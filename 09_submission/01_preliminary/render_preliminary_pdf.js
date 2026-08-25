@@ -50,7 +50,7 @@ main>h2:first-child{margin-top:0}
 <section class="cover">
   <div class="eyebrow">2026 ESG × AI 챌린지 해커톤 · TRACK C</div>
   <h1>수페스타</h1>
-  <h2>KAC 지식과 실행 Skill로 ESG 질문을<br>검증 가능한 다음 행동으로 바꾸는 로컬 AI 챗봇</h2>
+  <h2>KAC 지식과 실행 Skill로 ESG 질문을<br>검증 가능한 다음 행동으로 바꾸는 지식행동 AI 챗봇</h2>
   <div class="meta">팀 초 ROK · 박상훈<br>2026.08.25</div>
 </section>
 <main>${body}</main>

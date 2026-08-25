@@ -82,13 +82,13 @@ python3 -m unittest \
 
 SUPESTAR_AI_PROVIDER=disabled python3 \
   06_runtime/src/supestar_web/tests/validate_supestar_web.py \
-  --output-root 06_runtime/tests/submission_refresh_deterministic_v3_history_isolation_2026-08-25
+  --output-root 06_runtime/tests/submission_public_fix_deterministic_v4_2026-08-25
 
 python3 06_runtime/src/supestar_web/tests/validate_local_ai.py \
   --output-root 06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25
 ```
 
-결정론적 검증은 최초 오류 문장과 “저희 회사가 소유·운영” 자연어 변형을 포함한 63개 질문 시나리오로 9개 라우트와 `PROCEED/REVIEW/STOP`을 모두 확인한다. 범위에는 Scope 1·2·3 세부 활동, 부정문, 상태 충돌, 이전 대화 오염, 짧은 새 주제와 명시적 후속 질문의 분리, 산림 E/S/G 일부 누락, 절차 단계 충돌, 거래 G1~G11, 실시간 가격·투자추천·외부 실행, 프롬프트 우회와 가짜 증거 요청이 포함된다. 실제 로컬 AI 검증은 같은 대화 연속성 사례를 포함한 10개 질문을 통과했다. 세부 목록은 [질문 처리·위험 게이트 매트릭스](QUESTION_HANDLING_AND_RISK_MATRIX_2026-08-25.md)에 있다.
+결정론적 검증은 최초 오류 문장, “저희 회사가 소유·운영” 자연어 변형과 KOFPI 구체 개념 우선 선택 회귀를 포함한 64개 질문 시나리오로 9개 라우트와 `PROCEED/REVIEW/STOP`을 모두 확인한다. 범위에는 Scope 1·2·3 세부 활동, 부정문, 상태 충돌, 이전 대화 오염, 짧은 새 주제와 명시적 후속 질문의 분리, 산림 E/S/G 일부 누락, 절차 단계 충돌, 거래 G1~G11, 실시간 가격·투자추천·외부 실행, 프롬프트 우회와 가짜 증거 요청이 포함된다. 실제 로컬 AI 검증은 같은 대화 연속성 사례를 포함한 10개 질문을 통과했고, 공개 Qwen Cloud 검증 5건에서는 ESG·KOFPI·Scope 1의 실제 생성과 REVIEW·STOP의 생성 차단을 확인했다. 세부 목록은 [질문 처리·위험 게이트 매트릭스](QUESTION_HANDLING_AND_RISK_MATRIX_2026-08-25.md)에 있다.
 
 ## 안전 경계
 

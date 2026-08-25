@@ -6,7 +6,7 @@
 
 수페스타는 KAC 지식을 근거로 사용하고, KAC에서 구조화·배포한 Skill을 실행 규칙으로 사용하는 지식행동사슬 기반 스킬 실행형 ESG 챗봇이다.
 
-사용자 질문에서 Context를 만들고 관련 KAC 체인을 선택한 뒤 실행 Skill이 `PROCEED·REVIEW·STOP`을 판정한다. 로컬 AI는 검증 결과만 자연어로 설명하며, 구매처를 명시적으로 물은 경우에만 산림탄소마켓을 외부 선택지로 제공한다.
+사용자 질문에서 Context를 만들고 관련 KAC 체인을 선택한 뒤 실행 Skill이 `PROCEED·REVIEW·STOP`을 판정한다. 선택적 로컬·서버 AI는 검증 결과만 자연어로 설명하며, 구매처를 명시적으로 물은 경우에만 산림탄소마켓을 외부 선택지로 제공한다.
 
 ## 공식 확인 흐름
 
@@ -33,13 +33,16 @@
 
 ## 최신 검증 수치
 
-- 자동 테스트: 35건 PASS — Web 27 + Runtime Composite 3 + 원자 Skill 5
-- 결정론 시나리오: 63건 PASS
+- 자동 테스트: 36건 PASS — Web 28 + Runtime Composite 3 + 원자 Skill 5
+- 결정론 시나리오: 64건 PASS
 - 로컬 AI 근거 답변: 10건 PASS
+- 공개 Qwen Cloud: 5건 PASS — ESG·KOFPI·Scope 1 생성, REVIEW·STOP 생성 차단
 - 지원 라우트: 9개
 - 판정: `PROCEED·REVIEW·STOP` 모두 확인
 - 대화 연속성: 새 주제는 이전 발화 0건, 명시적 후속 질문만 직전 사용자 발화 1건 사용
 
 프로젝트 공개 저장소: https://github.com/pak3430/supestar-esg-ai
 
-브라우저 MVP는 별도 런타임 산출물이다. 임시 터널 주소는 만료되므로 최종 문서에 고정하지 않으며, 공개 URL이 공식적으로 필요할 때만 제출 직전에 새 주소를 열고 외부 네트워크에서 재검증한다.
+공개 데모: https://supestar-esg-ai.onrender.com
+
+브라우저 MVP는 별도 런타임 산출물이다. 공개판은 사용자 설치나 API 키 입력 없이 Render에서 실행되며, 실제 KAC·Skill 판정 뒤 Qwen Cloud `qwen-plus-character`가 허용된 결과만 설명한다. `REVIEW·STOP`에서는 생성형 AI 자유 생성을 차단한다. 무료 인스턴스의 첫 접속은 휴면 해제 때문에 지연될 수 있다.

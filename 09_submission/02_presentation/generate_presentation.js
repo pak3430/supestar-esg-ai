@@ -8,7 +8,7 @@ pptx.layout = 'LAYOUT_WIDE';
 pptx.author = '초 ROK · 박상훈';
 pptx.company = '초 ROK';
 pptx.subject = '2026 ESG × AI 챌린지 해커톤 수페스타 발표자료';
-pptx.title = '수페스타 — KAC 지식과 실행 Skill 기반 로컬 ESG AI';
+pptx.title = '수페스타 — KAC 지식과 실행 Skill 기반 ESG AI';
 pptx.lang = 'ko-KR';
 
 const FONT = 'Apple SD Gothic Neo';
@@ -68,7 +68,7 @@ function imageBox(slide, imgPath, x, y, w, h) {
   s.addText('2026 ESG × AI CHALLENGE · TRACK C', { x: 0.75, y: 0.72, w: 6.2, h: 0.28, fontFace: 'Aptos', fontSize: 11, bold: true, color: '83E1B3', charSpacing: 1.2, margin: 0 });
   s.addText('수페스타', { x: 0.75, y: 1.38, w: 6.8, h: 0.92, fontFace: FONT, fontSize: 40, bold: true, color: C.white, margin: 0 });
   s.addText('ESG 질문을 검증 가능한\n다음 행동으로 바꾸는 AI', { x: 0.78, y: 2.46, w: 7.2, h: 1.15, fontFace: FONT, fontSize: 25, bold: true, color: 'C8F4DD', margin: 0, fit: 'shrink' });
-  s.addText('KAC 지식을 질문별로 선택하고 실행 Skill을 실제로 수행한 뒤,\n로컬 AI가 검증 결과만 자연어로 설명합니다.', { x: 0.78, y: 3.92, w: 7.15, h: 0.88, fontFace: FONT, fontSize: 14, color: 'E4F3ED', margin: 0, fit: 'shrink' });
+  s.addText('KAC 지식을 질문별로 선택하고 실행 Skill을 실제로 수행한 뒤,\n선택적 로컬·서버 AI가 검증 결과만 자연어로 설명합니다.', { x: 0.78, y: 3.92, w: 7.15, h: 0.88, fontFace: FONT, fontSize: 14, color: 'E4F3ED', margin: 0, fit: 'shrink' });
   pill(s, '질문 → Context → KAC → Skill → 판정 → 설명', 0.78, 5.20, 4.75, '1B6756', 'E7FFF3');
   s.addImage({ path: mascot, x: 8.62, y: 1.38, w: 3.25, h: 3.25, sizing: 'contain' });
   s.addText('팀 초 ROK · 박상훈', { x: 0.78, y: 6.20, w: 3.4, h: 0.28, fontFace: FONT, fontSize: 11, color: 'C8DAD4', margin: 0 });
@@ -108,10 +108,10 @@ function imageBox(slide, imgPath, x, y, w, h) {
 }
 
 {
-  const s = pptx.addSlide('MASTER'); title(s, '04 · ARCHITECTURE', '판정은 Skill이 만들고, 로컬 AI는 검증 결과만 설명합니다', 'UI와 서버는 별도 Runtime 코드이며, Stage Skill만으로 챗봇 전체가 자동 생성됐다고 주장하지 않습니다.');
+  const s = pptx.addSlide('MASTER'); title(s, '04 · ARCHITECTURE', '판정은 Skill이 만들고, AI는 검증 결과만 설명합니다', 'UI와 서버는 별도 Runtime 코드이며, Stage Skill만으로 챗봇 전체가 자동 생성됐다고 주장하지 않습니다.');
   const flow = [
     ['1', 'Context', '사용자 진술만\n타입 필드로'], ['2', 'Composite', '라우터 1회\n단일 진입점'], ['3', 'KAC + Skill', '체인 선택·해시\n도메인 실행 1회'],
-    ['4', '판정', 'PROCEED\nREVIEW · STOP'], ['5', 'Local AI', '검증 결과만\n자연어 표현'], ['6', 'Risk Gate', '권한·주장·링크\n재검사'],
+    ['4', '판정', 'PROCEED\nREVIEW · STOP'], ['5', 'Local/Server AI', '검증 결과만\n자연어 표현'], ['6', 'Risk Gate', '권한·주장·링크\n재검사'],
   ];
   flow.forEach((f, i) => {
     const positions = [
@@ -160,15 +160,15 @@ function imageBox(slide, imgPath, x, y, w, h) {
   card(s, 9.10, 1.94, 3.42, 1.14, 'PROCEED', '필요한 입력과 근거가 충분하고 충돌이 없을 때 실행 결과 제시', C.green, C.mint2);
   card(s, 9.10, 3.34, 3.42, 1.14, 'REVIEW', '입력 누락·상충·공시 판단처럼 사람 확인이 필요한 경우 보완 질문', C.amber, C.amberBg);
   card(s, 9.10, 4.74, 3.42, 1.14, 'STOP', '실시간 시세·투자추천·무근거 계산·우회·가짜 증거·외부 실행 차단', C.coral, C.coralBg);
-  pill(s, 'REVIEW/STOP에서는 로컬 AI 자유 생성 차단', 9.16, 6.26, 3.28, C.blueBg, C.blue);
+  pill(s, 'REVIEW/STOP에서는 생성형 AI 자유 생성 차단', 9.16, 6.26, 3.28, C.blueBg, C.blue);
 }
 
 {
   const s = pptx.addSlide('MASTER'); title(s, '09 · ACTION & VALIDATION', '구매처를 직접 물은 경우에만 실제 행동 지점을 보여줍니다', '산림탄소마켓은 제품의 종착점이 아니라, 명시적 구매 의도에서만 나타나는 제한된 handoff입니다.');
   imageBox(s, market, 0.64, 1.88, 7.28, 4.92);
-  card(s, 8.22, 1.92, 2.10, 1.12, '35', '자동 테스트\n전부 PASS', C.blue, C.blueBg);
-  card(s, 10.54, 1.92, 2.10, 1.12, '63', '결정론 시나리오\n전부 PASS', C.green, C.mint2);
-  card(s, 8.22, 3.28, 2.10, 1.12, '10', '로컬 AI 근거 답변\n전부 PASS', C.amber, C.amberBg);
+  card(s, 8.22, 1.92, 2.10, 1.12, '36', '자동 테스트\n전부 PASS', C.blue, C.blueBg);
+  card(s, 10.54, 1.92, 2.10, 1.12, '64', '결정론 시나리오\n전부 PASS', C.green, C.mint2);
+  card(s, 8.22, 3.28, 2.10, 1.12, '10 + 5', '로컬 AI 10 · 공개 Qwen 5\n전부 PASS', C.amber, C.amberBg);
   card(s, 10.54, 3.28, 2.10, 1.12, '9', '지원 라우트\n전부 커버', C.coral, C.coralBg);
   s.addShape(pptx.ShapeType.roundRect, { x: 8.22, y: 4.72, w: 4.42, h: 1.34, rectRadius: 0.08, fill: { color: C.white }, line: { color: C.line } });
   s.addText('검증된 범위', { x: 8.48, y: 4.92, w: 3.9, h: 0.26, fontFace: FONT, fontSize: 12.5, bold: true, color: C.ink, margin: 0 });

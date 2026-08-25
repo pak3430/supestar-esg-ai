@@ -55,7 +55,7 @@ AI는 검증된 결과를 자연스러운 한국어로 표현할 뿐 Concept 선
 
 **Live Demo: [https://supestar-esg-ai.onrender.com](https://supestar-esg-ai.onrender.com)**
 
-별도 설치나 API 키 없이 브라우저에서 바로 질문할 수 있다. 공개 데모는 실제 KAC·Skill을 실행하는 `STRUCTURED_GROUNDED` 모드이며, 답변의 근거와 실행기록도 화면에서 확인할 수 있다. Render 무료 인스턴스가 휴면 상태이면 첫 접속에 최대 50초 이상 걸릴 수 있다.
+별도 설치나 사용자 API 키 없이 브라우저에서 바로 질문할 수 있다. 공개 데모는 실제 KAC·Skill을 먼저 실행한 뒤 서버 측 Qwen `qwen-plus-character`가 검증된 `PROCEED` 결과만 자연어로 설명하는 `CLOUD_AI_GROUNDED` 모드다. `REVIEW·STOP`에서는 모델 자유 생성을 차단하고 검증된 구조화 안내를 반환한다. 답변의 근거와 실행기록도 화면에서 확인할 수 있다. Render 무료 인스턴스가 휴면 상태이면 첫 접속에 최대 50초 이상 걸릴 수 있다.
 
 상태 API: [https://supestar-esg-ai.onrender.com/api/health](https://supestar-esg-ai.onrender.com/api/health)
 
@@ -113,12 +113,14 @@ SUPESTAR_CLOUD_AI_API_KEY=server-side-secret
 - 자동 테스트 36개 통과: Web 28개, Runtime Composite 3개, 원자 Skill 5개
 - 결정론적 질문 시나리오 64개 통과
 - 실제 로컬 AI 시나리오 10개 통과
+- 공개 Qwen Cloud 시나리오 5개 통과: ESG·KOFPI·Scope 1은 실제 생성 사용, REVIEW·STOP은 생성 차단
 - 9개 라우트와 `PROCEED`·`REVIEW`·`STOP` 모두 확인
 - 모든 시나리오에서 입력 바이트 보존, KAC 실행, Context 추출, Output Risk Gate 확인
 - 산림탄소마켓 연결은 명시적 구매 의도 시나리오 1건에서만 발생
 - `ESG → SDGs는요?`는 새 주제로 분리하고, `그건 왜 중요한가요?`는 직전 사용자 질문만 이어받는 대화 회귀 검증 통과
 - `한국임업진흥원은 산림 ESG에서 어떤 역할을 하나요?`는 일반 ESG가 아닌 `KOFPI`를 선택하는 구체 개념 우선 회귀 검증 통과
 - 질문 후 반복 새로고침 3회에서 스크롤 최상단·챗봇 상단 여백·초기 대화 상태 정상 확인
+- 공개 화면 상단에서 `서버 AI · qwen-plus-character` 표시 및 연속 새로고침 3/3 정상 확인
 
 ```bash
 python3 -m unittest discover \
@@ -137,6 +139,7 @@ python3 -m unittest discover \
 - [결정론적 64문항 검증 manifest](06_runtime/tests/submission_public_fix_deterministic_v4_2026-08-25/manifest.json)
 - [로컬 AI 10문항 검증 manifest](06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/manifest.json)
 - [최신 제출 패키지 최종검증](07_evidence/qa/2026-08-25_수페스타_최신제출패키지_최종검증.md)
+- [Qwen Cloud 공개 배포 검증](07_evidence/qa/2026-08-25_QwenCloud_공개배포_검증.md)
 
 ## 저장소 구조
 
