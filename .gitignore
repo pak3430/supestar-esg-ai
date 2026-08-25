@@ -55,6 +55,9 @@ ccs_composite_authoring/*
 !06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/
 06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/*
 !06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/manifest.json
+!06_runtime/tests/submission_public_fix_deterministic_v4_2026-08-25/
+06_runtime/tests/submission_public_fix_deterministic_v4_2026-08-25/*
+!06_runtime/tests/submission_public_fix_deterministic_v4_2026-08-25/manifest.json
 06_runtime/deploy/DEPLOYMENT_STATUS.md
 06_runtime/prototype/*.js
 
