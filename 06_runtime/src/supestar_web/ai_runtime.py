@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Grounded natural-language layer for Supestar.
 
-The model never selects authority, changes a verdict, or invents KAC nodes.  It
+The model never selects authority, changes a verdict, or invents KAC nodes. It
 only turns a deterministic, source-linked execution result into natural Korean.
-Ollama is used locally when available; otherwise the caller's grounded fallback
-is returned and the response mode states that no model was used.
+Ollama can be used locally and an OpenAI-compatible API can be configured on a
+server. If neither is available, the verified grounded fallback is returned.
 """
 
 from __future__ import annotations
@@ -21,6 +21,7 @@ from output_risk_gate import OutputRiskGate
 
 DEFAULT_OLLAMA_URL = "http://127.0.0.1:11434"
 DEFAULT_OLLAMA_MODEL = "qwen2.5:14b-instruct-q4_K_M"
+CLOUD_PROVIDER_ALIASES = {"cloud", "server", "openai_compatible", "openai-compatible"}
 
 
 class AiRuntime:
@@ -28,18 +29,31 @@ class AiRuntime:
         self.provider = os.environ.get("SUPESTAR_AI_PROVIDER", "auto").strip().lower()
         self.base_url = os.environ.get("SUPESTAR_OLLAMA_URL", DEFAULT_OLLAMA_URL).rstrip("/")
         self.preferred_model = os.environ.get("SUPESTAR_OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL).strip()
+        self.cloud_base_url = os.environ.get("SUPESTAR_CLOUD_AI_BASE_URL", "").strip().rstrip("/")
+        self.cloud_api_key = os.environ.get("SUPESTAR_CLOUD_AI_API_KEY", "").strip()
+        self.cloud_model = os.environ.get("SUPESTAR_CLOUD_AI_MODEL", "").strip()
         self.timeout_seconds = max(5, min(int(os.environ.get("SUPESTAR_AI_TIMEOUT_SECONDS", "90")), 120))
         self.risk_gate = OutputRiskGate()
 
-    def _request(self, path: str, payload: dict[str, Any] | None = None, timeout: float = 2.0) -> dict[str, Any]:
+    def _request(
+        self,
+        path: str,
+        payload: dict[str, Any] | None = None,
+        timeout: float = 2.0,
+        *,
+        base_url: str | None = None,
+        extra_headers: dict[str, str] | None = None,
+    ) -> dict[str, Any]:
         body = None
         headers = {"Accept": "application/json"}
+        if extra_headers:
+            headers.update(extra_headers)
         method = "GET"
         if payload is not None:
             body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
             headers["Content-Type"] = "application/json"
             method = "POST"
-        request = Request(f"{self.base_url}{path}", data=body, headers=headers, method=method)
+        request = Request(f"{base_url or self.base_url}{path}", data=body, headers=headers, method=method)
         with urlopen(request, timeout=timeout) as response:
             value = json.loads(response.read().decode("utf-8"))
         if not isinstance(value, dict):
@@ -54,6 +68,43 @@ class AiRuntime:
                 "model": None,
                 "mode": "STRUCTURED_GROUNDED",
                 "reason": "SUPESTAR_AI_PROVIDER disables model generation",
+            }
+        cloud_requested = self.provider in CLOUD_PROVIDER_ALIASES or (
+            self.provider == "auto"
+            and bool(self.cloud_base_url and self.cloud_api_key and self.cloud_model)
+        )
+        if cloud_requested:
+            missing = []
+            if not self.cloud_base_url:
+                missing.append("SUPESTAR_CLOUD_AI_BASE_URL")
+            if not self.cloud_api_key:
+                missing.append("SUPESTAR_CLOUD_AI_API_KEY")
+            if not self.cloud_model:
+                missing.append("SUPESTAR_CLOUD_AI_MODEL")
+            if missing:
+                return {
+                    "provider": "cloud",
+                    "connected": False,
+                    "configured": False,
+                    "model": self.cloud_model or None,
+                    "mode": "STRUCTURED_GROUNDED",
+                    "reason": "Cloud AI configuration is incomplete: " + ", ".join(missing),
+                }
+            return {
+                "provider": "cloud",
+                "connected": True,
+                "configured": True,
+                "model": self.cloud_model,
+                "mode": "CLOUD_AI_GROUNDED",
+                "reason": "Server-side cloud AI is configured",
+            }
+        if self.provider not in {"auto", "ollama", "local"}:
+            return {
+                "provider": self.provider,
+                "connected": False,
+                "model": None,
+                "mode": "STRUCTURED_GROUNDED",
+                "reason": "Unsupported SUPESTAR_AI_PROVIDER value",
             }
         try:
             payload = self._request("/api/tags", timeout=1.5)
@@ -82,6 +133,52 @@ class AiRuntime:
                 "mode": "STRUCTURED_GROUNDED",
                 "reason": f"Local model unavailable: {type(exc).__name__}",
             }
+
+    def _generate_with_provider(
+        self,
+        runtime_status: dict[str, Any],
+        messages: list[dict[str, str]],
+    ) -> tuple[str, dict[str, Any]]:
+        if runtime_status.get("provider") == "cloud":
+            payload = {
+                "model": runtime_status["model"],
+                "stream": False,
+                "messages": messages,
+                "temperature": 0.1,
+                "max_tokens": 360,
+                "response_format": {"type": "json_object"},
+            }
+            response = self._request(
+                "/chat/completions",
+                payload,
+                timeout=float(self.timeout_seconds),
+                base_url=self.cloud_base_url,
+                extra_headers={"Authorization": f"Bearer {self.cloud_api_key}"},
+            )
+            choices = response.get("choices", [])
+            if not choices or not isinstance(choices[0], dict):
+                raise ValueError("cloud AI response has no choice")
+            content = choices[0].get("message", {}).get("content")
+            usage = response.get("usage", {}) if isinstance(response.get("usage"), dict) else {}
+            return content, {
+                "doneReason": choices[0].get("finish_reason"),
+                "promptTokens": usage.get("prompt_tokens"),
+                "responseTokens": usage.get("completion_tokens"),
+            }
+
+        payload = {
+            "model": runtime_status["model"],
+            "stream": False,
+            "format": "json",
+            "messages": messages,
+            "options": {"temperature": 0.1, "num_predict": 360},
+        }
+        response = self._request("/api/chat", payload, timeout=float(self.timeout_seconds))
+        return response.get("message", {}).get("content"), {
+            "doneReason": response.get("done_reason"),
+            "promptTokens": response.get("prompt_eval_count"),
+            "responseTokens": response.get("eval_count"),
+        }
 
     @staticmethod
     def _compact_kac(kac_execution: dict[str, Any]) -> dict[str, Any]:
@@ -209,16 +306,8 @@ class AiRuntime:
             "role": "user",
             "content": "다음 검증 데이터만 사용해 현재 질문에 자연스러운 한국어로 답하세요.\n" + json.dumps(grounding, ensure_ascii=False),
         }]
-        payload = {
-            "model": runtime_status["model"],
-            "stream": False,
-            "format": "json",
-            "messages": messages,
-            "options": {"temperature": 0.1, "num_predict": 360},
-        }
         try:
-            response = self._request("/api/chat", payload, timeout=float(self.timeout_seconds))
-            content = response.get("message", {}).get("content")
+            content, generation_metrics = self._generate_with_provider(runtime_status, messages)
             parsed = json.loads(content) if isinstance(content, str) else None
             guidance = self._validate_guidance(parsed, safe_fallback)
             risk_decision = self.risk_gate.assess_model_guidance(
@@ -237,10 +326,8 @@ class AiRuntime:
                 return safe_fallback, runtime_status
             runtime_status.update({
                 "generationUsed": True,
-                "doneReason": response.get("done_reason"),
-                "promptTokens": response.get("prompt_eval_count"),
-                "responseTokens": response.get("eval_count"),
                 "outputRiskGate": risk_decision,
+                **generation_metrics,
             })
             return guidance, runtime_status
         except (OSError, ValueError, json.JSONDecodeError, HTTPError, URLError, TimeoutError) as exc:

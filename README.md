@@ -29,12 +29,12 @@
   → Identity → Goal → Task → Knowledge → Method → Skill 읽기·검증
   → 필요한 도메인 Run Skill 최대 1개 실행
   → PROCEED / REVIEW / STOP 판정 및 Run Record 생성
-→ 로컬 AI가 검증 결과를 자연어로 설명
+→ 선택적 로컬·서버 AI가 검증 결과를 자연어로 설명
 → Output Risk Gate가 근거·판정·외부 링크를 다시 검증
 → 안전한 최종 답변
 ```
 
-로컬 AI는 검증된 결과를 자연스러운 한국어로 표현할 뿐 Concept 선택, 근거, 판정을 바꿀 수 없다. 모델이 없거나 생성 검증에 실패하면 `STRUCTURED_GROUNDED` 모드로 근거 기반 구조화 답변을 반환한다.
+AI는 검증된 결과를 자연스러운 한국어로 표현할 뿐 Concept 선택, 근거, 판정을 바꿀 수 없다. 로컬 Ollama 또는 서버 측 OpenAI-compatible API를 선택할 수 있으며, 모델이 없거나 생성 검증에 실패하면 `STRUCTURED_GROUNDED` 모드로 근거 기반 구조화 답변을 반환한다.
 
 ## 구현 범위
 
@@ -45,15 +45,24 @@
 - KAC 파일 관계와 SHA-256 검증
 - Composite Run Record
 - 근거·판정·권한·외부 링크 Output Risk Gate
-- Ollama 로컬 AI 연동
+- Ollama 로컬 AI 및 선택적 서버 측 AI 연동
 - 브라우저 기반 대화 UI
 - 명시적 후속 질문 전용 대화 이력 정책(assistant 답변 재입력 금지)
 
 질문이 단순한 ESG 설명이면 ESG만 설명한다. 산림탄소마켓은 탄소크레딧 구매처나 구매 방법을 명시적으로 물은 경우에만 외부 행동 선택지로 연결한다.
 
-## 빠른 실행
+## 설치 없이 공개 데모 배포
 
-필수 조건은 Python 3이다. 로컬 AI 답변을 사용하려면 Ollama와 모델이 추가로 필요하다.
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https%3A%2F%2Fgithub.com%2Fpak3430%2Fsupestar-esg-ai)
+
+위 버튼은 현재 Docker Runtime을 공개 Web Service로 배포한다. 최초 상태는 API 키 없이 실제 KAC·Skill을 실행하는 `구조화 지식 모드`다. 서버 측 AI를 사용할 때는 배포 서비스의 Secret에만 API 키를 저장한다. 사용자는 Ollama·Python·모델을 설치하지 않고 발급된 URL만 연다.
+
+- [공개 데모 배포 상세 안내](06_runtime/deploy/PUBLIC_DEMO_DEPLOYMENT.md)
+- GitHub Pages는 Python Runtime을 실행하지 않으므로 본 프로젝트의 실제 데모 호스팅으로 사용하지 않는다.
+
+## 로컬 빠른 실행
+
+필수 조건은 Python 3이다. 로컬에서 생성형 답변까지 사용하려면 Ollama와 모델이 추가로 필요하다.
 
 ```bash
 ./06_runtime/deploy/start_local.sh
@@ -75,6 +84,17 @@ AI 없이 결정론적 구조화 답변만 확인하려면 다음과 같이 실�
 ```bash
 SUPESTAR_AI_PROVIDER=disabled ./06_runtime/deploy/start_local.sh
 ```
+
+배포 서버에서 선택적 AI를 활성화하려면 다음 환경변수를 비밀 저장소에 설정한다.
+
+```bash
+SUPESTAR_AI_PROVIDER=cloud
+SUPESTAR_CLOUD_AI_BASE_URL=https://provider.example/v1
+SUPESTAR_CLOUD_AI_MODEL=provider-model-id
+SUPESTAR_CLOUD_AI_API_KEY=server-side-secret
+```
+
+키·모델·URL이 누락되거나 호출과 출력 검증에 실패하면 구조화 지식 모드로 자동 전환한다. 비밀키는 브라우저와 Run Record에 포함하지 않는다.
 
 자세한 실행 구조는 [Runtime 문서](06_runtime/src/supestar_web/README.md)를 참고한다.
 

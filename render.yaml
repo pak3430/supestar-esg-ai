@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: supestar-esg-ai
+    runtime: docker
+    plan: free
+    dockerfilePath: ./06_runtime/deploy/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: SUPESTAR_AI_PROVIDER
+        value: disabled
+      - key: SUPESTAR_AI_TIMEOUT_SECONDS
+        value: 45

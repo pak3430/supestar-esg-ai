@@ -10,6 +10,7 @@ WORKDIR /app
 
 COPY 05_identity_pipeline/06_atomic_skills/ ./05_identity_pipeline/06_atomic_skills/
 COPY 05_identity_pipeline/07_run_skills/ ./05_identity_pipeline/07_run_skills/
+COPY 05_identity_pipeline/08_composite_runtime/ ./05_identity_pipeline/08_composite_runtime/
 COPY ccs_authoring/supestar_mvp_v3/ ./ccs_authoring/supestar_mvp_v3/
 COPY ccs_composite_authoring/ ./ccs_composite_authoring/
 COPY 06_runtime/src/supestar_web/ ./06_runtime/src/supestar_web/

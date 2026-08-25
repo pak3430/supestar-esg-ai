@@ -3,7 +3,7 @@
 - 버전: `2.0`
 - 상태: `IMPLEMENTED_AND_TESTED`
 - Stage vault: `ccs_authoring/supestar_mvp_v3` — Runtime 읽기 전용
-- AI provider: 로컬 Ollama 자동 감지, 없으면 명시적 구조화 지식 모드
+- AI provider: 로컬 Ollama 또는 서버 측 OpenAI-compatible API, 없거나 실패하면 구조화 지식 모드
 
 ## 1. 무엇을 실행하는가
 
@@ -74,7 +74,8 @@ ESG·SDGs·Scope·기관·KAC 정의, 일반 산림 ESG 설명, 단순 시장 �
 
 - AI 프롬프트에는 선택된 개념·근거·판정과 제한된 최근 대화만 제공한다.
 - 로컬 Ollama 사용 시 질문과 근거는 외부 모델 API로 전송되지 않는다.
-- 외부 AI provider는 현재 구현하지 않았다.
+- 서버 AI를 명시적으로 설정하면 현재 질문, 명시적 후속 질문 1개, 선택된 KAC와 검증 결과가 설정한 공급자 API로 전송된다.
+- 서버 AI 비밀키는 서버 환경변수에만 두고 브라우저·Run Record·GitHub에 기록하지 않는다.
 - Run Record에는 provider·model·모드·생성 사용 여부를 남기며 비밀키를 기록하지 않는다.
 - 모델 연결 실패는 숨기지 않고 `STRUCTURED_GROUNDED`로 표시한다.
 
@@ -92,4 +93,3 @@ ESG·SDGs·Scope·기관·KAC 정의, 일반 산림 ESG 설명, 단순 시장 �
 
 - `06_runtime/tests/supestar_web_kac_ai_v3_2026-08-25/manifest.json`
 - `06_runtime/tests/supestar_web_local_ai_v3_retry_2026-08-25/manifest.json`
-

@@ -800,7 +800,7 @@ def health_payload() -> dict[str, Any]:
         "aiRuntime": ai_status,
         "priorSealedCompositeSkill": str((v2_skill if v2_skill.is_file() else v1_skill).relative_to(PROJECT_ROOT)),
         "priorSealedCompositeSkillPresent": v2_skill.is_file() or v1_skill.is_file(),
-        "runtimeBoundary": "one local Runtime Composite entry executes routing, query-specific KAC, and at most one domain Run Skill; the optional local AI only verbalizes the verified result; no external transaction or registry mutation",
+        "runtimeBoundary": "one Runtime Composite entry executes routing, query-specific KAC, and at most one domain Run Skill; optional local or server-side AI only verbalizes the verified result; no external transaction or registry mutation",
     }
 
 

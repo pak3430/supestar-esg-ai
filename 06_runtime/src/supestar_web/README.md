@@ -2,7 +2,7 @@
 
 수페스타는 일반 ESG 질문을 산림탄소마켓 홍보로 바꾸지 않는다. 웹 서버는 배포된 `supestar-forest-esg-orchestrator-run` Runtime Composite를 단 한 번 호출한다. Composite 안에서 현재 질문에 관련된 Stage 1~5 Concept Skill을 선택하고, 봉인된 `Identity → Goal → Task → Knowledge → Method → Skill` 파일을 실제로 읽은 뒤 원문 근거에 한정해 답한다.
 
-정확한 분류는 **지식행동사슬 기반 스킬 실행형 챗봇**이다. 질문에 맞는 KAC 지식을 읽는 데서 끝나지 않고, Scope 분류·시장 구분·산림 E/S/G·공식 절차·거래 준비도 Run Skill을 실제로 실행한다. 로컬 AI는 그 결과를 사용자가 이해하기 쉬운 문장으로 바꿀 뿐 판정자는 아니다. 다만 웹 UI·서버·Context 추출·출력 게이트는 별도의 Runtime 코드이므로 “챗봇 전체가 Stage Skill만으로 자동 생성됐다”고 주장하지 않는다.
+정확한 분류는 **지식행동사슬 기반 스킬 실행형 챗봇**이다. 질문에 맞는 KAC 지식을 읽는 데서 끝나지 않고, Scope 분류·시장 구분·산림 E/S/G·공식 절차·거래 준비도 Run Skill을 실제로 실행한다. 선택적 로컬·서버 AI는 그 결과를 사용자가 이해하기 쉬운 문장으로 바꿀 뿐 판정자는 아니다. 다만 웹 UI·서버·Context 추출·출력 게이트는 별도의 Runtime 코드이므로 “챗봇 전체가 Stage Skill만으로 자동 생성됐다”고 주장하지 않는다.
 
 ## 현재 구현
 
@@ -15,7 +15,7 @@
 7. 분류·비교·절차·준비도 질문이면 Composite가 등록된 도메인 Run Skill을 최대 하나만 추가 실행한다.
 8. 입력 바이트, 라우터 전달 바이트, 선택 경로, 자식 실행 수를 `composite_run_record.json`에 남긴다.
 9. `OutputRiskGate`가 검증 판정과 자연어 답변을 대조한다. `REVIEW/STOP`과 거래 준비도는 모델 생성을 차단하고, Scope·절차·E/S/G·외부 링크·공식 확정이 근거를 벗어나면 생성문을 폐기한다.
-10. 로컬 Ollama가 있으면 통과한 검증 결과만 자연스러운 한국어로 표현한다. 모델은 Concept 선택, 근거, `PROCEED/REVIEW/STOP` 판정을 바꿀 수 없다.
+10. 로컬 Ollama 또는 설정된 서버 AI가 통과한 검증 결과만 자연스러운 한국어로 표현한다. 모델은 Concept 선택, 근거, `PROCEED/REVIEW/STOP` 판정을 바꿀 수 없다.
 11. 모델이 없거나 생성 검증이 실패하면 AI인 척하지 않고 `STRUCTURED_GROUNDED` 답변을 반환한다.
 12. 산림탄소마켓 링크는 탄소크레딧 구매처·구매 방법을 사용자가 명시적으로 질문한 경우에만 표시한다.
 
@@ -30,7 +30,7 @@
   → 필요한 경우 도메인 Run Skill 최대 1회
   → Composite Run Record 생성
 → 근거·판정 고정
-→ 로컬 AI 자연어 설명
+→ 선택적 로컬·서버 AI 자연어 설명
 → 판정·주장·권한·외부링크 Output Risk Gate
 → 조건이 맞을 때만 외부 행동 연결
 ```
@@ -39,7 +39,7 @@ Stage authoring vault와 기존에 봉인된 Composite v2는 Runtime에서 수�
 
 ## AI 연결 상태
 
-기본값은 `SUPESTAR_AI_PROVIDER=auto`다. 현재 개발 컴퓨터에서는 Ollama의 `qwen2.5:14b-instruct-q4_K_M`을 자동 감지해 `LOCAL_AI_GROUNDED`로 동작한다.
+기본값은 `SUPESTAR_AI_PROVIDER=auto`다. 개발 컴퓨터에서는 Ollama를 자동 감지해 `LOCAL_AI_GROUNDED`로 동작한다. 공개 서버에서는 OpenAI-compatible Chat Completions API를 선택적으로 설정해 `CLOUD_AI_GROUNDED`로 동작시킬 수 있다.
 
 ```bash
 export SUPESTAR_AI_PROVIDER=auto
@@ -50,13 +50,23 @@ export SUPESTAR_AI_TIMEOUT_SECONDS=90
 
 모델 없는 환경에서는 `SUPESTAR_AI_PROVIDER=disabled`로 명시적으로 끌 수 있다. 이때 답변은 `STRUCTURED_GROUNDED`로 표시되며 Concept·KAC·Run Skill 실행과 근거 기록은 그대로 수행된다.
 
+```bash
+export SUPESTAR_AI_PROVIDER=cloud
+export SUPESTAR_CLOUD_AI_BASE_URL=https://provider.example/v1
+export SUPESTAR_CLOUD_AI_MODEL=provider-model-id
+export SUPESTAR_CLOUD_AI_API_KEY=server-side-secret
+export SUPESTAR_AI_TIMEOUT_SECONDS=45
+```
+
+서버 AI 비밀키는 배포 서비스의 Secret에만 저장하며 브라우저·Run Record·GitHub에 기록하지 않는다. 설정 누락, API 오류, JSON 스키마 오류 또는 Output Risk Gate 거부가 발생하면 `STRUCTURED_GROUNDED`로 자동 전환한다.
+
 ## 실행
 
 ```bash
 ./06_runtime/deploy/start_local.sh
 ```
 
-브라우저에서 `http://127.0.0.1:4173/`을 연다. 상단 상태에 실제 연결된 로컬 모델명 또는 `구조화 지식 모드`가 표시된다.
+브라우저에서 `http://127.0.0.1:4173/`을 연다. 상단 상태에 연결 방식에 따라 `로컬 AI`, `서버 AI` 또는 `구조화 지식 모드`가 표시된다.
 
 ## 검증
 

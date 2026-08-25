@@ -339,9 +339,13 @@ fetch('/api/health')
     const ok = health.status === 'ok';
     runtimeState.classList.add(ok ? 'ready' : 'error');
     const ai = health.aiRuntime || {};
-    runtimeState.querySelector('span:last-child').textContent = ok
-      ? (ai.connected ? `로컬 AI · ${ai.model}` : '구조화 지식 모드')
-      : '서비스 점검 필요';
+    let modeLabel = '구조화 지식 모드';
+    if (ai.connected && ai.mode === 'CLOUD_AI_GROUNDED') {
+      modeLabel = `서버 AI · ${ai.model}`;
+    } else if (ai.connected && ai.mode === 'LOCAL_AI_GROUNDED') {
+      modeLabel = `로컬 AI · ${ai.model}`;
+    }
+    runtimeState.querySelector('span:last-child').textContent = ok ? modeLabel : '서비스 점검 필요';
   })
   .catch(() => {
     runtimeState.classList.add('error');

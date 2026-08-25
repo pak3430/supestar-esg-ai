@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import json
 import os
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 APP_ROOT = Path(__file__).resolve().parents[1]
@@ -114,6 +116,39 @@ class KnowledgeRuntimeTests(unittest.TestCase):
         status = AiRuntime().status()
         self.assertFalse(status["connected"])
         self.assertEqual(status["mode"], "STRUCTURED_GROUNDED")
+
+        cloud_env = {
+            "SUPESTAR_AI_PROVIDER": "cloud",
+            "SUPESTAR_CLOUD_AI_BASE_URL": "https://example.invalid/v1",
+            "SUPESTAR_CLOUD_AI_API_KEY": "test-secret-never-recorded",
+            "SUPESTAR_CLOUD_AI_MODEL": "test-grounded-model",
+        }
+        with patch.dict(os.environ, cloud_env, clear=False):
+            cloud_runtime = AiRuntime()
+            cloud_status = cloud_runtime.status()
+        self.assertTrue(cloud_status["connected"])
+        self.assertTrue(cloud_status["configured"])
+        self.assertEqual(cloud_status["provider"], "cloud")
+        self.assertEqual(cloud_status["mode"], "CLOUD_AI_GROUNDED")
+        self.assertNotIn("test-secret-never-recorded", str(cloud_status))
+
+        cloud_response = {
+            "choices": [{
+                "message": {"content": json.dumps({"title": "검증된 답변"}, ensure_ascii=False)},
+                "finish_reason": "stop",
+            }],
+            "usage": {"prompt_tokens": 12, "completion_tokens": 5},
+        }
+        with patch.object(cloud_runtime, "_request", return_value=cloud_response) as request_mock:
+            content, metrics = cloud_runtime._generate_with_provider(
+                cloud_status,
+                [{"role": "user", "content": "검증된 내용만 설명하세요."}],
+            )
+        self.assertEqual(json.loads(content)["title"], "검증된 답변")
+        self.assertEqual(metrics["doneReason"], "stop")
+        self.assertEqual(metrics["promptTokens"], 12)
+        self.assertEqual(request_mock.call_args.args[0], "/chat/completions")
+        self.assertEqual(request_mock.call_args.kwargs["base_url"], "https://example.invalid/v1")
 
 
 if __name__ == "__main__":
