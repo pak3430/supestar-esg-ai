@@ -48,6 +48,18 @@ class KnowledgeRuntimeTests(unittest.TestCase):
                     self.assertTrue(chain["conceptSkillRead"])
                     self.assertTrue(all(node["sha256"] for node in chain["nodes"]))
 
+    def test_specific_institution_wins_over_broad_esg_term(self) -> None:
+        question = "한국임업진흥원은 산림 ESG에서 어떤 역할을 하나요?"
+        result = self.runtime.execute(
+            question,
+            history=[{"role": "user", "content": "ESG가 무엇인가요?"}],
+        )
+        self.assertEqual(result["selectedConcepts"], ["KOFPI"])
+        self.assertEqual(result["historyMessagesUsed"], 0)
+        guidance = self.runtime.guidance(result)
+        text = " ".join([guidance["title"], *guidance["paragraphs"]])
+        self.assertIn("한국임업진흥원", text)
+
     def test_esg_guidance_stays_on_the_requested_definition(self) -> None:
         result = self.runtime.execute("ESG가 무엇인가요?")
         guidance = self.runtime.guidance(result)

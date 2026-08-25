@@ -1,3 +1,13 @@
+if ('scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
+
+const restorePageStart = () => window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+window.addEventListener('pageshow', () => {
+  restorePageStart();
+  requestAnimationFrame(restorePageStart);
+});
+
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#chatForm');
 const input = document.querySelector('#questionInput');
@@ -7,6 +17,8 @@ const quickPrompts = document.querySelector('#quickPrompts');
 const runtimeState = document.querySelector('#runtimeState');
 const initialMarkup = messages.innerHTML;
 const conversation = [];
+const CHAT_RETRY_DELAYS_MS = [700, 1600];
+const RETRYABLE_HTTP_STATUS = new Set([404, 408, 425, 429, 500, 502, 503, 504]);
 
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;')
@@ -276,6 +288,50 @@ function addError(message) {
   scrollToBottom();
 }
 
+const wait = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+
+async function parseChatResponse(response) {
+  const text = await response.text();
+  let payload = null;
+  if (text) {
+    try {
+      payload = JSON.parse(text);
+    } catch {
+      payload = null;
+    }
+  }
+  if (response.ok && payload && typeof payload === 'object') return payload;
+  const message = payload?.error
+    || (RETRYABLE_HTTP_STATUS.has(response.status)
+      ? '공개 서버가 준비되는 중입니다.'
+      : `요청을 처리하지 못했습니다. (HTTP ${response.status})`);
+  const error = new Error(message);
+  error.retryable = RETRYABLE_HTTP_STATUS.has(response.status);
+  error.status = response.status;
+  throw error;
+}
+
+async function requestChat(body) {
+  let lastError = null;
+  for (let attempt = 0; attempt <= CHAT_RETRY_DELAYS_MS.length; attempt += 1) {
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      return await parseChatResponse(response);
+    } catch (error) {
+      lastError = error;
+      const networkFailure = error instanceof TypeError;
+      const canRetry = attempt < CHAT_RETRY_DELAYS_MS.length && (networkFailure || error.retryable);
+      if (!canRetry) break;
+      await wait(CHAT_RETRY_DELAYS_MS[attempt]);
+    }
+  }
+  throw new Error(lastError?.message || '공개 서버 응답을 확인하지 못했습니다. 잠시 후 다시 시도해 주세요.');
+}
+
 async function runQuestion(question) {
   // The server decides whether a question is an explicit follow-up.  Send only
   // recent user-authored text; never feed assistant prose back as context.
@@ -286,14 +342,8 @@ async function runQuestion(question) {
   sendButton.disabled = true;
   input.disabled = true;
   try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question, history }),
-    });
-    const payload = await response.json();
+    const payload = await requestChat({ question, history });
     loading.remove();
-    if (!response.ok) throw new Error(payload.error || `HTTP ${response.status}`);
     addResult(payload);
   } catch (error) {
     loading.remove();
@@ -301,7 +351,7 @@ async function runQuestion(question) {
   } finally {
     sendButton.disabled = false;
     input.disabled = false;
-    input.focus();
+    input.focus({ preventScroll: true });
   }
 }
 
@@ -330,7 +380,7 @@ resetButton.addEventListener('click', () => {
   messages.innerHTML = initialMarkup;
   conversation.length = 0;
   input.value = '';
-  input.focus();
+  input.focus({ preventScroll: true });
 });
 
 fetch('/api/health')

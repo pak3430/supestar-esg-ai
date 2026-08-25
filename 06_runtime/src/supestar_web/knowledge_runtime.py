@@ -110,11 +110,19 @@ class KnowledgeRuntime:
             card = self.cards.get(identity, {})
             title = card.get("title") or _first_heading(text) or identity.replace("_", " ").title()
             aliases = list(dict.fromkeys([identity, identity.replace("_", " "), title, *card.get("aliases", [])]))
+            normalized_aliases: list[str] = []
+            for alias in aliases:
+                normalized = _normalize(alias)
+                if len(normalized) >= 2 and normalized not in normalized_aliases:
+                    normalized_aliases.append(normalized)
             catalog[identity] = {
                 "identity": identity,
                 "title": title,
                 "aliases": aliases,
-                "normalizedAliases": [_normalize(alias) for alias in aliases if len(_normalize(alias)) >= 2],
+                # Case, spacing, and punctuation variants may collapse to the
+                # same normalized alias. Count each semantic alias only once so
+                # a broad acronym such as ESG cannot win by duplicate scoring.
+                "normalizedAliases": normalized_aliases,
                 "definition": card.get("definition") or _body_excerpt(text),
                 "keyPoints": card.get("keyPoints", []),
                 "sourceEvidence": card.get("sourceEvidence", []),
