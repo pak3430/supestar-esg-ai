@@ -1,0 +1,15 @@
+*
+!05_identity_pipeline/
+!05_identity_pipeline/06_atomic_skills/
+!05_identity_pipeline/06_atomic_skills/**
+!05_identity_pipeline/07_run_skills/
+!05_identity_pipeline/07_run_skills/**
+!ccs_authoring/
+!ccs_authoring/supestar_mvp_v3/
+!ccs_authoring/supestar_mvp_v3/**
+!ccs_composite_authoring/
+!ccs_composite_authoring/**
+!06_runtime/
+!06_runtime/src/
+!06_runtime/src/supestar_web/
+!06_runtime/src/supestar_web/**

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0",
+  "runSkillVersion": "0.1.0-candidate",
+  "authoringVault": "ccs_authoring/supestar_mvp_v3",
+  "executionBoundary": "Deterministic local candidate execution only; no composite orchestration, runtime registration, external transaction, payment, registry mutation, legal/tax/certification decision, or public claim approval.",
+  "skills": [
+    {
+      "runSkill": "supestar-question-routing-run",
+      "buildSkill": "supestar-question-routing",
+      "targetIdentity": "USER_QUESTION",
+      "identityPath": "ccs_authoring/supestar_mvp_v3/_identity/USER_QUESTION.md",
+      "conceptSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/USER_QUESTION/SKILL.md",
+      "buildSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/supestar-question-routing/SKILL.md",
+      "codeSkillPath": "05_identity_pipeline/06_atomic_skills/supestar-question-routing/SKILL.md",
+      "wrapperPath": "05_identity_pipeline/06_atomic_skills/supestar-question-routing/scripts/run.py",
+      "contractPath": "05_identity_pipeline/06_atomic_skills/supestar-question-routing/references/contract.md",
+      "primaryInputFields": ["question", "userRole", "asOfDate"],
+      "requiredArtifacts": ["context_snapshot.json", "route_decision.json"]
+    },
+    {
+      "runSkill": "esg-carbon-action-path-run",
+      "buildSkill": "esg-carbon-action-path",
+      "targetIdentity": "ESG_MANAGEMENT",
+      "identityPath": "ccs_authoring/supestar_mvp_v3/_identity/ESG_MANAGEMENT.md",
+      "conceptSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/ESG_MANAGEMENT/SKILL.md",
+      "buildSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/esg-carbon-action-path/SKILL.md",
+      "codeSkillPath": "05_identity_pipeline/06_atomic_skills/esg-carbon-action-path/SKILL.md",
+      "wrapperPath": "05_identity_pipeline/06_atomic_skills/esg-carbon-action-path/scripts/run.py",
+      "contractPath": "05_identity_pipeline/06_atomic_skills/esg-carbon-action-path/references/contract.md",
+      "primaryInputFields": ["question", "userRole", "focus", "asOfDate"],
+      "requiredArtifacts": ["action_path.json", "explanation_cards.md", "next_action_checklist.md"]
+    },
+    {
+      "runSkill": "scope-activity-classification-run",
+      "buildSkill": "scope-activity-classification",
+      "targetIdentity": "ORGANIZATIONAL_BOUNDARY",
+      "identityPath": "ccs_authoring/supestar_mvp_v3/_identity/ORGANIZATIONAL_BOUNDARY.md",
+      "conceptSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/ORGANIZATIONAL_BOUNDARY/SKILL.md",
+      "buildSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/scope-activity-classification/SKILL.md",
+      "codeSkillPath": "05_identity_pipeline/06_atomic_skills/scope-activity-classification/SKILL.md",
+      "wrapperPath": "05_identity_pipeline/06_atomic_skills/scope-activity-classification/scripts/run.py",
+      "contractPath": "05_identity_pipeline/06_atomic_skills/scope-activity-classification/references/contract.md",
+      "primaryInputFields": ["activityDescription", "organizationBoundary", "asOfDate"],
+      "requiredArtifacts": ["scope_classification.json", "scope_evidence_card.md", "additional_data_request.md"]
+    },
+    {
+      "runSkill": "carbon-market-unit-comparison-run",
+      "buildSkill": "carbon-market-unit-comparison",
+      "targetIdentity": "CLIMATE_CLAIM",
+      "identityPath": "ccs_authoring/supestar_mvp_v3/_identity/CLIMATE_CLAIM.md",
+      "conceptSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/CLIMATE_CLAIM/SKILL.md",
+      "buildSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/carbon-market-unit-comparison/SKILL.md",
+      "codeSkillPath": "05_identity_pipeline/06_atomic_skills/carbon-market-unit-comparison/SKILL.md",
+      "wrapperPath": "05_identity_pipeline/06_atomic_skills/carbon-market-unit-comparison/scripts/run.py",
+      "contractPath": "05_identity_pipeline/06_atomic_skills/carbon-market-unit-comparison/references/contract.md",
+      "primaryInputFields": ["question", "purpose", "asOfDate"],
+      "requiredArtifacts": ["market_unit_comparison.json", "market_unit_comparison.md", "claim_cautions.md"]
+    },
+    {
+      "runSkill": "forest-esg-impact-mapping-run",
+      "buildSkill": "forest-esg-impact-mapping",
+      "targetIdentity": "FOREST_CARBON_PROJECT",
+      "identityPath": "ccs_authoring/supestar_mvp_v3/_identity/FOREST_CARBON_PROJECT.md",
+      "conceptSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/FOREST_CARBON_PROJECT/SKILL.md",
+      "buildSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/forest-esg-impact-mapping/SKILL.md",
+      "codeSkillPath": "05_identity_pipeline/06_atomic_skills/forest-esg-impact-mapping/SKILL.md",
+      "wrapperPath": "05_identity_pipeline/06_atomic_skills/forest-esg-impact-mapping/scripts/run.py",
+      "contractPath": "05_identity_pipeline/06_atomic_skills/forest-esg-impact-mapping/references/contract.md",
+      "primaryInputFields": ["projectSummary", "asOfDate"],
+      "requiredArtifacts": ["forest_esg_map.json", "forest_esg_map.md", "missing_axis_questions.md"]
+    },
+    {
+      "runSkill": "forest-carbon-procedure-guidance-run",
+      "buildSkill": "forest-carbon-procedure-guidance",
+      "targetIdentity": "FOREST_CARBON_PROJECT",
+      "identityPath": "ccs_authoring/supestar_mvp_v3/_identity/FOREST_CARBON_PROJECT.md",
+      "conceptSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/FOREST_CARBON_PROJECT/SKILL.md",
+      "buildSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/forest-carbon-procedure-guidance/SKILL.md",
+      "codeSkillPath": "05_identity_pipeline/06_atomic_skills/forest-carbon-procedure-guidance/SKILL.md",
+      "wrapperPath": "05_identity_pipeline/06_atomic_skills/forest-carbon-procedure-guidance/scripts/run.py",
+      "contractPath": "05_identity_pipeline/06_atomic_skills/forest-carbon-procedure-guidance/references/contract.md",
+      "primaryInputFields": ["projectType", "currentStage", "intendedUse", "asOfDate"],
+      "requiredArtifacts": ["procedure_path.json", "procedure_checklist.md", "official_confirmation_questions.md"]
+    },
+    {
+      "runSkill": "forest-carbon-transaction-readiness-run",
+      "buildSkill": "forest-carbon-transaction-readiness",
+      "targetIdentity": "TRANSACTION_EVIDENCE_PACK",
+      "identityPath": "ccs_authoring/supestar_mvp_v3/_identity/TRANSACTION_EVIDENCE_PACK.md",
+      "conceptSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/TRANSACTION_EVIDENCE_PACK/SKILL.md",
+      "buildSkillPath": "ccs_authoring/supestar_mvp_v3/_skill/forest-carbon-transaction-readiness/SKILL.md",
+      "codeSkillPath": "05_identity_pipeline/06_atomic_skills/forest-carbon-transaction-readiness/SKILL.md",
+      "wrapperPath": "05_identity_pipeline/06_atomic_skills/forest-carbon-transaction-readiness/scripts/run.py",
+      "contractPath": "05_identity_pipeline/06_atomic_skills/forest-carbon-transaction-readiness/references/contract.md",
+      "primaryInputFields": ["gates", "asOfDate"],
+      "requiredArtifacts": ["transaction_readiness.json", "transaction_readiness_table.md", "missing_evidence_checklist.md", "official_inquiry_draft.md"]
+    }
+  ]
+}

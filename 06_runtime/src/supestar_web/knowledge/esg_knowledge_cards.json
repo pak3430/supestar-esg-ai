@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Runtime grounding overlays for the sealed Stage 1-5 Concept Skill vault. These cards enrich user-facing definitions without modifying sealed authoring outputs.",
+  "cards": [
+    {
+      "identity": "ESG",
+      "title": "ESG",
+      "aliases": ["esg", "환경사회지배구조", "환경 사회 지배구조"],
+      "definition": "ESG는 환경(Environmental), 사회(Social), 지배구조(Governance)에 관한 조직의 영향·위험·기회와 성과를 함께 살피는 관점입니다.",
+      "keyPoints": [
+        "환경은 기후·자원·오염·생태계와 같은 영향을 봅니다.",
+        "사회는 노동·안전·인권·지역사회와 이해관계자의 영향을 봅니다.",
+        "지배구조는 의사결정·책임·통제·투명성과 검증 체계를 봅니다.",
+        "탄소는 ESG 전체가 아니라 환경 영역에서 측정 가능한 대표 주제 중 하나입니다."
+      ],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 2. ESG·탄소·SDGs의 경계", "lines": "L18-L25", "claim": "ESG의 정의와 탄소와의 경계"},
+        {"document": "ccs/_input/_document/01_ESG_산림탄소_전체생태계_기준서.md", "section": "# 3. 전체 생태계의 일곱 단계", "lines": "L35-L43", "claim": "ESG에서 측정·시장·산림탄소로 이어지는 전체 관계"}
+      ]
+    },
+    {
+      "identity": "ESG_MANAGEMENT",
+      "title": "ESG 경영",
+      "aliases": ["esg경영", "esg 관리", "지속가능경영"],
+      "definition": "ESG 경영은 ESG 관점을 조직의 목표·행동·책임·측정·검토 체계로 운영하는 것입니다.",
+      "keyPoints": [
+        "목표를 선언하는 것과 실제 행동을 운영하는 것은 구분해야 합니다.",
+        "행동이 있었다는 주장만으로 성과가 증명되지는 않으며 측정과 근거가 필요합니다.",
+        "환경·사회·지배구조의 책임 주체와 검토 절차가 함께 있어야 합니다."
+      ],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/01_ESG_산림탄소_전체생태계_기준서.md", "section": "# 3. 전체 생태계의 일곱 단계", "lines": "L35-L39", "claim": "ESG 경영의 목표·행동·책임과 성과 증명 관계"}
+      ]
+    },
+    {
+      "identity": "ENVIRONMENTAL_RESPONSIBILITY",
+      "title": "환경 책임(E)",
+      "aliases": ["환경책임", "환경 e", "environmental"],
+      "definition": "환경 책임은 조직이나 사업이 기후, 자원, 오염, 생태계에 미치는 영향을 파악하고 줄이며 그 결과를 근거로 설명하는 책임입니다.",
+      "keyPoints": ["탄소배출과 흡수량만이 아니라 생물다양성·영속성·누출 같은 영향도 함께 봅니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/04_산림_ESG_E_S_G_및_임업진흥원_생태계.md", "section": "# 2. E·S·G 구분", "lines": "L23-L27", "claim": "산림 ESG 환경축의 대상과 증거"}
+      ]
+    },
+    {
+      "identity": "SOCIAL_RESPONSIBILITY",
+      "title": "사회 책임(S)",
+      "aliases": ["사회책임", "사회 s", "social"],
+      "definition": "사회 책임은 근로자·산주·임업인·지역사회 등 이해관계자의 권리, 참여, 안전, 편익과 부담을 함께 살피는 책임입니다.",
+      "keyPoints": ["산림사업에서는 토지 권리, 참여 동의, 편익 배분과 지역사회 영향이 주요 확인 대상입니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/04_산림_ESG_E_S_G_및_임업진흥원_생태계.md", "section": "# 2. E·S·G 구분", "lines": "L23-L27", "claim": "산림 ESG 사회축의 참여자·권리·증거"}
+      ]
+    },
+    {
+      "identity": "GOVERNANCE_RESPONSIBILITY",
+      "title": "지배구조 책임(G)",
+      "aliases": ["지배구조책임", "거버넌스", "governance"],
+      "definition": "지배구조 책임은 누가 판단·승인·기록하고 오류·중복·분쟁을 어떻게 통제하는지를 명확히 하는 책임입니다.",
+      "keyPoints": ["산림탄소에서는 계획·등록·검증·인증·등록부·계약·감사와 책임 주체를 확인합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/04_산림_ESG_E_S_G_및_임업진흥원_생태계.md", "section": "# 2. E·S·G 구분", "lines": "L23-L27", "claim": "산림 ESG 지배구조축의 역할과 증거"}
+      ]
+    },
+    {
+      "identity": "SUSTAINABLE_DEVELOPMENT_GOALS",
+      "title": "지속가능발전목표(SDGs)",
+      "aliases": ["sdg", "sdgs", "지속가능발전목표", "지속가능 개발 목표"],
+      "definition": "SDGs는 기후 행동을 포함해 사람·경제·생태·제도에 관한 지속가능발전 목표를 함께 살피는 국제적인 목표 체계입니다.",
+      "keyPoints": ["탄소 성과만 최적화하면서 노동·지역사회·생물다양성·제도를 훼손하지 않는지 함께 검토하는 지도 역할을 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 5. SDGs 연결", "lines": "L53-L61", "claim": "탄소 행동과 SDGs의 관계"}
+      ]
+    },
+    {
+      "identity": "GREENHOUSE_GAS_INVENTORY",
+      "title": "온실가스 인벤토리",
+      "aliases": ["온실가스인벤토리", "ghg inventory", "배출량목록", "배출 인벤토리"],
+      "definition": "온실가스 인벤토리는 정해진 조직·운영 경계와 기간 안에서 배출원을 식별하고 활동자료와 배출계수로 배출량을 정리한 체계입니다.",
+      "keyPoints": ["직접 감축과 잔여배출을 판단하려면 먼저 무엇을 어디까지 측정했는지가 명확해야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 3. 온실가스 측정 구조", "lines": "L28-L43", "claim": "경계·활동자료·배출계수·CO2e의 측정 구조"}
+      ]
+    },
+    {
+      "identity": "ORGANIZATIONAL_BOUNDARY",
+      "title": "조직경계",
+      "aliases": ["조직경계", "조직 경계", "organizational boundary"],
+      "definition": "조직경계는 온실가스 산정에서 어느 법인·사업장·시설을 우리 조직의 집계 범위에 포함할지 정하는 기준입니다.",
+      "keyPoints": ["조직경계가 정해져야 운영경계와 Scope 분류를 일관되게 적용할 수 있습니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 3. 온실가스 측정 구조", "lines": "L28-L43", "claim": "조직경계와 운영경계의 선행관계"}
+      ]
+    },
+    {
+      "identity": "OPERATIONAL_BOUNDARY",
+      "title": "운영경계",
+      "aliases": ["운영경계", "운영 경계", "operational boundary"],
+      "definition": "운영경계는 조직경계 안의 배출 활동을 직접배출, 구매에너지 간접배출, 그 밖의 가치사슬 간접배출로 구분하는 기준입니다.",
+      "keyPoints": ["운영경계를 적용한 결과가 Scope 1·2·3 분류로 이어집니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 3. 온실가스 측정 구조", "lines": "L28-L43", "claim": "운영경계와 Scope 분류의 관계"}
+      ]
+    },
+    {
+      "identity": "SCOPE_1",
+      "title": "Scope 1",
+      "aliases": ["scope1", "scope 1", "스코프1", "스코프 1", "직접배출"],
+      "definition": "Scope 1은 조직이 소유하거나 통제하는 배출원에서 발생하는 직접 온실가스 배출입니다.",
+      "keyPoints": ["예시는 조직 소유 보일러의 연료 연소, 자체 차량 연료 사용 등이며 실제 분류에는 소유·통제 관계 확인이 필요합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 4. Scope 1·2·3", "lines": "L45-L51", "claim": "Scope 1의 정의와 분류 기준"}
+      ]
+    },
+    {
+      "identity": "SCOPE_2",
+      "title": "Scope 2",
+      "aliases": ["scope2", "scope 2", "스코프2", "스코프 2", "구매전력", "구매 에너지"],
+      "definition": "Scope 2는 조직이 구매해 소비한 전기·증기·열·냉방의 생산 과정에서 발생하는 간접 온실가스 배출입니다.",
+      "keyPoints": ["전력을 사용한 장소가 아니라 구매해 소비한 에너지인지가 핵심 분류 조건입니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 4. Scope 1·2·3", "lines": "L45-L51", "claim": "Scope 2의 정의와 분류 기준"}
+      ]
+    },
+    {
+      "identity": "SCOPE_3",
+      "title": "Scope 3",
+      "aliases": ["scope3", "scope 3", "스코프3", "스코프 3", "가치사슬배출", "가치사슬 배출"],
+      "definition": "Scope 3는 Scope 2를 제외하고 조직의 상류·하류 가치사슬에서 발생하는 그 밖의 간접 온실가스 배출입니다.",
+      "keyPoints": ["구매품, 출장, 운송, 판매제품 사용 등 다양한 활동이 포함될 수 있으며 Scope 1과 Scope 2의 단순 합이 아닙니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 4. Scope 1·2·3", "lines": "L45-L51", "claim": "Scope 3의 정의와 분류 기준"}
+      ]
+    },
+    {
+      "identity": "DIRECT_EMISSIONS_REDUCTION",
+      "title": "직접 감축",
+      "aliases": ["직접감축", "배출감축", "감축 우선"],
+      "definition": "직접 감축은 조직의 공정·에너지·설비·운영을 바꾸어 실제 배출량을 줄이는 행동입니다.",
+      "keyPoints": ["외부 크레딧 검토보다 먼저 측정 가능한 직접 감축을 우선해야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 6. 설명용 한 줄 워크플로우", "lines": "L63-L70", "claim": "측정에서 직접 감축과 잔여배출로 이어지는 순서"}
+      ]
+    },
+    {
+      "identity": "RESIDUAL_EMISSIONS",
+      "title": "잔여배출",
+      "aliases": ["잔여배출", "남은배출", "잔여 배출"],
+      "definition": "잔여배출은 합리적으로 가능한 직접 감축을 적용한 뒤에도 남아 별도로 관리해야 하는 배출입니다.",
+      "keyPoints": ["크레딧이나 상쇄 검토는 잔여배출의 범위와 사용 목적을 확인한 뒤에 이루어져야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/02_ESG_탄소측정_Scope_SDGs_연결구조.md", "section": "# 6. 설명용 한 줄 워크플로우", "lines": "L63-L70", "claim": "직접 감축과 잔여배출의 순서"}
+      ]
+    },
+    {
+      "identity": "CCM",
+      "title": "규제 탄소시장(CCM)",
+      "aliases": ["ccm", "규제탄소시장", "규제시장"],
+      "definition": "CCM은 법과 제도에 따라 감축 의무와 허용 단위, 제출·사용 규칙이 정해지는 규제 탄소시장입니다.",
+      "keyPoints": ["규제대상, 인정 단위와 법정 사용 규칙을 확인해야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/03_CCM_VCM_배출권_크레딧_상쇄_시장생태계.md", "section": "# 2. 다섯 개념의 구분", "lines": "L21-L34", "claim": "CCM과 VCM의 구분"}
+      ]
+    },
+    {
+      "identity": "VCM",
+      "title": "자발적 탄소시장(VCM)",
+      "aliases": ["vcm", "자발적탄소시장", "자발적 탄소시장", "자발적시장"],
+      "definition": "VCM은 조직이나 개인이 자발적인 기후 목표·기여를 위해 검증된 탄소크레딧을 활용하는 시장입니다.",
+      "keyPoints": ["표준·방법론·등록상태·이중사용 방지와 어떤 외부 주장에 사용할지를 확인해야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/03_CCM_VCM_배출권_크레딧_상쇄_시장생태계.md", "section": "# 2. 다섯 개념의 구분", "lines": "L21-L34", "claim": "VCM의 목적과 확인조건"}
+      ]
+    },
+    {
+      "identity": "EMISSION_ALLOWANCE",
+      "title": "배출권",
+      "aliases": ["배출권", "emission allowance"],
+      "definition": "배출권은 규제 총량과 할당계획 아래에서 일정량의 온실가스를 배출할 수 있도록 인정되는 규제 단위입니다.",
+      "keyPoints": ["탄소크레딧과 발행 근거와 사용 목적이 다르므로 같은 개념으로 취급하면 안 됩니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/03_CCM_VCM_배출권_크레딧_상쇄_시장생태계.md", "section": "# 2. 다섯 개념의 구분", "lines": "L21-L34", "claim": "배출권의 정의와 사용 맥락"}
+      ]
+    },
+    {
+      "identity": "CARBON_CREDIT",
+      "title": "탄소크레딧",
+      "aliases": ["탄소크레딧", "탄소 크레딧", "carbon credit", "크레딧"],
+      "definition": "탄소크레딧은 특정 사업에서 검증된 온실가스 감축·회피·제거 성과를 정해진 단위로 나타낸 것입니다.",
+      "keyPoints": ["사업·방법론·빈티지·검증·인증·등록부 상태와 중복사용 여부를 확인해야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/03_CCM_VCM_배출권_크레딧_상쇄_시장생태계.md", "section": "# 2. 다섯 개념의 구분", "lines": "L21-L34", "claim": "탄소크레딧의 정의와 확인조건"}
+      ]
+    },
+    {
+      "identity": "CARBON_OFFSET",
+      "title": "탄소상쇄",
+      "aliases": ["탄소상쇄", "상쇄", "offset"],
+      "definition": "탄소상쇄는 외부의 검증된 감축·제거 성과를 특정 배출이나 목표에 대응하여 사용하는 행위입니다.",
+      "keyPoints": ["직접 감축을 우선하고 등록부의 사용완료·소각 상태와 주장 범위를 확인해야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/03_CCM_VCM_배출권_크레딧_상쇄_시장생태계.md", "section": "# 2. 다섯 개념의 구분", "lines": "L21-L34", "claim": "상쇄의 정의와 직접 감축 우선 원칙"}
+      ]
+    },
+    {
+      "identity": "FOREST_CARBON",
+      "title": "산림탄소",
+      "aliases": ["산림탄소", "산림 탄소", "forest carbon"],
+      "definition": "산림탄소는 산림의 조성·경영·보전 등을 통해 이루어지는 탄소 흡수·저장과 그 성과의 측정·검증·관리를 다루는 영역입니다.",
+      "keyPoints": ["흡수량뿐 아니라 방법론·추가성·영속성·누출·권리·지역사회·검증·인증·등록부를 함께 확인해야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/04_산림_ESG_E_S_G_및_임업진흥원_생태계.md", "section": "# 1. 핵심 결론", "lines": "L16-L18", "claim": "산림탄소를 E·S·G 전체로 보는 기준"}
+      ]
+    },
+    {
+      "identity": "FOREST_CARBON_PROJECT",
+      "title": "산림탄소사업",
+      "aliases": ["산림탄소사업", "산림 탄소 사업", "산림프로젝트"],
+      "definition": "산림탄소사업은 정해진 사업유형과 방법론에 따라 산림의 탄소흡수 성과를 계획·등록·이행·모니터링·검증·인증하는 사업입니다.",
+      "keyPoints": ["토지와 사업 권리, 사업 적격성, 장기 모니터링, 검증·인증과 등록부 상태가 필요합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/04_산림_ESG_E_S_G_및_임업진흥원_생태계.md", "section": "# 4. 산림탄소 공식 절차", "lines": "L39-L55", "claim": "산림탄소사업의 공식 절차"}
+      ]
+    },
+    {
+      "identity": "KOFPI",
+      "title": "한국임업진흥원(KoFPI)",
+      "aliases": ["한국임업진흥원", "임업진흥원", "kofpi"],
+      "definition": "한국임업진흥원은 공개된 법정·공식 업무 범위에서 산림탄소상쇄제도의 운영·등록·인증 생태계에 참여하는 기관입니다.",
+      "keyPoints": ["개별 사업의 최종 상태와 기관의 최신 역할은 공식 안내와 산림탄소등록부에서 확인해야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/01_ESG_산림탄소_전체생태계_기준서.md", "section": "# 4. 핵심 참여자와 책임", "lines": "L45-L55", "claim": "한국임업진흥원과 산림탄소센터의 제도상 역할"},
+        {"document": "ccs/_input/_document/04_산림_ESG_E_S_G_및_임업진흥원_생태계.md", "section": "# 3. 공식 참여자와 역할", "lines": "L29-L37", "claim": "산림탄소 생태계의 공식 참여자"}
+      ]
+    },
+    {
+      "identity": "FOREST_CARBON_REGISTRY",
+      "title": "산림탄소등록부",
+      "aliases": ["산림탄소등록부", "탄소등록부", "등록부"],
+      "definition": "산림탄소등록부는 산림탄소사업과 인증 실적의 발행·보유·이전·사용 상태를 식별하고 관리하는 공식 기록 체계입니다.",
+      "keyPoints": ["거래나 외부 주장 전에는 단위의 현재 상태와 중복사용 여부를 등록부에서 확인해야 합니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/04_산림_ESG_E_S_G_및_임업진흥원_생태계.md", "section": "# 4. 산림탄소 공식 절차", "lines": "L39-L55", "claim": "인증 이후 등록부 상태관리의 역할"}
+      ]
+    },
+    {
+      "identity": "KNOWLEDGE_ACTION_CHAIN",
+      "title": "지식행동사슬(KAC)",
+      "aliases": ["지식행동사슬", "지식 행동 사슬", "kac", "knowledge action chain"],
+      "definition": "지식행동사슬은 개념을 단순히 저장하는 데서 끝내지 않고 Identity에서 Goal·Task·Knowledge·Method를 거쳐 실행 가능한 Skill과 검증 기록으로 연결하는 구조입니다.",
+      "keyPoints": ["질문마다 관련 개념과 관계를 선택하고, 사용한 근거·실행·판정·산출물을 추적할 수 있어야 실제 KAC 실행이라고 할 수 있습니다."],
+      "sourceEvidence": [
+        {"document": "ccs/_input/_document/06_산림_ESG_지식의_KAC_실행구조.md", "section": "# 2. KAC 실행 구조", "lines": "L21-L39", "claim": "Identity에서 Skill과 실행 기록으로 이어지는 구조"},
+        {"document": "ccs/_input/_document/08_ESG_AX_Concept_Build_Run_구조요구사항.md", "section": "# 3. Concept·Build·Run 구조", "lines": "L31-L55", "claim": "Concept·Build·Run의 역할 분리"}
+      ]
+    }
+  ]
+}

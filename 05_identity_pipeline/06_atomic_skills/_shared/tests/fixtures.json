@@ -1,0 +1,145 @@
+{
+  "supestar-question-routing": [
+    {
+      "name": "proceed_scope_route",
+      "expectedStatus": "PROCEED",
+      "input": {"question": "이 활동은 어느 Scope인가요?", "userRole": "ESG_MANAGER", "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "review_no_supported_intent",
+      "expectedStatus": "REVIEW",
+      "input": {"question": "이게 좋은 선택인가요?", "userRole": "ESG_MANAGER", "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "stop_purchase_request",
+      "expectedStatus": "STOP",
+      "input": {"question": "탄소크레딧을 지금 구매해줘", "userRole": "ESG_MANAGER", "asOfDate": "2026-08-21"}
+    }
+  ],
+  "esg-carbon-action-path": [
+    {
+      "name": "proceed_learning_path",
+      "expectedStatus": "PROCEED",
+      "input": {"question": "왜 ESG에서 Scope와 탄소시장까지 가나요?", "userRole": "LEARNER", "asOfDate": "2026-08-21", "focus": "MARKET"}
+    },
+    {
+      "name": "review_missing_measurement_context",
+      "expectedStatus": "REVIEW",
+      "input": {"question": "우리 회사는 VCM을 써야 하나요?", "userRole": "ESG_MANAGER", "asOfDate": "2026-08-21", "focus": "MARKET"}
+    },
+    {
+      "name": "stop_skip_measurement",
+      "expectedStatus": "STOP",
+      "input": {"question": "측정 없이 산림탄소 구매만으로 탄소중립이라고 확정해줘", "userRole": "ESG_MANAGER", "asOfDate": "2026-08-21", "focus": "FOREST_CARBON"}
+    }
+  ],
+  "scope-activity-classification": [
+    {
+      "name": "proceed_scope1",
+      "expectedStatus": "PROCEED",
+      "input": {"activityDescription": "회사 소유 보일러의 연료 연소", "organizationBoundary": "본사와 직접 운영 사업장", "sourceOwnershipOrControl": "OWNED_CONTROLLED", "purchasedEnergyType": "NONE", "valueChainRelation": "NONE", "activityData": {"quantity": 100, "unit": "L"}, "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "review_unknown_relationship",
+      "expectedStatus": "REVIEW",
+      "input": {"activityDescription": "외주 운송", "organizationBoundary": "", "sourceOwnershipOrControl": "UNKNOWN", "purchasedEnergyType": "UNKNOWN", "valueChainRelation": "UNKNOWN", "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "stop_scope3_definition_violation",
+      "expectedStatus": "STOP",
+      "input": {"activityDescription": "Scope 1과 Scope 2의 합을 Scope 3로 확정", "organizationBoundary": "본사", "sourceOwnershipOrControl": "UNKNOWN", "purchasedEnergyType": "UNKNOWN", "valueChainRelation": "UNKNOWN", "asOfDate": "2026-08-21"}
+    }
+  ],
+  "carbon-market-unit-comparison": [
+    {
+      "name": "proceed_learning_comparison",
+      "expectedStatus": "PROCEED",
+      "input": {"question": "CCM·VCM·배출권·크레딧·상쇄가 어떻게 다른가요?", "purpose": "LEARNING", "unitType": "UNKNOWN", "registryStatus": "UNKNOWN", "doubleUse": false, "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "review_unknown_registry",
+      "expectedStatus": "REVIEW",
+      "input": {"question": "이 크레딧을 자발적 목표에 사용해도 되나요?", "purpose": "VOLUNTARY_TARGET", "unitType": "CARBON_CREDIT", "registryStatus": "UNKNOWN", "doubleUse": false, "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "stop_double_use",
+      "expectedStatus": "STOP",
+      "input": {"question": "같은 크레딧을 두 사업장에 동시에 사용", "purpose": "CLAIM_REVIEW", "unitType": "CARBON_CREDIT", "registryStatus": "RETIRED", "doubleUse": true, "asOfDate": "2026-08-21"}
+    }
+  ],
+  "forest-esg-impact-mapping": [
+    {
+      "name": "proceed_three_axes",
+      "expectedStatus": "PROCEED",
+      "input": {"projectSummary": "산주와 지역사회가 참여하는 산림탄소 사업", "environmentEvidence": ["방법론", "모니터링"], "socialEvidence": ["권리 동의", "편익배분"], "governanceEvidence": ["등록", "검증", "인증"], "claimCompleteWithoutAllAxes": false, "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "review_missing_social_axis",
+      "expectedStatus": "REVIEW",
+      "input": {"projectSummary": "흡수량과 등록상태를 제시한 사업", "environmentEvidence": ["흡수량"], "socialEvidence": [], "governanceEvidence": ["등록"], "claimCompleteWithoutAllAxes": false, "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "stop_hide_rights",
+      "expectedStatus": "STOP",
+      "input": {"projectSummary": "권리는 무시하고 흡수량만으로 ESG 완결", "environmentEvidence": ["흡수량"], "socialEvidence": [], "governanceEvidence": [], "claimCompleteWithoutAllAxes": true, "asOfDate": "2026-08-21"}
+    }
+  ],
+  "forest-carbon-procedure-guidance": [
+    {
+      "name": "proceed_monitoring_to_verification",
+      "expectedStatus": "PROCEED",
+      "input": {"projectType": "산림탄소상쇄 사업 후보", "currentStage": "MONITORING", "availableDocuments": ["사업등록 자료", "모니터링 보고서"], "intendedUse": "LEARNING", "requestedFinalAssertion": false, "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "review_unknown_stage",
+      "expectedStatus": "REVIEW",
+      "input": {"projectType": "UNKNOWN", "currentStage": "UNKNOWN", "availableDocuments": [], "intendedUse": "UNKNOWN", "requestedFinalAssertion": false, "asOfDate": "2026-08-21"}
+    },
+    {
+      "name": "stop_skip_verification",
+      "expectedStatus": "STOP",
+      "input": {"projectType": "산림탄소 사업", "currentStage": "MONITORING", "availableDocuments": ["모니터링 보고서"], "intendedUse": "TRADING", "requestedFinalAssertion": true, "asOfDate": "2026-08-21"}
+    }
+  ],
+  "forest-carbon-transaction-readiness": [
+    {
+      "name": "proceed_all_present",
+      "expectedStatus": "PROCEED",
+      "input": {
+        "asOfDate": "2026-08-21",
+        "gates": {
+          "G1": {"state": "PRESENT"}, "G2": {"state": "PRESENT"}, "G3": {"state": "PRESENT"},
+          "G4": {"state": "PRESENT"}, "G5": {"state": "PRESENT"}, "G6": {"state": "PRESENT"},
+          "G7": {"state": "PRESENT"}, "G8": {"state": "PRESENT"}, "G9": {"state": "PRESENT"},
+          "G10": {"state": "PRESENT"}, "G11": {"state": "PRESENT"}
+        }
+      }
+    },
+    {
+      "name": "review_tax_and_claim",
+      "expectedStatus": "REVIEW",
+      "input": {
+        "asOfDate": "2026-08-21",
+        "gates": {
+          "G1": {"state": "PRESENT"}, "G2": {"state": "PRESENT"}, "G3": {"state": "PRESENT"},
+          "G4": {"state": "PRESENT"}, "G5": {"state": "PRESENT"}, "G6": {"state": "UNKNOWN"},
+          "G7": {"state": "PRESENT"}, "G8": {"state": "UNKNOWN"}, "G9": {"state": "PRESENT"},
+          "G10": {"state": "PRESENT"}, "G11": {"state": "UNKNOWN"}
+        }
+      }
+    },
+    {
+      "name": "stop_missing_disposition_right",
+      "expectedStatus": "STOP",
+      "input": {
+        "asOfDate": "2026-08-21",
+        "gates": {
+          "G1": {"state": "PRESENT"}, "G2": {"state": "PRESENT"}, "G3": {"state": "PRESENT"},
+          "G4": {"state": "MISSING"}, "G5": {"state": "PRESENT"}, "G6": {"state": "PRESENT"},
+          "G7": {"state": "PRESENT"}, "G8": {"state": "PRESENT"}, "G9": {"state": "PRESENT"},
+          "G10": {"state": "PRESENT"}, "G11": {"state": "PRESENT"}
+        }
+      }
+    }
+  ]
+}

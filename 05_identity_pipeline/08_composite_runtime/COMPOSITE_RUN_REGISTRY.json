@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "runtimeCompositeVersion": "0.3.0",
+  "executionBoundary": "Deterministic local orchestration only. The Composite may select and execute one registered local domain Run Skill, read the sealed Stage vault, and write run evidence. It may not perform an external transaction, payment, registry mutation, legal/tax/certification decision, or public claim approval.",
+  "composites": [
+    {
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "compositeName": "supestar-forest-esg-orchestrator",
+      "runtimeSkillPath": "05_identity_pipeline/08_composite_runtime/supestar-forest-esg-orchestrator-run/SKILL.md",
+      "runtimeContractPath": "05_identity_pipeline/08_composite_runtime/RUNTIME_COMPOSITE_CONTRACT.md",
+      "sealedSourceCompositePath": "ccs_composite_authoring/supestar_forest_esg_orchestrator_v2/_skill/supestar-forest-esg-orchestrator_skill/SKILL.md",
+      "sealedSourceAuthoringRecordPath": "ccs_composite_authoring/supestar_forest_esg_orchestrator_v2/_entity/_record/supestar_forest_esg_orchestrator_authoring_run.md",
+      "routerContractPath": "05_identity_pipeline/06_atomic_skills/supestar-question-routing/references/contract.md",
+      "knowledgeRuntimePath": "06_runtime/src/supestar_web/knowledge_runtime.py",
+      "groundingCardsPath": "06_runtime/src/supestar_web/knowledge/esg_knowledge_cards.json",
+      "stageVault": "ccs_authoring/supestar_mvp_v3",
+      "routerRunSkill": "supestar-question-routing-run",
+      "conceptRoute": "CONCEPT_EXPLANATION",
+      "domainRoutes": {
+        "ESG_CARBON_PATH": "esg-carbon-action-path-run",
+        "SCOPE_CLASSIFICATION": "scope-activity-classification-run",
+        "CARBON_MARKET_COMPARISON": "carbon-market-unit-comparison-run",
+        "FOREST_ESG_MAPPING": "forest-esg-impact-mapping-run",
+        "FOREST_CARBON_PROCEDURE": "forest-carbon-procedure-guidance-run",
+        "TRANSACTION_READINESS": "forest-carbon-transaction-readiness-run"
+      },
+      "terminalRoutes": [
+        "NEEDS_INPUT",
+        "OUT_OF_SCOPE"
+      ],
+      "failureTerminal": "ROUTING_EXECUTION_FAILURE",
+      "preferredIdentities": {
+        "ESG_CARBON_PATH": [
+          "ESG_MANAGEMENT"
+        ],
+        "SCOPE_CLASSIFICATION": [
+          "ORGANIZATIONAL_BOUNDARY"
+        ],
+        "CARBON_MARKET_COMPARISON": [
+          "CCM",
+          "VCM",
+          "EMISSION_ALLOWANCE",
+          "CARBON_CREDIT"
+        ],
+        "FOREST_ESG_MAPPING": [
+          "FOREST_CARBON_PROJECT"
+        ],
+        "FOREST_CARBON_PROCEDURE": [
+          "FOREST_CARBON_PROJECT"
+        ],
+        "TRANSACTION_READINESS": [
+          "TRANSACTION_EVIDENCE_PACK"
+        ]
+      }
+    }
+  ]
+}

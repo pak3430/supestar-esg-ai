@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#123f32" />
+    <meta
+      name="description"
+      content="복잡한 산림 ESG 지식을 이해하기 쉽게 설명하고 필요한 확인과 실제 다음 행동까지 연결하는 수페스타 데모"
+    />
+    <title>수페스타 | ESG 지식행동 AI</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="수페스타 홈">
+          <span class="brand-mark" aria-hidden="true">숲</span>
+          <span>
+            <strong>수페스타</strong>
+            <small>Grounded ESG Knowledge AI</small>
+          </span>
+        </a>
+        <div class="runtime-state" id="runtimeState">
+          <span class="pulse"></span>
+          <span>실행 엔진 확인 중</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="context-panel">
+          <section class="hero-card">
+            <div class="hero-copy">
+              <p class="eyebrow">FOREST ESG GUIDE</p>
+              <h1>질문에 필요한 ESG 지식만<br /><em>근거에서 답변까지</em> 연결합니다.</h1>
+              <p>
+                미리 구조화한 ESG 지식에서 질문에 필요한 내용과 근거만 골라
+                이해하기 쉬운 말로 설명합니다.
+              </p>
+            </div>
+            <img
+              class="mascot"
+              src="/assets/supe_star_ai.png"
+              alt="수페스타 캐릭터"
+            />
+          </section>
+
+          <section class="chain-card" aria-labelledby="chain-title">
+            <div class="section-heading">
+              <span>왜 이 구조가 필요한가요?</span>
+              <strong id="chain-title">지식을 행동으로 잇기 위해서입니다</strong>
+            </div>
+            <p class="chain-intro">같은 ESG 영역이라도 무엇을 묻고 무엇을 하려는지에 따라 필요한 지식과 확인 순서가 달라집니다.</p>
+            <ol class="reason-list">
+              <li><span>1</span><p><strong>질문의 개념을 선택하고</strong> 관련 없는 탄소·마켓 내용은 제외합니다.</p></li>
+              <li><span>2</span><p><strong>연결된 근거와 확인 순서를 따라</strong> 필요한 답변과 다음 행동을 만듭니다.</p></li>
+              <li><span>3</span><p><strong>AI는 문장을 자연스럽게 다듬고</strong> 판단은 구조화된 지식과 실행 규칙이 맡습니다.</p></li>
+            </ol>
+            <details class="chain-backstage">
+              <summary>뒷단의 지식행동사슬 보기</summary>
+              <div class="mini-chain">Identity → Goal → Task → Knowledge → Method → Skill</div>
+            </details>
+          </section>
+
+          <section class="boundary-card">
+            <div class="boundary-icon">!</div>
+            <div>
+              <strong>AI가 설명해도 근거와 권한 경계는 바뀌지 않습니다</strong>
+              <p>마켓 안내는 사용자가 구매처나 구매 절차를 명시적으로 요청한 경우에만 표시됩니다.</p>
+            </div>
+          </section>
+        </aside>
+
+        <section class="chat-panel" aria-label="수페스타 대화">
+          <div class="chat-heading">
+            <div>
+              <p class="eyebrow">FOREST ESG CONVERSATION</p>
+              <h2>수페스타에게 물어보세요</h2>
+            </div>
+            <button class="ghost-button" id="resetButton" type="button">대화 초기화</button>
+          </div>
+
+          <div class="messages" id="messages" aria-live="polite">
+            <article class="message assistant-message">
+              <div class="avatar"><img src="/assets/supe_star_ai.png" alt="" /></div>
+              <div class="bubble intro-bubble">
+                <span class="speaker">수페스타</span>
+                <p>
+                  안녕하세요. ESG, SDGs, Scope, 탄소시장, 산림탄소와 관련 기관까지 편하게 물어보세요.
+                  질문과 직접 관련된 지식과 근거만 골라 이해하기 쉽게 답변해 드릴게요.
+                </p>
+                <p class="muted">아래 예시를 선택하거나 직접 질문해 보세요.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="quick-prompts" id="quickPrompts" aria-label="예시 질문">
+            <button type="button" data-question="ESG가 무엇인가요?">ESG란 무엇인가요?</button>
+            <button type="button" data-question="SDGs는 ESG와 어떤 관계인가요?">ESG와 SDGs</button>
+            <button type="button" data-question="Scope 1과 Scope 2의 차이는 무엇인가요?">Scope 쉽게 이해하기</button>
+            <button type="button" data-question="한국임업진흥원은 산림 ESG에서 어떤 역할을 하나요?">한국임업진흥원 역할</button>
+            <button type="button" data-question="지식행동사슬은 왜 필요한가요?">지식행동사슬</button>
+            <button type="button" data-question="배출권과 탄소크레딧은 어떻게 다른가요?">탄소시장 쉽게 이해하기</button>
+            <button type="button" data-question="탄소크레딧을 어디에서 살 수 있나요?">산림탄소마켓 찾기</button>
+          </div>
+
+          <form class="composer" id="chatForm">
+            <label class="sr-only" for="questionInput">산림 ESG 질문</label>
+            <textarea
+              id="questionInput"
+              rows="2"
+              maxlength="2000"
+              placeholder="예: ESG가 무엇인가요?"
+              required
+            ></textarea>
+            <button class="send-button" id="sendButton" type="submit">
+              <span>질문하기</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </form>
+          <p class="composer-note">답변 아래를 열면 사용한 지식행동사슬·근거·실행 과정과 AI 동작 방식을 확인할 수 있습니다.</p>
+        </section>
+      </main>
+
+      <footer class="product-disclaimer">
+        <strong>해커톤 검증용 MVP</strong>
+        <span>한국임업진흥원 공식 운영 서비스가 아니며, 실제 거래·결제·인증·등록부 변경을 수행하지 않습니다.</span>
+      </footer>
+    </div>
+
+    <template id="userMessageTemplate">
+      <article class="message user-message">
+        <div class="bubble"><span class="speaker">나</span><p></p></div>
+      </article>
+    </template>
+
+    <template id="loadingTemplate">
+      <article class="message assistant-message loading-message">
+        <div class="avatar"><img src="/assets/supe_star_ai.png" alt="" /></div>
+        <div class="bubble">
+          <span class="speaker">수페스타</span>
+          <div class="running"><i></i><i></i><i></i><span>질문의 상황과 다음 행동을 정리하고 있어요.</span></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

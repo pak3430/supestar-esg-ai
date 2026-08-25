@@ -1,0 +1,2375 @@
+{
+  "meta": {
+    "schema": "forest-esg-kac-identity-catalog",
+    "version": "1.0.0",
+    "created_at": "2026-08-17T00:00:00+09:00",
+    "status_values": [
+      "검증",
+      "검증+파생",
+      "파생",
+      "조건부",
+      "미확정",
+      "기각",
+      "프레임워크"
+    ],
+    "active_product": "산림 ESG KAC 지식·행동·증빙 시스템",
+    "excluded": [
+      "실거래",
+      "자동결제",
+      "법률·세무 자문",
+      "가격·수익률 추천",
+      "인증 자동판정"
+    ]
+  },
+  "groups": [
+    {
+      "code": "FRM",
+      "title": "ESG·지속가능성 프레임",
+      "count": 20
+    },
+    {
+      "code": "GHG",
+      "title": "기후·온실가스 측정",
+      "count": 24
+    },
+    {
+      "code": "FOR",
+      "title": "산림 ESG·산림탄소 제도",
+      "count": 35
+    },
+    {
+      "code": "MKT",
+      "title": "탄소시장·거래·무결성",
+      "count": 39
+    },
+    {
+      "code": "KAC",
+      "title": "CCS·Identity·Skill·KAC 실행",
+      "count": 29
+    }
+  ],
+  "identities": [
+    {
+      "id": "FRM-001",
+      "name": "지속가능성",
+      "type": "상위 맥락",
+      "definition": "현재의 필요와 장기적 환경·사회·경제 지속 가능성을 함께 고려하는 상태와 관점",
+      "sourceClass": "UN·공식 가이드",
+      "state": "검증",
+      "use": "ESG와 SDGs의 공통 상위 맥락을 설명"
+    },
+    {
+      "id": "FRM-002",
+      "name": "지속가능발전",
+      "type": "상위 목표",
+      "definition": "경제·사회·환경의 세 차원을 통합해 발전을 추구하는 접근",
+      "sourceClass": "UN 2030 Agenda",
+      "state": "검증",
+      "use": "SDGs의 목적과 적용 범위를 판정"
+    },
+    {
+      "id": "FRM-003",
+      "name": "ESG",
+      "type": "평가·경영 관점",
+      "definition": "조직의 환경·사회·지배구조 관련 영향·위험·기회와 행동·성과를 다루는 관점",
+      "sourceClass": "해커톤 교육·공공기관 가이드",
+      "state": "검증",
+      "use": "문제를 E·S·G와 실행·성과로 분류"
+    },
+    {
+      "id": "FRM-004",
+      "name": "ESG 경영",
+      "type": "조직 운영",
+      "definition": "조직이 ESG 이슈를 목표·정책·행동·자원·성과·공시와 연결해 관리하는 운영 활동",
+      "sourceClass": "공공기관 ESG 가이드",
+      "state": "검증",
+      "use": "조직의 실행책임과 보고를 연결"
+    },
+    {
+      "id": "FRM-005",
+      "name": "환경(E)",
+      "type": "ESG 영역",
+      "definition": "기후·에너지·자원·오염·생물다양성 등 환경 영향과 대응을 다루는 영역",
+      "sourceClass": "공공기관 ESG 가이드",
+      "state": "검증",
+      "use": "산림탄소·흡수원·기후행동 배치"
+    },
+    {
+      "id": "FRM-006",
+      "name": "사회(S)",
+      "type": "ESG 영역",
+      "definition": "노동·안전·인권·지역사회·공급망·정보보호 등 사람과 사회에 대한 영역",
+      "sourceClass": "공공기관 ESG 가이드",
+      "state": "검증",
+      "use": "산주·임업인·지역사회 편익과 위험 배치"
+    },
+    {
+      "id": "FRM-007",
+      "name": "지배구조(G)",
+      "type": "ESG 영역",
+      "definition": "책임·의사결정·윤리·내부통제·감사·정보공개를 다루는 영역",
+      "sourceClass": "공공기관 ESG 가이드",
+      "state": "검증",
+      "use": "등록·검증·인증·책임·투명성 배치"
+    },
+    {
+      "id": "FRM-008",
+      "name": "SDGs",
+      "type": "국제 목표체계",
+      "definition": "UN 2030 Agenda의 통합적이고 불가분한 17개 지속가능발전목표와 169개 세부목표",
+      "sourceClass": "UN",
+      "state": "검증",
+      "use": "ESG 행동의 공공목표 기여를 연결"
+    },
+    {
+      "id": "FRM-009",
+      "name": "SDG 7",
+      "type": "국제 목표",
+      "definition": "모두를 위한 적정가격의 신뢰 가능하고 지속가능한 현대적 에너지 접근 목표",
+      "sourceClass": "UN",
+      "state": "검증",
+      "use": "산림바이오매스 에너지 관련성 검토"
+    },
+    {
+      "id": "FRM-010",
+      "name": "SDG 8",
+      "type": "국제 목표",
+      "definition": "포용적 경제성장과 생산적 고용·양질의 일자리 목표",
+      "sourceClass": "UN",
+      "state": "검증",
+      "use": "임업인·산촌 일자리와 사회효과 연결"
+    },
+    {
+      "id": "FRM-011",
+      "name": "SDG 12",
+      "type": "국제 목표",
+      "definition": "지속가능한 소비와 생산양식 보장 목표",
+      "sourceClass": "UN",
+      "state": "검증",
+      "use": "목제품 이용·자원순환과 연결"
+    },
+    {
+      "id": "FRM-012",
+      "name": "SDG 13",
+      "type": "국제 목표",
+      "definition": "기후변화와 그 영향에 대응하기 위한 긴급행동 목표",
+      "sourceClass": "UN",
+      "state": "검증",
+      "use": "산림탄소·감축·흡수 활동과 연결"
+    },
+    {
+      "id": "FRM-013",
+      "name": "SDG 15",
+      "type": "국제 목표",
+      "definition": "육상생태계 보호·복원, 지속가능한 산림관리와 생물다양성 보전 목표",
+      "sourceClass": "UN",
+      "state": "검증",
+      "use": "산림관리·생물다양성의 핵심 목표로 연결"
+    },
+    {
+      "id": "FRM-014",
+      "name": "SDG 16",
+      "type": "국제 목표",
+      "definition": "효과적이고 책임 있으며 포용적인 제도와 정의 접근 목표",
+      "sourceClass": "UN",
+      "state": "검증",
+      "use": "등록부·투명성·책임·분쟁 처리와 연결"
+    },
+    {
+      "id": "FRM-015",
+      "name": "SDG 17",
+      "type": "국제 목표",
+      "definition": "목표 이행수단과 글로벌 파트너십 강화 목표",
+      "sourceClass": "UN",
+      "state": "검증",
+      "use": "기관·기업·산주·검증기관 협력과 연결"
+    },
+    {
+      "id": "FRM-016",
+      "name": "영향·위험·기회(IRO)",
+      "type": "판단 대상",
+      "definition": "조직이 환경·사회에 미치는 영향과 지속가능성 이슈가 조직에 주는 위험·기회",
+      "sourceClass": "해커톤 교육·공시 체계",
+      "state": "검증",
+      "use": "문제에서 정책·행동·성과로 이어지는 출발점"
+    },
+    {
+      "id": "FRM-017",
+      "name": "중대성",
+      "type": "판단 기준",
+      "definition": "조직과 이해관계자의 의사결정에 중요해 우선 관리해야 할 이슈의 정도",
+      "sourceClass": "공공기관 ESG 가이드",
+      "state": "검증",
+      "use": "산림 ESG 과제의 우선순위 결정"
+    },
+    {
+      "id": "FRM-018",
+      "name": "이해관계자",
+      "type": "주체 집합",
+      "definition": "조직의 결정에 영향을 주거나 그 결정의 영향을 받는 개인·집단·기관",
+      "sourceClass": "공공기관 ESG 가이드",
+      "state": "검증",
+      "use": "수혜자·책임자·피해 가능 대상을 식별"
+    },
+    {
+      "id": "FRM-019",
+      "name": "ESG 성과지표",
+      "type": "측정 규칙",
+      "definition": "ESG 행동의 결과를 정량·정성으로 관찰하기 위한 정의·단위·기간·분모가 있는 지표",
+      "sourceClass": "해커톤 기준·공공기관 가이드",
+      "state": "검증",
+      "use": "산출물과 실제 변화 구분"
+    },
+    {
+      "id": "FRM-020",
+      "name": "ESG 공시",
+      "type": "보고 행동",
+      "definition": "목표·정책·행동·성과·한계·근거를 이해관계자에게 공개하는 활동",
+      "sourceClass": "공공기관 ESG 가이드",
+      "state": "검증",
+      "use": "행동과 증빙을 공개 정보로 전환"
+    },
+    {
+      "id": "GHG-001",
+      "name": "기후변화",
+      "type": "환경 현상",
+      "definition": "장기간의 기후 상태가 변화하며 자연·사회·경제에 영향을 주는 현상",
+      "sourceClass": "UNFCCC·공식 교육",
+      "state": "검증",
+      "use": "완화와 적응 문제의 상위 맥락"
+    },
+    {
+      "id": "GHG-002",
+      "name": "기후변화 완화",
+      "type": "대응 유형",
+      "definition": "온실가스 배출원을 줄이거나 흡수원을 유지·증진하여 기후변화 원인을 제한하는 대응",
+      "sourceClass": "UNFCCC·법령",
+      "state": "검증",
+      "use": "감축·흡수·산림탄소 활동 분류"
+    },
+    {
+      "id": "GHG-003",
+      "name": "기후변화 적응",
+      "type": "대응 유형",
+      "definition": "현재 또는 예상되는 기후 영향에 대비해 피해와 취약성을 낮추는 대응",
+      "sourceClass": "UNFCCC·공공기관 가이드",
+      "state": "검증",
+      "use": "완화와 다른 결과지표를 적용"
+    },
+    {
+      "id": "GHG-004",
+      "name": "온실가스",
+      "type": "물질 집합",
+      "definition": "대기에서 열을 흡수·방출하여 온실효과에 기여하는 기체의 집합",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "CO2와 여러 기체를 구분"
+    },
+    {
+      "id": "GHG-005",
+      "name": "이산화탄소(CO2)",
+      "type": "온실가스",
+      "definition": "탄소 원자와 산소 원자로 이루어진 대표적인 온실가스",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "탄소·CO2e와 혼동 방지"
+    },
+    {
+      "id": "GHG-006",
+      "name": "이산화탄소환산량(CO2e)",
+      "type": "환산 단위",
+      "definition": "여러 온실가스의 온난화 영향을 CO2 기준으로 환산한 양",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "서로 다른 기체의 배출량을 공통 단위로 표현"
+    },
+    {
+      "id": "GHG-007",
+      "name": "지구온난화지수(GWP)",
+      "type": "환산 계수",
+      "definition": "온실가스별 온난화 영향을 CO2와 비교하는 계수",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "CO2e 계산의 기준 버전 기록"
+    },
+    {
+      "id": "GHG-008",
+      "name": "온실가스 배출량",
+      "type": "측정값",
+      "definition": "정해진 조직·운영·시간 경계에서 대기로 배출된 온실가스의 양",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "Scope·활동자료·배출계수와 연결"
+    },
+    {
+      "id": "GHG-009",
+      "name": "온실가스 흡수·제거량",
+      "type": "측정값",
+      "definition": "정해진 방법론과 기간에 따라 대기에서 제거되거나 흡수된 온실가스의 양",
+      "sourceClass": "법령·방법론",
+      "state": "검증",
+      "use": "산림탄소흡수량과 연결"
+    },
+    {
+      "id": "GHG-010",
+      "name": "탄소흡수원",
+      "type": "자연·관리 체계",
+      "definition": "대기 중 온실가스를 흡수하고 저장하는 산림·토양 등 체계",
+      "sourceClass": "탄소중립기본법·탄소흡수원법",
+      "state": "검증",
+      "use": "산림의 역할과 유지·증진 활동 판정"
+    },
+    {
+      "id": "GHG-011",
+      "name": "탄소저장",
+      "type": "상태·기능",
+      "definition": "흡수된 탄소가 생체·토양·목제품 등에 일정 기간 보유되는 상태",
+      "sourceClass": "탄소흡수원법·방법론",
+      "state": "검증",
+      "use": "흡수와 영속성·역전 위험 연결"
+    },
+    {
+      "id": "GHG-012",
+      "name": "온실가스 인벤토리",
+      "type": "데이터 구조",
+      "definition": "배출원·흡수원·활동자료·배출계수·산정결과를 경계별로 기록한 목록",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "측정과 검증의 기준 데이터 구성"
+    },
+    {
+      "id": "GHG-013",
+      "name": "조직 경계",
+      "type": "산정 경계",
+      "definition": "인벤토리에 포함할 법인·사업장·운영단위를 정하는 경계",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "Scope 분류보다 먼저 결정"
+    },
+    {
+      "id": "GHG-014",
+      "name": "운영 경계",
+      "type": "산정 경계",
+      "definition": "조직 경계 안팎의 배출을 Scope 1·2·3으로 분류하는 경계",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "직접·간접배출 분류"
+    },
+    {
+      "id": "GHG-015",
+      "name": "Scope 1",
+      "type": "배출 범위",
+      "definition": "조직이 소유하거나 통제하는 배출원에서 발생하는 직접배출",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "직접배출원을 식별"
+    },
+    {
+      "id": "GHG-016",
+      "name": "Scope 2",
+      "type": "배출 범위",
+      "definition": "조직이 구매해 소비한 전기·스팀·열·냉방의 생산에서 발생하는 간접배출",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "구매에너지 자료와 연결"
+    },
+    {
+      "id": "GHG-017",
+      "name": "Scope 3",
+      "type": "배출 범위",
+      "definition": "Scope 2에 포함되지 않으며 조직의 가치사슬에서 발생하는 기타 간접배출",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "15개 범주와 관련 활동 선별"
+    },
+    {
+      "id": "GHG-018",
+      "name": "가치사슬",
+      "type": "활동 관계",
+      "definition": "원재료·구매·운송·사용·폐기·투자 등 조직의 상·하류 활동 연결",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "Scope 3 배출원과 데이터 소유자 탐색"
+    },
+    {
+      "id": "GHG-019",
+      "name": "활동자료",
+      "type": "산정 입력",
+      "definition": "연료량·전력사용량·거리·구매금액·수량 등 배출 계산의 기초 데이터",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "배출계수와 결합해 산정"
+    },
+    {
+      "id": "GHG-020",
+      "name": "배출계수",
+      "type": "산정 입력",
+      "definition": "활동 단위당 온실가스 배출량을 나타내는 계수",
+      "sourceClass": "GHG Protocol·국가자료",
+      "state": "검증",
+      "use": "출처·지역·연도·단위 검증"
+    },
+    {
+      "id": "GHG-021",
+      "name": "기준연도",
+      "type": "시간 기준",
+      "definition": "감축 성과를 비교하기 위해 선택한 기준 기간",
+      "sourceClass": "GHG Protocol",
+      "state": "검증",
+      "use": "목표·재산정·성과 비교"
+    },
+    {
+      "id": "GHG-022",
+      "name": "직접 감축",
+      "type": "행동",
+      "definition": "조직이나 사업이 통제 가능한 배출원·활동에서 실제 배출을 줄이는 행동",
+      "sourceClass": "기후행동 원칙·해커톤 교육",
+      "state": "검증",
+      "use": "상쇄와 구분하고 우선순위 설정"
+    },
+    {
+      "id": "GHG-023",
+      "name": "잔여 배출",
+      "type": "판단 대상",
+      "definition": "가능하고 정당한 감축 조치를 수행한 뒤에도 남는 배출",
+      "sourceClass": "기후 무결성 지침",
+      "state": "조건부",
+      "use": "크레딧 사용과 주장 범위 검토의 전제"
+    },
+    {
+      "id": "GHG-024",
+      "name": "MRV",
+      "type": "관리 체계",
+      "definition": "배출·감축·흡수 성과를 측정하고 보고하며 검증하는 일련의 체계",
+      "sourceClass": "법령·공식 제도",
+      "state": "검증",
+      "use": "성과의 재현성과 신뢰성 확보"
+    },
+    {
+      "id": "FOR-001",
+      "name": "산림",
+      "type": "자연·산업 도메인",
+      "definition": "나무·토양·생물·물·사람의 활동이 결합된 육상생태계이자 임업 기반",
+      "sourceClass": "산림 관련 법·KoFPI",
+      "state": "검증",
+      "use": "산림 ESG 도메인의 상위 Identity"
+    },
+    {
+      "id": "FOR-002",
+      "name": "지속가능한 산림경영",
+      "type": "관리 접근",
+      "definition": "산림의 환경·사회·경제 기능을 장기적으로 유지하도록 계획·관리하는 접근",
+      "sourceClass": "UN SDG 15·KoFPI",
+      "state": "검증",
+      "use": "흡수량 외 생물다양성·지역사회·거버넌스 연결"
+    },
+    {
+      "id": "FOR-003",
+      "name": "산림탄소",
+      "type": "도메인 개념",
+      "definition": "산림의 흡수·저장·관리 및 그 성과 측정·제도를 포괄하는 개념",
+      "sourceClass": "탄소흡수원법·KoFPI",
+      "state": "검증",
+      "use": "산림탄소상쇄제도와 구분"
+    },
+    {
+      "id": "FOR-004",
+      "name": "산림탄소흡수원",
+      "type": "탄소흡수원",
+      "definition": "대기 중 이산화탄소를 흡수하고 산림 생체량·토양 등에 저장하는 산림 체계",
+      "sourceClass": "탄소흡수원법",
+      "state": "검증",
+      "use": "유지·증진 활동과 연결"
+    },
+    {
+      "id": "FOR-005",
+      "name": "산림탄소흡수량",
+      "type": "측정값",
+      "definition": "공식 방법론과 사업 경계에 따라 산정·검증·인증된 산림의 탄소 흡수 성과량",
+      "sourceClass": "탄소흡수원법·KoFPI",
+      "state": "검증",
+      "use": "일반 계산값과 인증량을 구분"
+    },
+    {
+      "id": "FOR-006",
+      "name": "산림탄소상쇄제도",
+      "type": "국내 제도",
+      "definition": "기업·산주·지자체 등이 자발적으로 탄소흡수원 유지·증진 활동을 하고 추가 산림탄소흡수량을 정부가 인증하는 제도",
+      "sourceClass": "KoFPI·탄소흡수원법",
+      "state": "검증",
+      "use": "사업 절차와 주체를 연결"
+    },
+    {
+      "id": "FOR-007",
+      "name": "거래형 사업",
+      "type": "참여 유형",
+      "definition": "검증과 인증 및 거래 단계를 포함하는 산림탄소상쇄 참여 유형",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "비거래형과 절차·산출 구분"
+    },
+    {
+      "id": "FOR-008",
+      "name": "비거래형 사업",
+      "type": "참여 유형",
+      "definition": "산림탄소 성과를 홍보 등 비거래 목적으로 활용하는 참여 유형",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "거래형과 절차·검증 차이 확인"
+    },
+    {
+      "id": "FOR-009",
+      "name": "식생복구",
+      "type": "사업 활동",
+      "definition": "훼손되거나 식생이 부족한 지역의 식생을 회복해 흡수원을 증진하는 활동",
+      "sourceClass": "KoFPI 운영 안내",
+      "state": "검증",
+      "use": "적용 방법론과 대상지 확인"
+    },
+    {
+      "id": "FOR-010",
+      "name": "신규조림·재조림",
+      "type": "사업 활동",
+      "definition": "비산림지의 조림 또는 과거 산림지의 재조림을 통해 흡수원을 조성하는 활동",
+      "sourceClass": "KoFPI 운영 안내",
+      "state": "검증",
+      "use": "토지 이력·적격성·방법론 확인"
+    },
+    {
+      "id": "FOR-011",
+      "name": "목제품 이용",
+      "type": "사업 활동",
+      "definition": "목재 이용과 저장효과를 통해 산림탄소 성과를 관리하는 활동",
+      "sourceClass": "KoFPI 운영 안내",
+      "state": "검증",
+      "use": "제품 경계·수명·대체효과를 구분"
+    },
+    {
+      "id": "FOR-012",
+      "name": "산림경영",
+      "type": "사업 활동",
+      "definition": "숲가꾸기·벌기령 연장 등 산림관리로 흡수·저장 기능을 유지·증진하는 활동",
+      "sourceClass": "KoFPI 운영 안내",
+      "state": "검증",
+      "use": "사업계획·방법론·모니터링 연결"
+    },
+    {
+      "id": "FOR-013",
+      "name": "산림바이오매스 에너지 이용",
+      "type": "사업 활동",
+      "definition": "산림바이오매스를 에너지로 이용하는 산림탄소 관련 활동",
+      "sourceClass": "KoFPI 운영 안내",
+      "state": "검증",
+      "use": "연료·대체·지속가능성 조건 검토"
+    },
+    {
+      "id": "FOR-014",
+      "name": "산지전용 억제",
+      "type": "사업 활동",
+      "definition": "산림이 다른 용도로 전환되는 것을 억제해 탄소저장과 흡수 기능을 유지하는 활동",
+      "sourceClass": "KoFPI 운영 안내",
+      "state": "검증",
+      "use": "기준선·추가성·권리 검토"
+    },
+    {
+      "id": "FOR-015",
+      "name": "복합형 사업",
+      "type": "사업 활동",
+      "definition": "둘 이상의 산림탄소 활동을 결합한 사업 유형",
+      "sourceClass": "산림탄소등록부",
+      "state": "검증",
+      "use": "각 방법론과 중복계산을 점검"
+    },
+    {
+      "id": "FOR-016",
+      "name": "산주",
+      "type": "권리·참여 주체",
+      "definition": "산림을 소유하거나 적법한 관리·사업 권한을 가진 개인 또는 조직",
+      "sourceClass": "제도·사업 문서",
+      "state": "조건부",
+      "use": "소유·사용·처분 권한과 사업 적격성 확인"
+    },
+    {
+      "id": "FOR-017",
+      "name": "사업자",
+      "type": "실행 주체",
+      "definition": "산림탄소 사업계획을 제출하고 사업·모니터링·거래 또는 활용을 수행하는 주체",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "단계별 책임과 산출물 연결"
+    },
+    {
+      "id": "FOR-018",
+      "name": "산림청",
+      "type": "정부 주체",
+      "definition": "산림 정책과 산림탄소상쇄 인증 체계를 관할하는 중앙행정기관",
+      "sourceClass": "법령·KoFPI",
+      "state": "검증",
+      "use": "법령·인증·등록부 책임 연결"
+    },
+    {
+      "id": "FOR-019",
+      "name": "한국임업진흥원",
+      "type": "공공기관",
+      "definition": "임업 진흥과 산림탄소·인증사업 등을 수행하는 공공기관",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "기관의 공식 사업범위만 연결"
+    },
+    {
+      "id": "FOR-020",
+      "name": "산림탄소센터",
+      "type": "제도 운영 주체",
+      "definition": "산림탄소상쇄제도 운영·관리와 검증 전문인력 교육 등을 수행하는 한국임업진흥원 산하 조직",
+      "sourceClass": "탄소흡수원법",
+      "state": "검증",
+      "use": "접수·평가·등록·인증 관련 역할 연결"
+    },
+    {
+      "id": "FOR-021",
+      "name": "검증기관",
+      "type": "검증 주체",
+      "definition": "모니터링 결과와 흡수량이 적용 기준에 맞는지 독립적으로 검토하는 주체",
+      "sourceClass": "KoFPI 절차",
+      "state": "검증",
+      "use": "검증보고서와 책임 연결"
+    },
+    {
+      "id": "FOR-022",
+      "name": "산림탄소등록부",
+      "type": "공식 관리 시스템",
+      "definition": "탄소흡수원 활동과 산림탄소흡수량 정보·통계의 투명한 관리와 유통을 위한 등록부",
+      "sourceClass": "탄소흡수원법·KoFPI",
+      "state": "검증",
+      "use": "사업·인증·거래·사용 상태 확인"
+    },
+    {
+      "id": "FOR-023",
+      "name": "사업계획서",
+      "type": "절차 산출물",
+      "definition": "사업대상·방법론·기준선·모니터링·예상성과·책임을 설명하는 신청 문서",
+      "sourceClass": "KoFPI 가이드",
+      "state": "검증",
+      "use": "사업 등록의 입력자료"
+    },
+    {
+      "id": "FOR-024",
+      "name": "타당성 검토",
+      "type": "절차 단계",
+      "definition": "사업계획과 대상·방법론의 적용 가능성을 등록 전에 검토하는 단계",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "사업등록의 선행 게이트"
+    },
+    {
+      "id": "FOR-025",
+      "name": "사업등록",
+      "type": "절차 상태",
+      "definition": "타당성 검토를 거친 사업이 공식 등록부에 사업으로 기록된 상태",
+      "sourceClass": "KoFPI·법령",
+      "state": "검증",
+      "use": "실행·모니터링의 전제"
+    },
+    {
+      "id": "FOR-026",
+      "name": "사업실행",
+      "type": "절차 단계",
+      "definition": "등록된 계획에 따라 산림탄소 유지·증진 활동을 수행하는 단계",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "활동 기록과 모니터링 발생"
+    },
+    {
+      "id": "FOR-027",
+      "name": "모니터링",
+      "type": "절차 단계",
+      "definition": "사업 활동과 흡수량 산정에 필요한 현장·자료·변화를 지속적으로 기록하는 단계",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "모니터링 결과보고서 산출"
+    },
+    {
+      "id": "FOR-028",
+      "name": "검증",
+      "type": "절차 단계",
+      "definition": "검증기관이 모니터링 결과와 산정이 기준에 부합하는지 확인하는 단계",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "인증 전 독립 확인"
+    },
+    {
+      "id": "FOR-029",
+      "name": "검증보고서",
+      "type": "절차 산출물",
+      "definition": "검증 범위·방법·발견사항·결론을 기록한 문서",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "인증심사의 근거"
+    },
+    {
+      "id": "FOR-030",
+      "name": "인증보고서",
+      "type": "절차 산출물",
+      "definition": "산림탄소센터가 인증심사를 위해 정리하는 결과 문서",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "산림청 인증의 입력"
+    },
+    {
+      "id": "FOR-031",
+      "name": "정부 인증",
+      "type": "절차 상태",
+      "definition": "산림청이 산림탄소흡수량을 제도에 따라 인정한 상태",
+      "sourceClass": "KoFPI·법령",
+      "state": "검증",
+      "use": "거래·활용 가능한 상태 판정"
+    },
+    {
+      "id": "FOR-032",
+      "name": "인증서",
+      "type": "절차 산출물",
+      "definition": "인증 결과와 대상·수량·조건을 증명하는 공식 문서",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "거래·홍보·사용 증빙"
+    },
+    {
+      "id": "FOR-033",
+      "name": "거래",
+      "type": "절차 행동",
+      "definition": "거래형 사업에서 인증된 산림탄소흡수량을 판매·구매·이전하는 행위",
+      "sourceClass": "KoFPI·법령",
+      "state": "검증",
+      "use": "계약·대금·등록부 이전과 연결"
+    },
+    {
+      "id": "FOR-034",
+      "name": "홍보·비거래 활용",
+      "type": "절차 행동",
+      "definition": "비거래형 성과를 승인된 범위에서 사회공헌·홍보 등에 활용하는 행위",
+      "sourceClass": "KoFPI",
+      "state": "검증",
+      "use": "표현·근거·중복사용 점검"
+    },
+    {
+      "id": "FOR-035",
+      "name": "효력 상실·사용 완료",
+      "type": "등록부 상태",
+      "definition": "유효기간 경과 또는 상쇄실적 사용 등으로 해당 흡수량이 다시 사용될 수 없는 상태",
+      "sourceClass": "탄소흡수원법",
+      "state": "검증",
+      "use": "이중사용 방지와 상태 추적"
+    },
+    {
+      "id": "MKT-001",
+      "name": "탄소가격제",
+      "type": "정책 수단",
+      "definition": "온실가스 배출에 명시적 가격 신호를 부여하는 제도적 접근",
+      "sourceClass": "World Bank",
+      "state": "검증",
+      "use": "ETS와 탄소세를 구분"
+    },
+    {
+      "id": "MKT-002",
+      "name": "배출권거래제(ETS)",
+      "type": "규제 시장제도",
+      "definition": "배출총량 또는 성과기준을 정하고 배출단위의 거래를 허용하는 규제 제도",
+      "sourceClass": "법령·World Bank",
+      "state": "검증",
+      "use": "규제대상·할당·제출의무 연결"
+    },
+    {
+      "id": "MKT-003",
+      "name": "K-ETS",
+      "type": "국내 규제제도",
+      "definition": "대한민국 온실가스 배출권거래제",
+      "sourceClass": "배출권거래법",
+      "state": "검증",
+      "use": "국내 CCM의 구체 제도로 연결"
+    },
+    {
+      "id": "MKT-004",
+      "name": "규제·의무 탄소시장(CCM)",
+      "type": "시장 유형",
+      "definition": "법적 의무나 규제 목표를 이행하기 위해 배출단위가 사용되는 시장",
+      "sourceClass": "World Bank·법령",
+      "state": "검증",
+      "use": "VCM과 의무·인정단위 구분"
+    },
+    {
+      "id": "MKT-005",
+      "name": "자발적 탄소시장(VCM)",
+      "type": "시장 유형",
+      "definition": "법적 의무 외의 자발적 기후목표·기여를 위해 크레딧을 구매·사용하는 시장",
+      "sourceClass": "World Bank·VCMI",
+      "state": "검증",
+      "use": "CCM과 주장·무결성 기준 구분"
+    },
+    {
+      "id": "MKT-006",
+      "name": "배출허용총량",
+      "type": "규제 기준",
+      "definition": "규제기간에 허용되는 온실가스 배출의 전체 한도",
+      "sourceClass": "배출권거래법",
+      "state": "검증",
+      "use": "배출권 총수량과 연결"
+    },
+    {
+      "id": "MKT-007",
+      "name": "배출권 할당",
+      "type": "규제 절차",
+      "definition": "할당계획과 법정 기준에 따라 할당대상업체에 배출권을 배정하는 절차",
+      "sourceClass": "배출권거래법",
+      "state": "검증",
+      "use": "단순 보상 논리를 배제"
+    },
+    {
+      "id": "MKT-008",
+      "name": "배출권",
+      "type": "규제 단위",
+      "definition": "법정 배출허용총량 범위에서 개별 배출업체에 할당되는 온실가스 배출허용량",
+      "sourceClass": "배출권거래법",
+      "state": "검증",
+      "use": "탄소크레딧과 구분"
+    },
+    {
+      "id": "MKT-009",
+      "name": "탄소크레딧",
+      "type": "성과 단위",
+      "definition": "기준선 대비 감축·회피·제거 성과를 방법론과 검증을 거쳐 정량화한 단위",
+      "sourceClass": "World Bank·UNFCCC",
+      "state": "검증",
+      "use": "발행제도·사업·상태 확인"
+    },
+    {
+      "id": "MKT-010",
+      "name": "상쇄",
+      "type": "크레딧 사용",
+      "definition": "자신의 경계 밖에서 발생한 검증 성과를 특정 배출 또는 목표에 대응해 사용하는 행위",
+      "sourceClass": "UNFCCC·World Bank",
+      "state": "검증",
+      "use": "직접 감축과 크레딧 자체를 구분"
+    },
+    {
+      "id": "MKT-011",
+      "name": "방법론",
+      "type": "산정 규칙",
+      "definition": "기준선·경계·산정식·모니터링·검증 방법을 정한 규칙",
+      "sourceClass": "제도 운영표준",
+      "state": "검증",
+      "use": "사업 적격성과 성과량 계산"
+    },
+    {
+      "id": "MKT-012",
+      "name": "기준선",
+      "type": "비교 상태",
+      "definition": "사업이 없었을 때 예상되는 배출·흡수 상태",
+      "sourceClass": "방법론·World Bank",
+      "state": "검증",
+      "use": "추가성과 성과량의 비교 기준"
+    },
+    {
+      "id": "MKT-013",
+      "name": "추가성",
+      "type": "무결성 기준",
+      "definition": "사업이나 인센티브가 없었으면 성과가 발생하지 않았을 것이라는 조건",
+      "sourceClass": "World Bank·시장 지침",
+      "state": "검증",
+      "use": "크레딧의 실제 기후기여 검토"
+    },
+    {
+      "id": "MKT-014",
+      "name": "누출",
+      "type": "무결성 위험",
+      "definition": "사업의 영향으로 배출이나 훼손 활동이 다른 위치·주체로 이동하는 현상",
+      "sourceClass": "방법론·시장 지침",
+      "state": "검증",
+      "use": "순성과 계산과 모니터링"
+    },
+    {
+      "id": "MKT-015",
+      "name": "영속성",
+      "type": "무결성 기준",
+      "definition": "저장·흡수된 탄소가 요구 기간 동안 유지되는 성질",
+      "sourceClass": "방법론·시장 지침",
+      "state": "검증",
+      "use": "산림 화재·훼손·역전 대응"
+    },
+    {
+      "id": "MKT-016",
+      "name": "역전",
+      "type": "무결성 위험",
+      "definition": "저장된 탄소가 화재·벌채·재해 등으로 다시 배출되는 사건",
+      "sourceClass": "방법론·시장 지침",
+      "state": "검증",
+      "use": "영속성 보완·상태 갱신"
+    },
+    {
+      "id": "MKT-017",
+      "name": "이중계산·이중사용",
+      "type": "무결성 위험",
+      "definition": "동일 성과가 둘 이상의 목표·주장·거래에 중복 반영되는 상태",
+      "sourceClass": "법령·시장 지침",
+      "state": "검증",
+      "use": "등록부·이전·사용 완료 확인"
+    },
+    {
+      "id": "MKT-018",
+      "name": "발행",
+      "type": "단위 상태변경",
+      "definition": "검증·인증된 성과가 사용 가능한 단위로 등록되는 상태변경",
+      "sourceClass": "제도별 규칙",
+      "state": "조건부",
+      "use": "인증과 거래가능 상태를 구분"
+    },
+    {
+      "id": "MKT-019",
+      "name": "이전",
+      "type": "단위 상태변경",
+      "definition": "등록부에서 단위의 보유 주체가 변경되는 상태변경",
+      "sourceClass": "등록부·거래규칙",
+      "state": "검증",
+      "use": "매매·대금결제와 구분"
+    },
+    {
+      "id": "MKT-020",
+      "name": "소각·사용 완료",
+      "type": "단위 상태변경",
+      "definition": "단위를 다시 거래·사용할 수 없도록 종료 상태로 기록하는 행위",
+      "sourceClass": "법령·등록부",
+      "state": "검증",
+      "use": "상쇄 주장과 이중사용 방지"
+    },
+    {
+      "id": "MKT-021",
+      "name": "기후 주장",
+      "type": "대외 표현",
+      "definition": "조직이 감축·상쇄·기여·탄소중립 등에 관해 외부에 표현하는 주장",
+      "sourceClass": "VCMI·공시 기준",
+      "state": "검증",
+      "use": "범위·기간·근거·단위 상태 검토"
+    },
+    {
+      "id": "MKT-022",
+      "name": "그린워싱",
+      "type": "표현 위험",
+      "definition": "환경 성과나 책임을 사실·범위·근거보다 과장하거나 오인하게 만드는 표현 또는 행위",
+      "sourceClass": "책임 있는 AI·시장 지침",
+      "state": "검증",
+      "use": "이익 추구 자체와 기만적 주장을 구분"
+    },
+    {
+      "id": "MKT-023",
+      "name": "시장 무결성",
+      "type": "시장 기준",
+      "definition": "단위·거래·주장·등록·검증이 정확하고 투명하며 중복되지 않는 상태",
+      "sourceClass": "World Bank·VCMI",
+      "state": "검증",
+      "use": "시장 신뢰와 책임성 평가"
+    },
+    {
+      "id": "TXN-001",
+      "name": "판매자",
+      "type": "거래 주체",
+      "definition": "거래 대상 단위를 적법하게 처분할 권한을 가진 주체",
+      "sourceClass": "거래 일반·제도",
+      "state": "조건부",
+      "use": "권리·등록상태·계약 권한 확인"
+    },
+    {
+      "id": "TXN-002",
+      "name": "구매자",
+      "type": "거래 주체",
+      "definition": "거래 대상 단위를 취득하고 정해진 목적에 사용하는 주체",
+      "sourceClass": "거래 일반·제도",
+      "state": "조건부",
+      "use": "사용 목적·주장·소각 책임 확인"
+    },
+    {
+      "id": "TXN-003",
+      "name": "중개자",
+      "type": "거래 주체",
+      "definition": "판매자와 구매자의 탐색·매칭·절차를 지원하는 주체",
+      "sourceClass": "등록부 중개거래 자료",
+      "state": "조건부",
+      "use": "권한·책임·수수료·개인정보 범위 확인"
+    },
+    {
+      "id": "TXN-004",
+      "name": "거래 대상",
+      "type": "계약 객체",
+      "definition": "계약에서 수량·단위·사업·빈티지·상태가 특정되는 산림탄소흡수량 또는 관련 권리",
+      "sourceClass": "제도·계약 검토",
+      "state": "미확정",
+      "use": "자산 성격을 단정하지 않고 특정성 검증"
+    },
+    {
+      "id": "TXN-005",
+      "name": "처분 권한",
+      "type": "권리 조건",
+      "definition": "판매자가 해당 단위를 이전·판매할 수 있는 법적·제도적 권한",
+      "sourceClass": "법률 검토 필요",
+      "state": "미확정",
+      "use": "토지 소유와 크레딧 처분권을 분리 검증"
+    },
+    {
+      "id": "TXN-006",
+      "name": "거래계약",
+      "type": "법적 산출물",
+      "definition": "당사자·대상·수량·가격·이전·결제·책임·해제 조건을 정한 합의",
+      "sourceClass": "법률 검토 필요",
+      "state": "미확정",
+      "use": "결제 전 거래규칙을 명시"
+    },
+    {
+      "id": "TXN-007",
+      "name": "가격",
+      "type": "거래 조건",
+      "definition": "당사자가 합의한 단위당 또는 총 거래대금",
+      "sourceClass": "시장·계약",
+      "state": "조건부",
+      "use": "등록부 단위와 금액을 연결"
+    },
+    {
+      "id": "TXN-008",
+      "name": "결제",
+      "type": "금전 행동",
+      "definition": "구매자가 계약에 따라 대금을 지급하는 행위",
+      "sourceClass": "결제 일반",
+      "state": "조건부",
+      "use": "거래 성립·이전·정산과 구분"
+    },
+    {
+      "id": "TXN-009",
+      "name": "정산",
+      "type": "거래 마감",
+      "definition": "대금·수수료·세금·환불·지급대상을 계산하고 거래를 마감하는 과정",
+      "sourceClass": "회계·결제 검토 필요",
+      "state": "미확정",
+      "use": "플랫폼 연동의 선행 설계"
+    },
+    {
+      "id": "TXN-010",
+      "name": "세무 분류",
+      "type": "제도 판단",
+      "definition": "거래대금과 거래대상의 과세·신고 성격을 판정하는 과정",
+      "sourceClass": "과세관청·전문가 확인 필요",
+      "state": "미확정",
+      "use": "세율이나 과세 여부를 임의 확정하지 않음"
+    },
+    {
+      "id": "TXN-011",
+      "name": "소득세 처리",
+      "type": "제도 판단",
+      "definition": "개인 산주 등 판매자의 소득 유형·필요경비·신고의무를 판정하는 과정",
+      "sourceClass": "과세관청·전문가 확인 필요",
+      "state": "미확정",
+      "use": "산주 유형별 질의서 작성"
+    },
+    {
+      "id": "TXN-012",
+      "name": "부가가치세 처리",
+      "type": "제도 판단",
+      "definition": "공급 주체·거래대상·거래유형에 따른 부가가치세 적용을 판정하는 과정",
+      "sourceClass": "과세관청·전문가 확인 필요",
+      "state": "미확정",
+      "use": "세금계산서·영수증 요건과 함께 검증"
+    },
+    {
+      "id": "TXN-013",
+      "name": "거래 증빙",
+      "type": "증거 묶음",
+      "definition": "계약·권리·등록부·대금·세무·이전·사용 상태를 연결해 재현하는 기록",
+      "sourceClass": "감사·회계 원칙",
+      "state": "파생",
+      "use": "결제사업자·감사자에게 거래 전 과정을 설명"
+    },
+    {
+      "id": "TXN-014",
+      "name": "개인정보·동의",
+      "type": "권리·보호",
+      "definition": "산주·구매자·중개자의 개인정보를 목적·범위·보유기간에 맞게 처리하는 조건",
+      "sourceClass": "개인정보 법령 검토",
+      "state": "미확정",
+      "use": "데모에서는 합성정보만 사용"
+    },
+    {
+      "id": "TXN-015",
+      "name": "분쟁·취소·환불",
+      "type": "예외 처리",
+      "definition": "거래 오류·권리 하자·미이전·중복사용 등 실패에 대응하는 절차",
+      "sourceClass": "계약·플랫폼 정책 검토",
+      "state": "미확정",
+      "use": "정상 흐름만 보여주는 오류 방지"
+    },
+    {
+      "id": "TXN-016",
+      "name": "감사 추적성",
+      "type": "증거 성질",
+      "definition": "누가 언제 어떤 근거와 승인으로 상태를 바꿨는지 재현 가능한 성질",
+      "sourceClass": "KAC·감사 원칙",
+      "state": "파생",
+      "use": "거래·주장·피드백을 실행ID로 연결"
+    },
+    {
+      "id": "KAC-001",
+      "name": "공통컨텍스트구조(CCS)",
+      "type": "컨텍스트 구조",
+      "definition": "Purpose·Meaning·Situation·Criteria·Role·Limit·Source·Format·Feedback의 공통 슬롯 구조",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "산림 ESG 도메인 컨텍스트의 형식 제공"
+    },
+    {
+      "id": "KAC-002",
+      "name": "Purpose",
+      "type": "CCS 슬롯",
+      "definition": "왜 이 도메인 실행을 하는지와 기대하는 변화",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "해커톤 목적과 사용자 결과 고정"
+    },
+    {
+      "id": "KAC-003",
+      "name": "Meaning",
+      "type": "CCS 슬롯",
+      "definition": "핵심 용어와 개념의 합의된 의미·경계",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "ESG·Scope·CCM·VCM 혼동 방지"
+    },
+    {
+      "id": "KAC-004",
+      "name": "Situation",
+      "type": "CCS 슬롯",
+      "definition": "현재 문제·대상·환경·기준시점",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "산주·기업·기관별 실행 분기"
+    },
+    {
+      "id": "KAC-005",
+      "name": "Criteria",
+      "type": "CCS 슬롯",
+      "definition": "판정·성공·중단·검토 기준",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "공식 근거와 완료조건 고정"
+    },
+    {
+      "id": "KAC-006",
+      "name": "Role",
+      "type": "CCS 슬롯",
+      "definition": "실행자·검토자·승인자·책임자의 역할",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "기관과 시장 주체의 책임 분리"
+    },
+    {
+      "id": "KAC-007",
+      "name": "Limit",
+      "type": "CCS 슬롯",
+      "definition": "하지 않을 일·데이터·권한·불확실성의 경계",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "법률·세무 자문과 실거래 제외"
+    },
+    {
+      "id": "KAC-008",
+      "name": "Source",
+      "type": "CCS 슬롯",
+      "definition": "판정과 실행에 사용할 근거의 출처·버전·기준일",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "공식 원문 우선순위 적용"
+    },
+    {
+      "id": "KAC-009",
+      "name": "Format",
+      "type": "CCS 슬롯",
+      "definition": "출력 산출물의 구조·필드·표시 방식",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "그래프·체크리스트·실행로그 표준화"
+    },
+    {
+      "id": "KAC-010",
+      "name": "Feedback",
+      "type": "CCS 슬롯",
+      "definition": "검토된 오류·개선 요청을 다음 컨텍스트 후보로 기록하는 구조",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "자동 사실 승격 방지"
+    },
+    {
+      "id": "KAC-011",
+      "name": "도메인 컨텍스트(DC_D)",
+      "type": "실행 환경",
+      "definition": "CCS를 산림 ESG 도메인에 구체화한 목적·의미·상황·기준·역할·제한·근거·형식·피드백 집합",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "실행 전 기준환경 구성"
+    },
+    {
+      "id": "KAC-012",
+      "name": "DCI",
+      "type": "사전 게이트",
+      "definition": "도메인 컨텍스트의 소유자·권한·책임·출처·민감정보 등 치명적 결함을 먼저 점검하는 무결성 게이트",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "잘못된 기준환경에서 실행 차단"
+    },
+    {
+      "id": "KAC-013",
+      "name": "Identity",
+      "type": "파생 시작점",
+      "definition": "도메인에서 고유한 의미·경계·판정기준·관계를 가진 실행 대상",
+      "sourceClass": "KAC·Identity Pipeline",
+      "state": "프레임워크",
+      "use": "용어가 아니라 Skill 필요성을 만드는 단위"
+    },
+    {
+      "id": "KAC-014",
+      "name": "Goal",
+      "type": "파생 노드",
+      "definition": "Identity가 달성해야 할 판정 가능한 목표",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "실행 방향과 성공조건 연결"
+    },
+    {
+      "id": "KAC-015",
+      "name": "Task",
+      "type": "파생 노드",
+      "definition": "Goal 달성을 위해 수행해야 하는 구체 과업",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "입력과 산출이 있는 일 단위"
+    },
+    {
+      "id": "KAC-016",
+      "name": "Knowledge",
+      "type": "파생 노드",
+      "definition": "Task 수행에 필요한 정의·규칙·근거·사례·제약",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "공식 근거를 실행지식으로 구조화"
+    },
+    {
+      "id": "KAC-017",
+      "name": "Method",
+      "type": "파생 노드",
+      "definition": "Knowledge를 적용해 Task를 수행하는 판정·절차 방법",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "결정 규칙과 단계 고정"
+    },
+    {
+      "id": "KAC-018",
+      "name": "Skill",
+      "type": "파생 결과",
+      "definition": "명시적 입력·출력·판정기준·제약을 가진 단일 책임 실행 능력",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "지식을 호출 가능한 책임 단위로 변환"
+    },
+    {
+      "id": "KAC-019",
+      "name": "외부 지식사슬(KC_ext)",
+      "type": "KAC 노드",
+      "definition": "지식의 출처·연결·저장·공유·적용 경로",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "공식 원문에서 실행지식까지 추적"
+    },
+    {
+      "id": "KAC-020",
+      "name": "Skill 파생사슬(SDC)",
+      "type": "KAC 노드",
+      "definition": "Identity→Goal→Task→Knowledge→Method→Skill로 Skill 필요성을 정당화하는 사슬",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "임의 Skill 생성 방지"
+    },
+    {
+      "id": "KAC-021",
+      "name": "SkillRuntime",
+      "type": "실행 계약",
+      "definition": "Skill의 입력·출력·출처·도구·가드레일·검증·추적·승인·상태·배포 규칙을 묶은 실행 계약",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "Skill을 실제 호출 가능한 상태로 컴파일"
+    },
+    {
+      "id": "KAC-022",
+      "name": "ActionEvent",
+      "type": "실행 사건",
+      "definition": "특정 Runtime이 특정 입력과 버전으로 실제 수행된 사건",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "누가 언제 무엇을 실행했는지 기록"
+    },
+    {
+      "id": "KAC-023",
+      "name": "OutputObject",
+      "type": "산출물",
+      "definition": "실행이 직접 생성한 문서·그래프·체크리스트·판정·로그",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "보이는 결과물과 실제 변화를 구분"
+    },
+    {
+      "id": "KAC-024",
+      "name": "OutcomeObject",
+      "type": "검증된 변화",
+      "definition": "산출물이 사용자·업무·제도 이해에 실제로 만든 검증 가능한 변화",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "해커톤 ESG 임팩트 측정"
+    },
+    {
+      "id": "KAC-025",
+      "name": "Review",
+      "type": "검토",
+      "definition": "권한·책임·출처·근거·기준·승인·기록·위험을 검토하는 단계",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "성과와 주장 승인 여부 결정"
+    },
+    {
+      "id": "KAC-026",
+      "name": "Feedback Candidate",
+      "type": "변경 후보",
+      "definition": "증거·범위·소유자·승인상태·롤백계획이 붙은 컨텍스트 변경 후보",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "단순 의견을 공식 사실과 분리"
+    },
+    {
+      "id": "KAC-027",
+      "name": "Context Update",
+      "type": "학습 결과",
+      "definition": "승인된 Feedback이 반영된 다음 버전의 도메인 컨텍스트",
+      "sourceClass": "KAC 원문",
+      "state": "프레임워크",
+      "use": "다음 실행의 기준 개선"
+    },
+    {
+      "id": "KAC-028",
+      "name": "실행 추적성",
+      "type": "품질 조건",
+      "definition": "Source·Identity·Skill·Runtime·Action·Output·Outcome·Review를 실행ID로 역추적할 수 있는 성질",
+      "sourceClass": "KAC 원문",
+      "state": "파생",
+      "use": "AI 기술 구현과 책임성 증명"
+    },
+    {
+      "id": "KAC-029",
+      "name": "인간 승인",
+      "type": "거버넌스 게이트",
+      "definition": "법률·세무·공식 주장·컨텍스트 변경 등 고위험 결정을 권한자가 승인하는 절차",
+      "sourceClass": "KAC 원문·책임 있는 AI",
+      "state": "파생",
+      "use": "AI가 권한 밖 결론을 확정하지 못하게 함"
+    }
+  ],
+  "relations": [
+    {
+      "id": "REL-001",
+      "from": "FRM-003",
+      "type": "HAS_PART",
+      "to": "FRM-005",
+      "basis": "ESG 3축",
+      "state": "검증"
+    },
+    {
+      "id": "REL-002",
+      "from": "FRM-003",
+      "type": "HAS_PART",
+      "to": "FRM-006",
+      "basis": "ESG 3축",
+      "state": "검증"
+    },
+    {
+      "id": "REL-003",
+      "from": "FRM-003",
+      "type": "HAS_PART",
+      "to": "FRM-007",
+      "basis": "ESG 3축",
+      "state": "검증"
+    },
+    {
+      "id": "REL-004",
+      "from": "FRM-004",
+      "type": "MANAGES",
+      "to": "FRM-016",
+      "basis": "ESG 경영 과정",
+      "state": "검증"
+    },
+    {
+      "id": "REL-005",
+      "from": "FRM-004",
+      "type": "MEASURES_WITH",
+      "to": "FRM-019",
+      "basis": "행동·성과 평가",
+      "state": "검증"
+    },
+    {
+      "id": "REL-006",
+      "from": "FRM-003",
+      "type": "RELATED_TO_NOT_EQUAL",
+      "to": "FRM-008",
+      "basis": "서로 다른 체계",
+      "state": "검증"
+    },
+    {
+      "id": "REL-007",
+      "from": "FOR-002",
+      "type": "CONTRIBUTES_TO",
+      "to": "FRM-013",
+      "basis": "지속가능한 산림관리",
+      "state": "검증"
+    },
+    {
+      "id": "REL-008",
+      "from": "FOR-003",
+      "type": "APPLIES_TO",
+      "to": "FRM-005",
+      "basis": "환경영역",
+      "state": "검증"
+    },
+    {
+      "id": "REL-009",
+      "from": "FOR-016",
+      "type": "AFFECTED_BY",
+      "to": "FRM-006",
+      "basis": "권리·소득·안전",
+      "state": "파생"
+    },
+    {
+      "id": "REL-010",
+      "from": "FOR-022",
+      "type": "SUPPORTS",
+      "to": "FRM-007",
+      "basis": "투명성·책임성",
+      "state": "파생"
+    },
+    {
+      "id": "REL-011",
+      "from": "GHG-012",
+      "type": "REQUIRES",
+      "to": "GHG-013",
+      "basis": "인벤토리 경계",
+      "state": "검증"
+    },
+    {
+      "id": "REL-012",
+      "from": "GHG-013",
+      "type": "PRECEDES",
+      "to": "GHG-014",
+      "basis": "GHG Protocol",
+      "state": "검증"
+    },
+    {
+      "id": "REL-013",
+      "from": "GHG-014",
+      "type": "CLASSIFIES_AS",
+      "to": "GHG-015",
+      "basis": "Scope 분류",
+      "state": "검증"
+    },
+    {
+      "id": "REL-014",
+      "from": "GHG-014",
+      "type": "CLASSIFIES_AS",
+      "to": "GHG-016",
+      "basis": "Scope 분류",
+      "state": "검증"
+    },
+    {
+      "id": "REL-015",
+      "from": "GHG-014",
+      "type": "CLASSIFIES_AS",
+      "to": "GHG-017",
+      "basis": "Scope 분류",
+      "state": "검증"
+    },
+    {
+      "id": "REL-016",
+      "from": "GHG-017",
+      "type": "APPLIES_TO",
+      "to": "GHG-018",
+      "basis": "가치사슬 간접배출",
+      "state": "검증"
+    },
+    {
+      "id": "REL-017",
+      "from": "GHG-008",
+      "type": "CALCULATED_FROM",
+      "to": "GHG-019",
+      "basis": "산정 원리",
+      "state": "검증"
+    },
+    {
+      "id": "REL-018",
+      "from": "GHG-008",
+      "type": "CALCULATED_FROM",
+      "to": "GHG-020",
+      "basis": "산정 원리",
+      "state": "검증"
+    },
+    {
+      "id": "REL-019",
+      "from": "GHG-008",
+      "type": "EXPRESSED_AS",
+      "to": "GHG-006",
+      "basis": "환산 단위",
+      "state": "검증"
+    },
+    {
+      "id": "REL-020",
+      "from": "GHG-022",
+      "type": "PRECEDES",
+      "to": "MKT-010",
+      "basis": "감축 우선 원칙",
+      "state": "조건부"
+    },
+    {
+      "id": "REL-021",
+      "from": "GHG-023",
+      "type": "MAY_TRIGGER",
+      "to": "MKT-010",
+      "basis": "잔여 배출 대응",
+      "state": "조건부"
+    },
+    {
+      "id": "REL-022",
+      "from": "GHG-010",
+      "type": "HAS_TYPE",
+      "to": "FOR-004",
+      "basis": "산림흡수원",
+      "state": "검증"
+    },
+    {
+      "id": "REL-023",
+      "from": "FOR-004",
+      "type": "PRODUCES",
+      "to": "FOR-005",
+      "basis": "방법론 적용 성과",
+      "state": "검증"
+    },
+    {
+      "id": "REL-024",
+      "from": "FOR-006",
+      "type": "OPERATED_WITHIN",
+      "to": "FOR-020",
+      "basis": "탄소흡수원법",
+      "state": "검증"
+    },
+    {
+      "id": "REL-025",
+      "from": "FOR-020",
+      "type": "LOCATED_UNDER",
+      "to": "FOR-019",
+      "basis": "탄소흡수원법",
+      "state": "검증"
+    },
+    {
+      "id": "REL-026",
+      "from": "FOR-018",
+      "type": "AUTHORIZES",
+      "to": "FOR-031",
+      "basis": "공식 절차",
+      "state": "검증"
+    },
+    {
+      "id": "REL-027",
+      "from": "FOR-022",
+      "type": "RECORDS",
+      "to": "FOR-025",
+      "basis": "등록부 기능",
+      "state": "검증"
+    },
+    {
+      "id": "REL-028",
+      "from": "FOR-022",
+      "type": "RECORDS",
+      "to": "FOR-031",
+      "basis": "등록부 기능",
+      "state": "검증"
+    },
+    {
+      "id": "REL-029",
+      "from": "FOR-022",
+      "type": "RECORDS",
+      "to": "FOR-033",
+      "basis": "등록부 기능",
+      "state": "검증"
+    },
+    {
+      "id": "REL-030",
+      "from": "FOR-022",
+      "type": "PREVENTS",
+      "to": "MKT-017",
+      "basis": "효력상실 정보 기록",
+      "state": "검증"
+    },
+    {
+      "id": "REL-031",
+      "from": "FOR-023",
+      "type": "INPUT_TO",
+      "to": "FOR-024",
+      "basis": "참여절차",
+      "state": "검증"
+    },
+    {
+      "id": "REL-032",
+      "from": "FOR-024",
+      "type": "PRECEDES",
+      "to": "FOR-025",
+      "basis": "참여절차",
+      "state": "검증"
+    },
+    {
+      "id": "REL-033",
+      "from": "FOR-025",
+      "type": "PRECEDES",
+      "to": "FOR-026",
+      "basis": "참여절차",
+      "state": "검증"
+    },
+    {
+      "id": "REL-034",
+      "from": "FOR-026",
+      "type": "PRODUCES_DATA_FOR",
+      "to": "FOR-027",
+      "basis": "참여절차",
+      "state": "검증"
+    },
+    {
+      "id": "REL-035",
+      "from": "FOR-027",
+      "type": "PRECEDES",
+      "to": "FOR-028",
+      "basis": "거래형 절차",
+      "state": "검증"
+    },
+    {
+      "id": "REL-036",
+      "from": "FOR-021",
+      "type": "PERFORMS",
+      "to": "FOR-028",
+      "basis": "거래형 절차",
+      "state": "검증"
+    },
+    {
+      "id": "REL-037",
+      "from": "FOR-028",
+      "type": "PRODUCES",
+      "to": "FOR-029",
+      "basis": "거래형 절차",
+      "state": "검증"
+    },
+    {
+      "id": "REL-038",
+      "from": "FOR-029",
+      "type": "INPUT_TO",
+      "to": "FOR-030",
+      "basis": "인증심사",
+      "state": "검증"
+    },
+    {
+      "id": "REL-039",
+      "from": "FOR-030",
+      "type": "PRECEDES",
+      "to": "FOR-031",
+      "basis": "인증절차",
+      "state": "검증"
+    },
+    {
+      "id": "REL-040",
+      "from": "FOR-031",
+      "type": "PRODUCES",
+      "to": "FOR-032",
+      "basis": "인증결과",
+      "state": "검증"
+    },
+    {
+      "id": "REL-041",
+      "from": "FOR-007",
+      "type": "ENDS_WITH",
+      "to": "FOR-033",
+      "basis": "거래형",
+      "state": "검증"
+    },
+    {
+      "id": "REL-042",
+      "from": "FOR-008",
+      "type": "ENDS_WITH",
+      "to": "FOR-034",
+      "basis": "비거래형",
+      "state": "검증"
+    },
+    {
+      "id": "REL-043",
+      "from": "MKT-002",
+      "type": "OPERATES_IN",
+      "to": "MKT-004",
+      "basis": "법정 의무시장",
+      "state": "검증"
+    },
+    {
+      "id": "REL-044",
+      "from": "MKT-003",
+      "type": "IS_A",
+      "to": "MKT-002",
+      "basis": "국내 ETS",
+      "state": "검증"
+    },
+    {
+      "id": "REL-045",
+      "from": "MKT-006",
+      "type": "DETERMINES_TOTAL",
+      "to": "MKT-008",
+      "basis": "배출권거래법",
+      "state": "검증"
+    },
+    {
+      "id": "REL-046",
+      "from": "MKT-007",
+      "type": "ALLOCATES",
+      "to": "MKT-008",
+      "basis": "배출권거래법",
+      "state": "검증"
+    },
+    {
+      "id": "REL-047",
+      "from": "MKT-008",
+      "type": "NOT_EQUAL",
+      "to": "MKT-009",
+      "basis": "단위 성격 차이",
+      "state": "검증"
+    },
+    {
+      "id": "REL-048",
+      "from": "MKT-009",
+      "type": "MAY_BE_USED_FOR",
+      "to": "MKT-010",
+      "basis": "상쇄는 사용행위",
+      "state": "검증"
+    },
+    {
+      "id": "REL-049",
+      "from": "MKT-009",
+      "type": "REQUIRES",
+      "to": "MKT-011",
+      "basis": "성과 산정",
+      "state": "검증"
+    },
+    {
+      "id": "REL-050",
+      "from": "MKT-011",
+      "type": "USES",
+      "to": "MKT-012",
+      "basis": "기준선",
+      "state": "검증"
+    },
+    {
+      "id": "REL-051",
+      "from": "MKT-009",
+      "type": "REQUIRES",
+      "to": "MKT-013",
+      "basis": "추가성",
+      "state": "검증"
+    },
+    {
+      "id": "REL-052",
+      "from": "MKT-009",
+      "type": "GUARDED_AGAINST",
+      "to": "MKT-014",
+      "basis": "누출",
+      "state": "검증"
+    },
+    {
+      "id": "REL-053",
+      "from": "MKT-009",
+      "type": "GUARDED_BY",
+      "to": "MKT-015",
+      "basis": "영속성",
+      "state": "검증"
+    },
+    {
+      "id": "REL-054",
+      "from": "MKT-015",
+      "type": "THREATENED_BY",
+      "to": "MKT-016",
+      "basis": "역전",
+      "state": "검증"
+    },
+    {
+      "id": "REL-055",
+      "from": "MKT-019",
+      "type": "PRECEDES",
+      "to": "MKT-020",
+      "basis": "사용 상태",
+      "state": "조건부"
+    },
+    {
+      "id": "REL-056",
+      "from": "MKT-020",
+      "type": "SUPPORTS",
+      "to": "MKT-021",
+      "basis": "주장 근거",
+      "state": "조건부"
+    },
+    {
+      "id": "REL-057",
+      "from": "MKT-022",
+      "type": "THREATENS",
+      "to": "MKT-023",
+      "basis": "기만적 주장",
+      "state": "검증"
+    },
+    {
+      "id": "REL-058",
+      "from": "FOR-033",
+      "type": "REQUIRES",
+      "to": "TXN-005",
+      "basis": "처분 권한",
+      "state": "미확정"
+    },
+    {
+      "id": "REL-059",
+      "from": "FOR-033",
+      "type": "REQUIRES",
+      "to": "TXN-006",
+      "basis": "계약",
+      "state": "미확정"
+    },
+    {
+      "id": "REL-060",
+      "from": "FOR-033",
+      "type": "REQUIRES",
+      "to": "TXN-008",
+      "basis": "대금결제",
+      "state": "미확정"
+    },
+    {
+      "id": "REL-061",
+      "from": "TXN-008",
+      "type": "PRECEDES_OR_FOLLOWS_BY_CONTRACT",
+      "to": "MKT-019",
+      "basis": "동시이행 설계 필요",
+      "state": "미확정"
+    },
+    {
+      "id": "REL-062",
+      "from": "TXN-009",
+      "type": "REQUIRES",
+      "to": "TXN-010",
+      "basis": "세무분류",
+      "state": "미확정"
+    },
+    {
+      "id": "REL-063",
+      "from": "TXN-010",
+      "type": "MAY_REQUIRE",
+      "to": "TXN-011",
+      "basis": "판매자 유형",
+      "state": "미확정"
+    },
+    {
+      "id": "REL-064",
+      "from": "TXN-010",
+      "type": "MAY_REQUIRE",
+      "to": "TXN-012",
+      "basis": "거래 유형",
+      "state": "미확정"
+    },
+    {
+      "id": "REL-065",
+      "from": "TXN-013",
+      "type": "AGGREGATES",
+      "to": "TXN-006",
+      "basis": "계약 증빙",
+      "state": "파생"
+    },
+    {
+      "id": "REL-066",
+      "from": "TXN-013",
+      "type": "AGGREGATES",
+      "to": "TXN-008",
+      "basis": "결제 증빙",
+      "state": "파생"
+    },
+    {
+      "id": "REL-067",
+      "from": "TXN-013",
+      "type": "AGGREGATES",
+      "to": "MKT-019",
+      "basis": "이전 증빙",
+      "state": "파생"
+    },
+    {
+      "id": "REL-068",
+      "from": "TXN-016",
+      "type": "EVIDENCES",
+      "to": "MKT-023",
+      "basis": "시장 무결성",
+      "state": "파생"
+    },
+    {
+      "id": "REL-069",
+      "from": "KAC-001",
+      "type": "INSTANTIATES_AS",
+      "to": "KAC-011",
+      "basis": "KAC 원문",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-070",
+      "from": "KAC-011",
+      "type": "MUST_PASS",
+      "to": "KAC-012",
+      "basis": "KAC 원문",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-071",
+      "from": "KAC-013",
+      "type": "DERIVES_TO",
+      "to": "KAC-014",
+      "basis": "SDC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-072",
+      "from": "KAC-014",
+      "type": "DERIVES_TO",
+      "to": "KAC-015",
+      "basis": "SDC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-073",
+      "from": "KAC-015",
+      "type": "REQUIRES",
+      "to": "KAC-016",
+      "basis": "SDC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-074",
+      "from": "KAC-016",
+      "type": "APPLIED_BY",
+      "to": "KAC-017",
+      "basis": "SDC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-075",
+      "from": "KAC-017",
+      "type": "DERIVES_TO",
+      "to": "KAC-018",
+      "basis": "SDC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-076",
+      "from": "KAC-018",
+      "type": "COMPILED_AS",
+      "to": "KAC-021",
+      "basis": "KAC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-077",
+      "from": "KAC-021",
+      "type": "EMITS",
+      "to": "KAC-022",
+      "basis": "KAC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-078",
+      "from": "KAC-022",
+      "type": "PRODUCES",
+      "to": "KAC-023",
+      "basis": "KAC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-079",
+      "from": "KAC-023",
+      "type": "MAY_CAUSE",
+      "to": "KAC-024",
+      "basis": "Output ≠ Outcome",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-080",
+      "from": "KAC-024",
+      "type": "ASSESSED_BY",
+      "to": "KAC-025",
+      "basis": "KAC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-081",
+      "from": "KAC-025",
+      "type": "MAY_CREATE",
+      "to": "KAC-026",
+      "basis": "KAC",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-082",
+      "from": "KAC-026",
+      "type": "MAY_UPDATE",
+      "to": "KAC-027",
+      "basis": "승인 필요",
+      "state": "프레임워크"
+    },
+    {
+      "id": "REL-083",
+      "from": "KAC-029",
+      "type": "GOVERNS",
+      "to": "KAC-027",
+      "basis": "Context 변경 승인",
+      "state": "파생"
+    }
+  ],
+  "skills": [
+    {
+      "id": "SK-01",
+      "responsibility": "사용자·상황 Context 수립",
+      "input": "사용자 역할·질문·기준시점",
+      "output": "CCS Situation·Role·Purpose",
+      "prohibition": "역할·목적을 추정해 확정하지 않음",
+      "evidence": "KACRun context"
+    },
+    {
+      "id": "SK-02",
+      "responsibility": "질문 Identity 인식",
+      "input": "질문·Identity Catalog",
+      "output": "Identity ID 후보와 신뢰도",
+      "prohibition": "카탈로그 밖 개념을 공식용어로 창작하지 않음",
+      "evidence": "identity_match.json"
+    },
+    {
+      "id": "SK-03",
+      "responsibility": "용어 경계 판정",
+      "input": "Identity 후보·별칭·정의",
+      "output": "동일/관련/비동일/확인필요",
+      "prohibition": "탄소=CO2=CO2e, ESG=SDGs로 병합 금지",
+      "evidence": "boundary_decision"
+    },
+    {
+      "id": "SK-04",
+      "responsibility": "ESG→행동·성과 연결",
+      "input": "ESG 이슈·IRO·사용자",
+      "output": "정책→행동→지표→증빙 경로",
+      "prohibition": "탄소 수치 하나로 ESG 전체를 판정하지 않음",
+      "evidence": "impact_path"
+    },
+    {
+      "id": "SK-05",
+      "responsibility": "산림 E·S·G 관계 매핑",
+      "input": "산림 활동·주체·제도",
+      "output": "E/S/G 관계 그래프",
+      "prohibition": "산림탄소를 ESG 전체로 과장하지 않음",
+      "evidence": "forest_esg_graph"
+    },
+    {
+      "id": "SK-06",
+      "responsibility": "SDGs 기여 매핑",
+      "input": "행동·Outcome·SDG 목표",
+      "output": "기여 후보·근거·한계",
+      "prohibition": "목표 로고 나열만으로 기여를 확정하지 않음",
+      "evidence": "sdg_linkage"
+    },
+    {
+      "id": "SK-07",
+      "responsibility": "Scope 분류",
+      "input": "조직경계·활동·배출원",
+      "output": "Scope 1/2/3·이유·필요자료",
+      "prohibition": "Scope 3를 Scope 1·2 복합으로 판정하지 않음",
+      "evidence": "scope_classification"
+    },
+    {
+      "id": "SK-08",
+      "responsibility": "배출 산정 입력 점검",
+      "input": "활동자료·배출계수·단위·기간",
+      "output": "충족/누락/불일치 목록",
+      "prohibition": "입력 없이 감축량을 계산하지 않음",
+      "evidence": "measurement_readiness"
+    },
+    {
+      "id": "SK-09",
+      "responsibility": "CCM·VCM 판정",
+      "input": "법적 의무·제도·사용목적",
+      "output": "시장유형·근거·확인질문",
+      "prohibition": "국가·제도를 묻지 않고 단정하지 않음",
+      "evidence": "market_classification"
+    },
+    {
+      "id": "SK-10",
+      "responsibility": "배출권·크레딧·상쇄 판정",
+      "input": "단위·발행제도·현재상태·용도",
+      "output": "단위유형·사용행위·오개념 교정",
+      "prohibition": "단위를 행위와 동일시하지 않음",
+      "evidence": "unit_use_decision"
+    },
+    {
+      "id": "SK-11",
+      "responsibility": "산림탄소 사업경로 생성",
+      "input": "참여주체·사업유형·거래형 여부",
+      "output": "공식 절차·주체·산출물·게이트",
+      "prohibition": "공식 대행·승인을 자동 보장하지 않음",
+      "evidence": "forest_project_path"
+    },
+    {
+      "id": "SK-12",
+      "responsibility": "등록·검증·인증 상태 판정",
+      "input": "사업ID·문서·등록부 상태",
+      "output": "현재상태·다음단계·공식 링크",
+      "prohibition": "등록·검증·인증을 같은 상태로 취급하지 않음",
+      "evidence": "project_status"
+    },
+    {
+      "id": "SK-13",
+      "responsibility": "거래 준비도 판정",
+      "input": "권리·단위·계약·결제·이전·세무·증빙",
+      "output": "READY/REVIEW/STOP과 누락조건",
+      "prohibition": "미검증 세무를 확정하거나 실거래 수행 금지",
+      "evidence": "transaction_readiness"
+    },
+    {
+      "id": "SK-14",
+      "responsibility": "무결성·그린워싱 위험 탐지",
+      "input": "주장·단위·감축경로·상태·근거",
+      "output": "위험유형·수정문구·필요증빙",
+      "prohibition": "이익 추구 자체를 그린워싱으로 단정하지 않음",
+      "evidence": "integrity_review"
+    },
+    {
+      "id": "SK-15",
+      "responsibility": "공식 근거 연결",
+      "input": "Claim·Source Registry·기준일",
+      "output": "Claim→Source→구간→상태",
+      "prohibition": "회의 발언을 외부 사실의 단독 근거로 사용 금지",
+      "evidence": "claim_evidence_map"
+    },
+    {
+      "id": "SK-16",
+      "responsibility": "KAC Runtime 조립",
+      "input": "선택 Skill·CCS·가드레일·승인정책",
+      "output": "실행 가능한 Runtime 계약",
+      "prohibition": "소유자·출처·승인자가 없으면 실행 금지",
+      "evidence": "runtime_contract"
+    },
+    {
+      "id": "SK-17",
+      "responsibility": "Outcome·Review 판정",
+      "input": "Output·사용자 전후측정·기준",
+      "output": "Outcome 상태·Review 결과",
+      "prohibition": "산출물 존재를 임팩트 달성으로 간주하지 않음",
+      "evidence": "outcome_review"
+    },
+    {
+      "id": "SK-18",
+      "responsibility": "Feedback·Context 갱신 후보 생성",
+      "input": "Review 발견사항·증거·소유자",
+      "output": "변경후보·영향범위·롤백안",
+      "prohibition": "인간 승인 없이 Context 자동 갱신 금지",
+      "evidence": "feedback_candidate"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CLM-001",
+      "claim": "ESG는 환경·사회·지배구조 관련 행동과 성과를 측정·관리한다.",
+      "status": "검증",
+      "basis": "해커톤 교육·공공기관 ESG 가이드",
+      "handling": "문서 핵심 전제"
+    },
+    {
+      "id": "CLM-002",
+      "claim": "ESG와 SDGs는 관련되지만 동일한 체계가 아니다.",
+      "status": "검증",
+      "basis": "UN 2030 Agenda·공공기관 가이드",
+      "handling": "관계형으로만 연결"
+    },
+    {
+      "id": "CLM-003",
+      "claim": "SDGs는 17개 목표와 169개 세부목표로 구성되고 경제·사회·환경 차원을 통합한다.",
+      "status": "검증",
+      "basis": "UN 2030 Agenda",
+      "handling": "회의의 축약 설명 교정"
+    },
+    {
+      "id": "CLM-004",
+      "claim": "Scope 1은 직접배출, Scope 2는 구매에너지 간접배출, Scope 3는 기타 가치사슬 간접배출이다.",
+      "status": "검증",
+      "basis": "GHG Protocol",
+      "handling": "Scope 3 복합설명 폐기"
+    },
+    {
+      "id": "CLM-005",
+      "claim": "탄소·CO2·CO2e는 같은 용어가 아니다.",
+      "status": "검증",
+      "basis": "GHG Protocol",
+      "handling": "질문 모호성 확인"
+    },
+    {
+      "id": "CLM-006",
+      "claim": "배출권은 법정 배출허용총량 범위에서 업체에 할당되는 배출허용량이다.",
+      "status": "검증",
+      "basis": "배출권거래법 제2조",
+      "handling": "단순 보상설명 폐기"
+    },
+    {
+      "id": "CLM-007",
+      "claim": "배출권 할당은 법정 할당계획과 기준을 따른다.",
+      "status": "검증",
+      "basis": "배출권거래법 제12조",
+      "handling": "감축기업에 무조건 더 지급한다고 표현 금지"
+    },
+    {
+      "id": "CLM-008",
+      "claim": "크레딧은 감축·회피·제거 성과 단위이고 상쇄는 그 단위를 사용하는 행위다.",
+      "status": "검증",
+      "basis": "World Bank·UNFCCC",
+      "handling": "단위와 사용 분리"
+    },
+    {
+      "id": "CLM-009",
+      "claim": "산림탄소상쇄제도는 자발적 유지·증진 활동으로 추가 확보된 산림탄소흡수량을 정부가 인증하는 제도다.",
+      "status": "검증",
+      "basis": "KoFPI 공식 안내",
+      "handling": "국내 제도 정의"
+    },
+    {
+      "id": "CLM-010",
+      "claim": "거래형 절차는 계획·타당성·등록·실행·모니터링·검증·인증·거래로 이어진다.",
+      "status": "검증",
+      "basis": "KoFPI 공식 안내",
+      "handling": "MVP 대표 워크플로우"
+    },
+    {
+      "id": "CLM-011",
+      "claim": "산림탄소등록부는 정보·통계의 투명한 관리와 유통, 이중사용 방지를 지원한다.",
+      "status": "검증",
+      "basis": "탄소흡수원법 제22·24조",
+      "handling": "Evidence UI 근거"
+    },
+    {
+      "id": "CLM-012",
+      "claim": "산림 기반 ESG는 E뿐 아니라 임업인·지역사회(S), 정보·책임·윤리(G)와 연결할 수 있다.",
+      "status": "검증+파생",
+      "basis": "KoFPI FOR-ESG 추진체계",
+      "handling": "관계맵의 도메인 축"
+    },
+    {
+      "id": "CLM-013",
+      "claim": "모든 기업의 이윤 추구는 그린워싱이다.",
+      "status": "기각",
+      "basis": "공식 정의와 불일치",
+      "handling": "기만·과장·무근거 주장만 위험으로 판정"
+    },
+    {
+      "id": "CLM-014",
+      "claim": "탄소크레딧 판매수익은 반드시 재조림에 사용해야 한다.",
+      "status": "미확정",
+      "basis": "일반 의무 근거 미확인",
+      "handling": "사업·계약·제도별 조건 확인"
+    },
+    {
+      "id": "CLM-015",
+      "claim": "산림탄소흡수량 판매대금의 소득세·부가가치세 처리는 단일 방식으로 확정된다.",
+      "status": "미확정",
+      "basis": "공식 일반기준 부족",
+      "handling": "판매자·거래유형별 과세관청 질의 필요"
+    },
+    {
+      "id": "CLM-016",
+      "claim": "결제서비스 연동은 거래객체·권리·계약·세무·이전·정산 구조가 먼저 정의돼야 한다.",
+      "status": "설계 가설",
+      "basis": "회의 문제의식·결제 일반통제",
+      "handling": "PoC에서 준비도 게이트로 검증"
+    },
+    {
+      "id": "CLM-017",
+      "claim": "브라우저 화면 자체가 이번 해커톤 제품의 본체다.",
+      "status": "기각",
+      "basis": "2026-08-17 회의 방향",
+      "handling": "화면은 구조·실행·증거를 검토하는 Evidence UI로 한정"
+    }
+  ],
+  "sources": [
+    {
+      "name": "ESG×AI 챌린지 OT·팀빌딩 진행자료",
+      "url": "local://01_official/OT_팀빌딩_진행자료.pdf"
+    },
+    {
+      "name": "ESG 제도 개요와 AI 활용 사전교육 자료",
+      "url": "local://01_official/training_and_guides/1교시_ESG 제도 개요와 AI 활용.pdf"
+    },
+    {
+      "name": "공공기관 ESG 가이드라인(안)",
+      "url": "local://01_official/training_and_guides/별첨 공공기관 ESG가이드라인.pdf"
+    },
+    {
+      "name": "GHG Protocol Corporate Standard FAQ",
+      "url": "https://ghgprotocol.org/corporate-standard-frequently-asked-questions"
+    },
+    {
+      "name": "GHG Protocol Scope 3 Calculation Guidance",
+      "url": "https://ghgprotocol.org/scope-3-calculation-guidance-2"
+    },
+    {
+      "name": "UN Sustainable Development Goals",
+      "url": "https://sdgs.un.org/goals"
+    },
+    {
+      "name": "UN 2030 Agenda",
+      "url": "https://sdgs.un.org/2030agenda"
+    },
+    {
+      "name": "한국임업진흥원 KoFPI ESG 추진체계",
+      "url": "https://www.kofpi.or.kr/CSM/CSM_07.do"
+    },
+    {
+      "name": "한국임업진흥원 산림탄소상쇄제도 운영",
+      "url": "https://www.kofpi.or.kr/intro/bizGuide_04_02.do"
+    },
+    {
+      "name": "산림탄소등록부",
+      "url": "https://carbonregistry.forest.go.kr/"
+    },
+    {
+      "name": "탄소흡수원 유지 및 증진에 관한 법률",
+      "url": "https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=900566832"
+    },
+    {
+      "name": "온실가스 배출권의 할당 및 거래에 관한 법률 - 배출권 정의",
+      "url": "https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1000919695"
+    },
+    {
+      "name": "UNFCCC Market and Non-Market Mechanisms",
+      "url": "https://unfccc.int/topics/what-are-market-and-non-market-mechanisms"
+    },
+    {
+      "name": "World Bank Pricing Carbon",
+      "url": "https://www.worldbank.org/en/programs/pricing-carbon"
+    },
+    {
+      "name": "World Bank Emission Reduction Credits",
+      "url": "https://ppp.worldbank.org/emission-reduction-credits"
+    },
+    {
+      "name": "Knowledge-Action Chain 공개 저장소",
+      "url": "https://github.com/sopia19910/Knowledge-Action-Chain"
+    }
+  ]
+}
