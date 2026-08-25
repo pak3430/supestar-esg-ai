@@ -11,6 +11,17 @@
 → PROCEED·REVIEW·STOP → 선택적 서버 AI 표현 → Output Risk Gate → Run Record
 ```
 
+## 현재 공개 데모
+
+- 실행 URL: [https://supestar-esg-ai.onrender.com](https://supestar-esg-ai.onrender.com)
+- 상태 API: [https://supestar-esg-ai.onrender.com/api/health](https://supestar-esg-ai.onrender.com/api/health)
+- 배포 상태: Render `live` 확인
+- 실행 모드: `STRUCTURED_GROUNDED`
+- 지식 자산: 85개 Identity·Concept Skill
+- Runtime Composite: `supestar-forest-esg-orchestrator-run` 준비 완료
+
+2026년 8월 25일 외부 HTTPS 호출로 홈, 상태 API, 일반 ESG, 구체적 Scope 1, 명시적 탄소크레딧 구매 질문을 검증했다. 사용자 PC에는 Ollama·Python·모델·API 키가 필요하지 않다.
+
 ## 1. 설치 없는 기본 데모
 
 저장소 루트의 `render.yaml`은 `06_runtime/deploy/Dockerfile`을 이용해 Web Service를 만든다. 최초 배포는 `SUPESTAR_AI_PROVIDER=disabled`로 시작한다.
@@ -61,10 +72,10 @@ OpenAI-compatible Chat Completions API를 제공하는 공급자를 사용할 �
 
 ## 5. 공개 URL 반영 위치
 
-실제 URL이 발급되고 외부 검증을 통과한 뒤에만 다음 위치에 기록한다.
+검증된 현재 URL을 다음 위치에 기록했다.
 
 - 저장소 `README.md`의 Live Demo
 - `09_submission/final/00_제출파일_안내.md`
 - 제출 폼의 MVP URL 항목
 
-임시 터널 주소나 검증 전 URL은 최종 제출물에 고정하지 않는다.
+임시 터널 주소나 검증 전 URL은 최종 제출물에 고정하지 않는다. Render 무료 인스턴스는 휴면 후 첫 요청이 늦을 수 있으므로 발표 직전에 한 번 열어 둔다.

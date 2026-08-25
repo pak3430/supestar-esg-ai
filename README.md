@@ -51,11 +51,19 @@ AI는 검증된 결과를 자연스러운 한국어로 표현할 뿐 Concept 선
 
 질문이 단순한 ESG 설명이면 ESG만 설명한다. 산림탄소마켓은 탄소크레딧 구매처나 구매 방법을 명시적으로 물은 경우에만 외부 행동 선택지로 연결한다.
 
-## 설치 없이 공개 데모 배포
+## 설치 없이 바로 시연
+
+**Live Demo: [https://supestar-esg-ai.onrender.com](https://supestar-esg-ai.onrender.com)**
+
+별도 설치나 API 키 없이 브라우저에서 바로 질문할 수 있다. 공개 데모는 실제 KAC·Skill을 실행하는 `STRUCTURED_GROUNDED` 모드이며, 답변의 근거와 실행기록도 화면에서 확인할 수 있다. Render 무료 인스턴스가 휴면 상태이면 첫 접속에 최대 50초 이상 걸릴 수 있다.
+
+상태 API: [https://supestar-esg-ai.onrender.com/api/health](https://supestar-esg-ai.onrender.com/api/health)
+
+## 직접 공개 데모 배포
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https%3A%2F%2Fgithub.com%2Fpak3430%2Fsupestar-esg-ai)
 
-위 버튼은 현재 Docker Runtime을 공개 Web Service로 배포한다. 최초 상태는 API 키 없이 실제 KAC·Skill을 실행하는 `구조화 지식 모드`다. 서버 측 AI를 사용할 때는 배포 서비스의 Secret에만 API 키를 저장한다. 사용자는 Ollama·Python·모델을 설치하지 않고 발급된 URL만 연다.
+위 버튼은 현재 Docker Runtime을 별도의 공개 Web Service로 배포한다. 최초 상태는 API 키 없이 실제 KAC·Skill을 실행하는 `구조화 지식 모드`다. 서버 측 AI를 사용할 때는 배포 서비스의 Secret에만 API 키를 저장한다. 사용자는 Ollama·Python·모델을 설치하지 않고 발급된 URL만 연다.
 
 - [공개 데모 배포 상세 안내](06_runtime/deploy/PUBLIC_DEMO_DEPLOYMENT.md)
 - GitHub Pages는 Python Runtime을 실행하지 않으므로 본 프로젝트의 실제 데모 호스팅으로 사용하지 않는다.
