@@ -64,7 +64,7 @@ function imageBox(slide, imgPath, x, y, w, h) {
 
 {
   const s = pptx.addSlide('MASTER'); s.background = { color: C.forest };
-  s.addShape(pptx.ShapeType.ellipse, { x: 8.25, y: -1.25, w: 5.9, h: 5.9, fill: { color: '185F50' }, line: { color: '185F50' } });
+  s.addShape(pptx.ShapeType.ellipse, { x: 8.66, y: 0.18, w: 4.42, h: 4.42, fill: { color: '185F50' }, line: { color: '185F50' } });
   s.addText('2026 ESG × AI CHALLENGE · TRACK C', { x: 0.75, y: 0.72, w: 6.2, h: 0.28, fontFace: 'Aptos', fontSize: 11, bold: true, color: '83E1B3', charSpacing: 1.2, margin: 0 });
   s.addText('수페스타', { x: 0.75, y: 1.38, w: 6.8, h: 0.92, fontFace: FONT, fontSize: 40, bold: true, color: C.white, margin: 0 });
   s.addText('ESG 질문을 검증 가능한\n다음 행동으로 바꾸는 AI', { x: 0.78, y: 2.46, w: 7.2, h: 1.15, fontFace: FONT, fontSize: 25, bold: true, color: 'C8F4DD', margin: 0, fit: 'shrink' });
@@ -166,9 +166,9 @@ function imageBox(slide, imgPath, x, y, w, h) {
 {
   const s = pptx.addSlide('MASTER'); title(s, '09 · ACTION & VALIDATION', '구매처를 직접 물은 경우에만 실제 행동 지점을 보여줍니다', '산림탄소마켓은 제품의 종착점이 아니라, 명시적 구매 의도에서만 나타나는 제한된 handoff입니다.');
   imageBox(s, market, 0.64, 1.88, 7.28, 4.92);
-  card(s, 8.22, 1.92, 2.10, 1.12, '23', '단위·통합 테스트\n전부 PASS', C.blue, C.blueBg);
-  card(s, 10.54, 1.92, 2.10, 1.12, '60', '결정론 시나리오\n전부 PASS', C.green, C.mint2);
-  card(s, 8.22, 3.28, 2.10, 1.12, '8', '로컬 AI 근거 답변\n전부 PASS', C.amber, C.amberBg);
+  card(s, 8.22, 1.92, 2.10, 1.12, '35', '자동 테스트\n전부 PASS', C.blue, C.blueBg);
+  card(s, 10.54, 1.92, 2.10, 1.12, '63', '결정론 시나리오\n전부 PASS', C.green, C.mint2);
+  card(s, 8.22, 3.28, 2.10, 1.12, '10', '로컬 AI 근거 답변\n전부 PASS', C.amber, C.amberBg);
   card(s, 10.54, 3.28, 2.10, 1.12, '9', '지원 라우트\n전부 커버', C.coral, C.coralBg);
   s.addShape(pptx.ShapeType.roundRect, { x: 8.22, y: 4.72, w: 4.42, h: 1.34, rectRadius: 0.08, fill: { color: C.white }, line: { color: C.line } });
   s.addText('검증된 범위', { x: 8.48, y: 4.92, w: 3.9, h: 0.26, fontFace: FONT, fontSize: 12.5, bold: true, color: C.ink, margin: 0 });
@@ -183,7 +183,7 @@ function imageBox(slide, imgPath, x, y, w, h) {
   s.addText('사용자에게는 자연스러운 답변을,\n뒷단에는 KAC · 실행 Skill · 근거 · Run Record를.', { x: 0.82, y: 4.58, w: 6.85, h: 0.84, fontFace: FONT, fontSize: 15, color: 'D5EEE4', margin: 0, fit: 'shrink' });
   s.addImage({ path: mascot, x: 8.65, y: 1.40, w: 3.25, h: 3.25, sizing: 'contain' });
   pill(s, '구조화 → Skill 묶음 → 배포 → 실행 증명', 8.42, 5.08, 3.76, '1B6756', 'E7FFF3');
-  s.addText('팀 초 ROK · 박상훈', { x: 9.00, y: 6.18, w: 2.6, h: 0.28, fontFace: FONT, fontSize: 11, color: 'C8DAD4', align: 'center', margin: 0 });
+  s.addText('팀 초 ROK · 박상훈\ngithub.com/pak3430/supestar-esg-ai', { x: 8.50, y: 6.04, w: 3.65, h: 0.58, fontFace: FONT, fontSize: 9.5, color: 'C8DAD4', align: 'center', margin: 0, fit: 'shrink' });
 }
 
 pptx.writeFile({ fileName: out }).then(() => process.stdout.write(out + '\n'));

@@ -171,7 +171,7 @@ const MarketScene: React.FC<{ f: number }> = ({ f }) => (
 );
 
 const ValidationScene: React.FC<{ f: number }> = ({ f }) => {
-  const metrics = [['23', '단위·통합 테스트'], ['60', '결정론 시나리오'], ['8', '로컬 AI 근거 답변'], ['9', '지원 라우트']];
+  const metrics = [['35', '자동 테스트'], ['63', '결정론 시나리오'], ['10', '로컬 AI 근거 답변'], ['9', '지원 라우트']];
   return <Base><Kicker>10 · VALIDATION</Kicker><Head>실행 구조와 안전 경계를 최신 코드로 다시 검증했습니다</Head>
     <div style={{ position: 'absolute', left: 100, right: 100, top: 250, display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 28 }}>
       {metrics.map((m, i) => <div key={m[0]} style={{ height: 240, borderRadius: 22, border: `3px solid ${C.line}`, borderTop: `14px solid ${[C.blue, C.green, C.amber, C.coral][i]}`, background: C.white, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', opacity: fade(f, 10 + i * 12), transform: `translateY(${rise(f, 10 + i * 12)}px)` }}>

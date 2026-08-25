@@ -64,8 +64,8 @@ export const SCENES: Scene[] = [
   },
   {
     id: 's10_validation', durationSec: 17,
-    subtitle: '23 tests · 60 scenarios · 8 local-AI cases · 9 routes',
-    narration: '최신 검증은 단위 통합 스물세 건, 결정론 예순 건, 로컬 에이아이 여덟 건을 통과했습니다. 아홉 라우트와 프로시드, 리뷰, 스톱도 확인했습니다.',
+    subtitle: '35 tests · 63 scenarios · 10 local-AI cases · 9 routes',
+    narration: '최신 검증은 자동 테스트 서른다섯 건, 결정론 예순세 건, 로컬 에이아이 열 건을 통과했습니다. 아홉 라우트와 프로시드, 리뷰, 스톱도 확인했습니다.',
   },
   {
     id: 's11_close', durationSec: 14,
