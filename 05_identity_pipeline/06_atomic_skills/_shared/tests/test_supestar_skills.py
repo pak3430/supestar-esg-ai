@@ -14,7 +14,7 @@ ATOMIC_ROOT = TEST_ROOT.parents[1]
 SHARED_ROOT = TEST_ROOT.parent
 sys.path.insert(0, str(SHARED_ROOT))
 
-from supestar_skills import evaluate  # noqa: E402
+from supestar_skills import evaluate, evaluate_question_routing  # noqa: E402
 
 
 class SupestarSkillRuntimeTests(unittest.TestCase):
@@ -57,6 +57,25 @@ class SupestarSkillRuntimeTests(unittest.TestCase):
                     "asOfDate": "2026-08-25",
                 })
                 self.assertEqual(result["data"]["routeDecision"]["route"], expected_route)
+
+    def test_explicit_follow_up_uses_verified_routing_question(self) -> None:
+        payload = {
+            "question": "그건 왜 중요한가요?",
+            "routingQuestion": "ESG가 무엇인가요? / 그건 왜 중요한가요?",
+            "conversationContinuity": {
+                "policy": "EXPLICIT_FOLLOW_UP_ONLY",
+                "historyMessagesUsed": 1,
+            },
+            "userRole": "LEARNER",
+            "asOfDate": "2026-08-25",
+            "providedEvidence": [],
+        }
+        result = evaluate_question_routing(payload)
+        decision = result["data"]["routeDecision"]
+        snapshot = result["data"]["contextSnapshot"]
+        self.assertEqual(decision["route"], "CONCEPT_EXPLANATION")
+        self.assertEqual(snapshot["question"], "그건 왜 중요한가요?")
+        self.assertEqual(snapshot["routingQuestion"], payload["routingQuestion"])
 
     def test_each_wrapper_executes_and_lands_artifacts(self) -> None:
         for skill, cases in self.fixtures.items():

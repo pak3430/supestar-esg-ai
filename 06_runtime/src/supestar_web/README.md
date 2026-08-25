@@ -6,7 +6,7 @@
 
 ## 현재 구현
 
-1. `ContextRuntime`이 현재 질문과 명시적으로 참조된 이전 사용자 발화에서만 운영 필드를 추출한다. 이전 AI 답변은 사실 입력으로 쓰지 않는다.
+1. 모든 계층이 공통 `EXPLICIT_FOLLOW_UP_ONLY` 정책을 사용한다. 현재 질문은 기본적으로 독립 처리하고, “그건·그 배출원·앞서”처럼 명시적인 참조가 있을 때만 직전 사용자 발화 1개를 연결한다. 이전 AI 답변은 사실 입력으로 쓰지 않는다.
 2. 추출한 값마다 원문 조각·규칙·신뢰도·출처를 `context_extraction.json`에 기록하고, 부정·상충 정보는 임의 선택하지 않고 `UNKNOWN`으로 남긴다.
 3. 웹 서버는 이후 `supestar-forest-esg-orchestrator-run` 하나만 직접 호출한다.
 4. Composite 내부의 `supestar-question-routing-run`이 일반 개념 설명과 6개 실행 경로, 입력 보완, 금지 요청을 정확히 한 번 구분한다.
@@ -21,6 +21,7 @@
 
 ```text
 질문
+→ 새 주제 독립 처리 / 명시적 후속 질문만 직전 사용자 발화 연결
 → 사용자 진술 전용 자연어 Context 추출·상충 검사
 → Runtime Composite 단일 진입점
   → 질문 라우팅 1회
@@ -63,20 +64,27 @@ export SUPESTAR_AI_TIMEOUT_SECONDS=90
 python3 -m unittest \
   discover -s 06_runtime/src/supestar_web/tests -p 'test_*.py' -v
 
+python3 -m unittest \
+  discover -s 05_identity_pipeline/08_composite_runtime/tests -p 'test_*.py' -v
+
+python3 -m unittest \
+  discover -s 05_identity_pipeline/06_atomic_skills/_shared/tests -p 'test_*.py' -v
+
 SUPESTAR_AI_PROVIDER=disabled python3 \
   06_runtime/src/supestar_web/tests/validate_supestar_web.py \
-  --output-root 06_runtime/tests/supestar_web_v4_natural_final_r3_2026-08-25
+  --output-root 06_runtime/tests/submission_refresh_deterministic_v3_history_isolation_2026-08-25
 
 python3 06_runtime/src/supestar_web/tests/validate_local_ai.py \
-  --output-root 06_runtime/tests/supestar_web_local_ai_v4_natural_final_r2_2026-08-25
+  --output-root 06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25
 ```
 
-결정론적 검증은 최초 오류 문장과 “저희 회사가 소유·운영” 자연어 변형을 포함한 60개 질문 시나리오로 9개 라우트와 `PROCEED/REVIEW/STOP`을 모두 확인한다. 범위에는 Scope 1·2·3 세부 활동, 부정문, 상태 충돌, 이전 대화 오염, 산림 E/S/G 일부 누락, 절차 단계 충돌, 거래 G1~G11, 실시간 가격·투자추천·외부 실행, 프롬프트 우회와 가짜 증거 요청이 포함된다. 세부 목록은 [질문 처리·위험 게이트 매트릭스](QUESTION_HANDLING_AND_RISK_MATRIX_2026-08-25.md)에 있다.
+결정론적 검증은 최초 오류 문장과 “저희 회사가 소유·운영” 자연어 변형을 포함한 63개 질문 시나리오로 9개 라우트와 `PROCEED/REVIEW/STOP`을 모두 확인한다. 범위에는 Scope 1·2·3 세부 활동, 부정문, 상태 충돌, 이전 대화 오염, 짧은 새 주제와 명시적 후속 질문의 분리, 산림 E/S/G 일부 누락, 절차 단계 충돌, 거래 G1~G11, 실시간 가격·투자추천·외부 실행, 프롬프트 우회와 가짜 증거 요청이 포함된다. 실제 로컬 AI 검증은 같은 대화 연속성 사례를 포함한 10개 질문을 통과했다. 세부 목록은 [질문 처리·위험 게이트 매트릭스](QUESTION_HANDLING_AND_RISK_MATRIX_2026-08-25.md)에 있다.
 
 ## 안전 경계
 
 - 사용자가 제공하지 않은 조직경계·활동·증거·사업 상태를 만들어내지 않는다.
 - 짧다는 이유만으로 이전 질문을 새 질문에 합치지 않으며, 명시적인 지시어가 있을 때만 이전 사용자 발화를 제한적으로 사용한다.
+- 라우터·KAC·Context·AI가 동일한 대화 정책을 사용하고 각 실행 기록에 실제 사용한 이전 발화 수를 남긴다.
 - 문서 보유·미보유와 등록·절차 상태는 문장 단위로 판별하고 상충하면 `REVIEW`한다.
 - AI는 선택된 근거를 설명할 뿐 공식 사실이나 누락 증거를 보충하지 않는다.
 - 검증 판정이 `REVIEW/STOP`이면 모델 문장을 생성하지 않는다.

@@ -108,6 +108,16 @@ class ContextRuntimeTest(unittest.TestCase):
         self.assertEqual(payload["purchasedEnergyType"], "ELECTRICITY")
         self.assertNotEqual(payload["sourceOwnershipOrControl"], "OWNED_CONTROLLED")
 
+    def test_connective_with_new_activity_does_not_inherit_prior_scope_relationship(self) -> None:
+        payload, report = self.runtime.enrich(
+            _base(),
+            "그러면 한전 구매전력은 어느 Scope인가요?",
+            [{"role": "user", "content": "우리 회사 소유 보일러는 어느 Scope인가요?"}],
+        )
+        self.assertEqual(report["priorUserMessagesUsed"], 0)
+        self.assertEqual(payload["purchasedEnergyType"], "ELECTRICITY")
+        self.assertNotEqual(payload["sourceOwnershipOrControl"], "OWNED_CONTROLLED")
+
     def test_explicit_follow_up_uses_only_prior_user_statement(self) -> None:
         payload, report = self.runtime.enrich(
             _base(),

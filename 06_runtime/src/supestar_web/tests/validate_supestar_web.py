@@ -20,6 +20,9 @@ from server import PROJECT_ROOT, orchestrate  # noqa: E402
 CASES = [
     {"name": "esg_definition", "question": "ESG가 무엇인가요?", "route": "CONCEPT_EXPLANATION", "status": "PROCEED", "concept": "ESG", "market": False},
     {"name": "sdgs_definition", "question": "SDGs는 무엇인가요?", "route": "CONCEPT_EXPLANATION", "status": "PROCEED", "concept": "SUSTAINABLE_DEVELOPMENT_GOALS", "market": False},
+    {"name": "concept_short_new_topic_isolated", "question": "SDGs는요?", "history": [{"role": "user", "content": "ESG가 무엇인가요?"}, {"role": "assistant", "content": "ESG의 정의"}], "route": "CONCEPT_EXPLANATION", "status": "PROCEED", "concept": "SUSTAINABLE_DEVELOPMENT_GOALS", "market": False, "historyUsed": 0},
+    {"name": "concept_connective_new_topic_isolated", "question": "그러면 SDGs는요?", "history": [{"role": "user", "content": "ESG가 무엇인가요?"}], "route": "CONCEPT_EXPLANATION", "status": "PROCEED", "concept": "SUSTAINABLE_DEVELOPMENT_GOALS", "market": False, "historyUsed": 0},
+    {"name": "concept_explicit_follow_up", "question": "그건 왜 중요한가요?", "history": [{"role": "user", "content": "ESG가 무엇인가요?"}, {"role": "assistant", "content": "ESG의 정의"}], "route": "CONCEPT_EXPLANATION", "status": "PROCEED", "concept": "ESG", "market": False, "historyUsed": 1},
     {"name": "environment_axis_definition", "question": "ESG에서 환경 영역은 무엇을 보나요?", "route": "CONCEPT_EXPLANATION", "status": "PROCEED", "concept": None, "market": False},
     {"name": "kac_definition", "question": "지식행동사슬 KAC는 왜 필요한가요?", "route": "CONCEPT_EXPLANATION", "status": "PROCEED", "concept": None, "market": False},
     {"name": "kofpi_definition", "question": "한국임업진흥원은 산림탄소에서 어떤 역할을 하나요?", "route": "CONCEPT_EXPLANATION", "status": "PROCEED", "concept": None, "market": False},
@@ -172,6 +175,16 @@ def validate(output_root: Path) -> dict[str, object]:
             raise ValueError(f"{name}: expected Concept Skill {case['concept']} not selected: {selected_concepts}")
         if case["concept"] and not result["kacExecution"].get("allChainFilesPresent"):
             raise ValueError(f"{name}: selected KAC chain files are incomplete")
+        if "historyUsed" in case:
+            expected_history = case["historyUsed"]
+            observed = {
+                "routing": result.get("conversationContinuity", {}).get("historyMessagesUsed"),
+                "kac": result.get("kacExecution", {}).get("historyMessagesUsed"),
+                "context": context_extraction.get("priorUserMessagesUsed"),
+                "ai": result.get("aiRuntime", {}).get("historyMessagesUsed"),
+            }
+            if any(value != expected_history for value in observed.values()):
+                raise ValueError(f"{name}: conversation history policy mismatch: {observed}")
         if result.get("answerMode") != "STRUCTURED_GROUNDED" or result.get("aiRuntime", {}).get("generationUsed"):
             raise ValueError(f"{name}: deterministic test unexpectedly used a model")
         if "candidateScope" in case and result.get("data", {}).get("candidateScope") != case["candidateScope"]:
@@ -219,7 +232,7 @@ def validate(output_root: Path) -> dict[str, object]:
         )
     manifest = {
         "schemaVersion": "1.0",
-        "profile": "supestar-web-runtime-composite-v4-natural-context-and-output-risk-gated",
+        "profile": "supestar-web-runtime-composite-v5-explicit-follow-up-only",
         "caseCount": len(records),
         "routeCoverage": sorted({record["route"] for record in records}),
         "statusCoverage": sorted({record["status"] for record in records}),

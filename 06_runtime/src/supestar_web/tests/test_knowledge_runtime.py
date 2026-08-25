@@ -65,6 +65,50 @@ class KnowledgeRuntimeTests(unittest.TestCase):
             ],
         )
         self.assertEqual(result["selectedConcepts"], ["ESG"])
+        self.assertEqual(result["historyMessagesUsed"], 1)
+
+    def test_short_new_topic_does_not_inherit_previous_user_topic(self) -> None:
+        result = self.runtime.execute(
+            "SDGs는요?",
+            history=[
+                {"role": "user", "content": "ESG가 무엇인가요?"},
+                {"role": "assistant", "content": "ESG의 정의"},
+            ],
+        )
+        self.assertEqual(result["effectiveQuestion"], "SDGs는요?")
+        self.assertEqual(result["selectedConcepts"], ["SUSTAINABLE_DEVELOPMENT_GOALS"])
+        self.assertEqual(result["historyMessagesUsed"], 0)
+
+    def test_connective_with_new_topic_does_not_inherit_previous_topic(self) -> None:
+        result = self.runtime.execute(
+            "그러면 SDGs는요?",
+            history=[{"role": "user", "content": "ESG가 무엇인가요?"}],
+        )
+        self.assertEqual(result["effectiveQuestion"], "그러면 SDGs는요?")
+        self.assertEqual(result["selectedConcepts"], ["SUSTAINABLE_DEVELOPMENT_GOALS"])
+        self.assertEqual(result["historyMessagesUsed"], 0)
+
+    def test_ai_history_uses_only_explicit_follow_up_context(self) -> None:
+        runtime = AiRuntime()
+        history = [{"role": "user", "content": "ESG가 무엇인가요?"}]
+        fallback = {
+            "statusLabel": "답변",
+            "title": "검증된 답변",
+            "paragraphs": ["검증된 내용입니다."],
+            "rationale": "근거에 따릅니다.",
+            "steps": [],
+            "followUp": "다음 질문을 입력하세요.",
+            "marketHandoff": None,
+        }
+        deterministic = {"status": "PROCEED", "data": {}}
+        _, new_topic_status = runtime.generate(
+            "SDGs는요?", history, {}, deterministic, fallback, False, "CONCEPT_EXPLANATION"
+        )
+        _, follow_up_status = runtime.generate(
+            "그건 왜 중요한가요?", history, {}, deterministic, fallback, False, "CONCEPT_EXPLANATION"
+        )
+        self.assertEqual(new_topic_status["historyMessagesUsed"], 0)
+        self.assertEqual(follow_up_status["historyMessagesUsed"], 1)
 
     def test_disabled_ai_reports_honest_fallback_mode(self) -> None:
         status = AiRuntime().status()

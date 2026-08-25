@@ -17,6 +17,8 @@ from server import AI_RUNTIME, orchestrate  # noqa: E402
 
 CASES = [
     {"name": "esg", "question": "ESG가 무엇인가요?", "concept": "ESG", "market": False, "status": "PROCEED", "route": "CONCEPT_EXPLANATION", "model": True},
+    {"name": "short_new_topic_isolated", "question": "SDGs는요?", "history": [{"role": "user", "content": "ESG가 무엇인가요?"}], "concept": "SUSTAINABLE_DEVELOPMENT_GOALS", "market": False, "status": "PROCEED", "route": "CONCEPT_EXPLANATION", "model": True, "historyUsed": 0},
+    {"name": "explicit_follow_up", "question": "그건 왜 중요한가요?", "history": [{"role": "user", "content": "ESG가 무엇인가요?"}], "concept": "ESG", "market": False, "status": "PROCEED", "route": "CONCEPT_EXPLANATION", "model": True, "historyUsed": 1},
     {"name": "scope_definition", "question": "Scope 1이 무엇인가요?", "concept": "SCOPE_1", "market": False, "status": "PROCEED", "route": "CONCEPT_EXPLANATION", "model": True},
     {"name": "scope_1_natural", "question": "우리 회사가 소유하고 직접 운영·통제하는 사업장 보일러에서 도시가스 1,250Nm3를 연소했고 고지서를 보유했습니다. 어느 Scope인가요?", "concept": "ORGANIZATIONAL_BOUNDARY", "market": False, "status": "PROCEED", "route": "SCOPE_CLASSIFICATION", "model": True, "candidateScope": "SCOPE_1"},
     {"name": "scope_1_owned_operated_variant", "question": "저희 회사가 소유·운영하는 보일러에서 도시가스 1,250 Nm³를 2026년 8월에 사용했고 고지서가 있습니다. Scope 몇인가요?", "concept": "ORGANIZATIONAL_BOUNDARY", "market": False, "status": "PROCEED", "route": "SCOPE_CLASSIFICATION", "model": True, "candidateScope": "SCOPE_1"},
@@ -40,7 +42,10 @@ def validate(output_root: Path) -> dict[str, object]:
         question = case["question"]
         concept = case["concept"]
         market_expected = case["market"]
-        result = orchestrate({"question": question}, output_root / name)
+        request = {"question": question}
+        if "history" in case:
+            request["history"] = case["history"]
+        result = orchestrate(request, output_root / name)
         guidance = result["userGuidance"]
         text = " ".join([guidance["title"], *guidance["paragraphs"]])
         composite = result.get("compositeExecution", {})
@@ -63,6 +68,16 @@ def validate(output_root: Path) -> dict[str, object]:
             raise ValueError(f"{name}: non-PROCEED model generation was not blocked: {gate}")
         if concept not in result["kacExecution"]["selectedConcepts"]:
             raise ValueError(f"{name}: expected concept not selected: {concept}")
+        if "historyUsed" in case:
+            expected_history = case["historyUsed"]
+            observed = {
+                "routing": result.get("conversationContinuity", {}).get("historyMessagesUsed"),
+                "kac": result.get("kacExecution", {}).get("historyMessagesUsed"),
+                "context": result.get("contextExtraction", {}).get("priorUserMessagesUsed"),
+                "ai": result.get("aiRuntime", {}).get("historyMessagesUsed"),
+            }
+            if any(value != expected_history for value in observed.values()):
+                raise ValueError(f"{name}: conversation history policy mismatch: {observed}")
         market_present = bool(guidance.get("marketHandoff"))
         if market_present != market_expected:
             raise ValueError(f"{name}: market policy mismatch")
@@ -88,7 +103,7 @@ def validate(output_root: Path) -> dict[str, object]:
         })
     manifest = {
         "schemaVersion": "1.0",
-        "profile": "supestar-local-ai-grounded-runtime-composite-v4-risk-gated",
+        "profile": "supestar-local-ai-grounded-runtime-composite-v5-explicit-follow-up-only",
         "provider": status,
         "caseCount": len(records),
         "allCasesPassed": True,

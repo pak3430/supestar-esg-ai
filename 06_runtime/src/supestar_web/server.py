@@ -22,6 +22,7 @@ from typing import Any
 from urllib.parse import unquote, urlparse
 
 from ai_runtime import AiRuntime
+from conversation_policy import effective_question
 from context_runtime import ContextRuntime
 from knowledge_runtime import KnowledgeRuntime
 
@@ -423,6 +424,7 @@ def _default_payload(
     """Create and enrich a neutral context without inventing user facts."""
 
     today = datetime.now(KST).date().isoformat()
+    routing_question, routing_history_used = effective_question(question, history)
     compact = question.lower().replace(" ", "")
     if any(token in compact for token in ("ccm", "vcm", "배출권", "크레딧", "탄소시장", "상쇄")):
         focus = "MARKET"
@@ -437,6 +439,11 @@ def _default_payload(
 
     payload: dict[str, Any] = {
         "question": question,
+        "routingQuestion": routing_question,
+        "conversationContinuity": {
+            "policy": "EXPLICIT_FOLLOW_UP_ONLY",
+            "historyMessagesUsed": routing_history_used,
+        },
         "userRole": "LEARNER",
         "asOfDate": today,
         "providedEvidence": [],
@@ -668,6 +675,7 @@ def orchestrate(request: dict[str, Any], run_root_parent: Path = DEFAULT_RUN_ROO
         "verdictPreserved": final_result.get("status"),
         "outputRiskGate": ai_status.get("outputRiskGate"),
         "contextExtractionSha256": _sha(context_extraction_path),
+        "conversationContinuity": payload.get("conversationContinuity", {}),
     }
     ai_record_path = run_root / "ai_generation_record.json"
     ai_record_path.write_text(json.dumps(ai_record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -704,6 +712,7 @@ def orchestrate(request: dict[str, Any], run_root_parent: Path = DEFAULT_RUN_ROO
             "formalV2Mutation": composite_record.get("provenance", {}).get("formalV2Mutation"),
         },
         "question": question,
+        "conversationContinuity": payload.get("conversationContinuity", {}),
         "demoContext": "사용자가 제공하지 않은 조직·활동·증거는 추정하지 않습니다. 실제 인증·법률·세무·거래 효력을 확정하지 않습니다.",
         "answerMode": ai_status.get("mode"),
         "aiRuntime": ai_status,

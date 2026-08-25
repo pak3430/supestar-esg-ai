@@ -1,0 +1,613 @@
+{
+  "schemaVersion": "1.0",
+  "profile": "supestar-local-ai-grounded-runtime-composite-v5-explicit-follow-up-only",
+  "provider": {
+    "provider": "ollama",
+    "connected": true,
+    "model": "qwen2.5:14b-instruct-q4_K_M",
+    "mode": "LOCAL_AI_GROUNDED",
+    "reason": "Local Ollama model is available"
+  },
+  "caseCount": 10,
+  "allCasesPassed": true,
+  "cases": [
+    {
+      "case": "esg",
+      "route": "CONCEPT_EXPLANATION",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "ESG"
+      ],
+      "answerMode": "LOCAL_AI_GROUNDED",
+      "generationUsed": true,
+      "outputRiskGate": {
+        "decision": "ACCEPT_MODEL_GUIDANCE",
+        "route": "CONCEPT_EXPLANATION",
+        "verifiedStatus": "PROCEED",
+        "reasonCodes": [],
+        "accepted": true,
+        "residualRisk": "LOW"
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": false,
+      "answer": {
+        "statusLabel": "질문하신 내용을 찾았어요",
+        "title": "ESG는 환경(Environmental), 사회(Social), 지배구조(Governance)에 관한 조직의 영향·위험·기회와 성과를 함께 살피는 관점입니다.",
+        "paragraphs": [
+          "환경은 기후·자원·오염·생태계와 같은 영향을 봅니다.",
+          "사회는 노동·안전·인권·지역사회와 이해관계자의 영향을 봅니다.",
+          "지배구조는 의사결정·책임·통제·투명성과 검증 체계를 봅니다.",
+          "탄소는 ESG 전체가 아니라 환경 영역에서 측정 가능한 대표 주제 중 하나입니다."
+        ],
+        "rationale": "질문과 직접 관련된 개념과 근거만 골라 설명하면 다른 ESG 주제나 탄소시장 이야기로 답변이 흐르는 것을 막을 수 있습니다.",
+        "steps": [],
+        "followUp": "ESG의 실제 적용 사례나 다른 개념과의 관계가 궁금하면 이어서 질문해 주세요.",
+        "marketHandoff": null
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/esg/20260825T145953454770_1e1b12a8",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/esg/20260825T145953454770_1e1b12a8/composite/composite_run_record.json",
+        "compositeRecordSha256": "d1bfc15f5e5c4c43840b04217737c58484c42c849d731f92a8c54f4540565e0a",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/esg/20260825T145953454770_1e1b12a8/composite/result.json",
+        "compositeResultSha256": "e6a7e7af964216fc070efea4c3e8637d97d35f2277c1c2c72ca30cd08c69b00c",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/esg/20260825T145953454770_1e1b12a8/composite/router/run_skill_record.json",
+        "selectedRecord": null,
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/esg/20260825T145953454770_1e1b12a8/composite/kac_execution.json",
+        "kacExecutionSha256": "342612e7d581b071b57394b2423a716b432597c1872e5e4a4732916c4bddfd41",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/esg/20260825T145953454770_1e1b12a8/context_extraction.json",
+        "contextExtractionSha256": "f1aa7b8f6ef66ee2e17108b45b610a2504b18e086362efd5311558ffe9e7a6f3",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/esg/20260825T145953454770_1e1b12a8/ai_generation_record.json",
+        "aiGenerationRecordSha256": "8163a81ebf8e5bbc25e1a074344fd294faa4994c93df456225505ba9a85b27f8",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/esg/20260825T145953454770_1e1b12a8/orchestrator_response.json",
+        "orchestratorResponseSha256": "de380f36860ce1d4f3a13e1829f9330e1192ee7ed6e660ce9fb70082479c0ff7"
+      }
+    },
+    {
+      "case": "short_new_topic_isolated",
+      "route": "CONCEPT_EXPLANATION",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "SUSTAINABLE_DEVELOPMENT_GOALS"
+      ],
+      "answerMode": "LOCAL_AI_GROUNDED",
+      "generationUsed": true,
+      "outputRiskGate": {
+        "decision": "ACCEPT_MODEL_GUIDANCE",
+        "route": "CONCEPT_EXPLANATION",
+        "verifiedStatus": "PROCEED",
+        "reasonCodes": [],
+        "accepted": true,
+        "residualRisk": "LOW"
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": false,
+      "answer": {
+        "statusLabel": "질문하신 내용을 찾았어요",
+        "title": "지속가능발전목표(SDGs)",
+        "paragraphs": [
+          "SDGs는 기후 행동을 포함해 사람·경제·생태·제도에 관한 지속가능발전 목표를 함께 살피는 국제적인 목표 체계입니다."
+        ],
+        "rationale": "질문과 직접 관련된 개념과 근거만 골라 설명하면 다른 ESG 주제나 탄소시장 이야기로 답변이 흐르는 것을 막을 수 있습니다.",
+        "steps": [],
+        "followUp": "지속가능발전목표(SDGs)의 실제 적용 사례나 다른 개념과의 관계가 궁금하면 이어서 질문해 주세요.",
+        "marketHandoff": null
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/short_new_topic_isolated/20260825T150034591492_83720c98",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/short_new_topic_isolated/20260825T150034591492_83720c98/composite/composite_run_record.json",
+        "compositeRecordSha256": "c7d4965e5bec6a0ccf061815d6e3a3591eeff0640784ccf75c704329d7ff319e",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/short_new_topic_isolated/20260825T150034591492_83720c98/composite/result.json",
+        "compositeResultSha256": "9efb0e992c7dd761d49d8e8875a7fd324ae1fb27aa5a6b72056cb6fc8824baae",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/short_new_topic_isolated/20260825T150034591492_83720c98/composite/router/run_skill_record.json",
+        "selectedRecord": null,
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/short_new_topic_isolated/20260825T150034591492_83720c98/composite/kac_execution.json",
+        "kacExecutionSha256": "68eaf0aa46f5a9dc7f8d665fe0191cdb5883b7d51143bc095ec84f37c83f5743",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/short_new_topic_isolated/20260825T150034591492_83720c98/context_extraction.json",
+        "contextExtractionSha256": "f1aa7b8f6ef66ee2e17108b45b610a2504b18e086362efd5311558ffe9e7a6f3",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/short_new_topic_isolated/20260825T150034591492_83720c98/ai_generation_record.json",
+        "aiGenerationRecordSha256": "e1de497d988a50a91f007204da4535398387c162cbfdbbce72dac6f4bf8b0e05",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/short_new_topic_isolated/20260825T150034591492_83720c98/orchestrator_response.json",
+        "orchestratorResponseSha256": "67a5594e66e1cc07d162ce3bcd3f88464fee53e565ae94220b3511a70b38f718"
+      }
+    },
+    {
+      "case": "explicit_follow_up",
+      "route": "CONCEPT_EXPLANATION",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "ESG"
+      ],
+      "answerMode": "LOCAL_AI_GROUNDED",
+      "generationUsed": true,
+      "outputRiskGate": {
+        "decision": "ACCEPT_MODEL_GUIDANCE",
+        "route": "CONCEPT_EXPLANATION",
+        "verifiedStatus": "PROCEED",
+        "reasonCodes": [],
+        "accepted": true,
+        "residualRisk": "LOW"
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": false,
+      "answer": {
+        "statusLabel": "질문하신 내용을 찾았어요",
+        "title": "ESG",
+        "paragraphs": [
+          "ESG는 환경(Environmental), 사회(Social), 지배구조(Governance)에 관한 조직의 영향·위험·기회와 성과를 함께 살피는 관점입니다.",
+          "환경은 기후·자원·오염·생태계와 같은 영향을 봅니다.",
+          "사회는 노동·안전·인권·지역사회와 이해관계자의 영향을 봅니다.",
+          "지배구조는 의사결정·책임·통제·투명성과 검증 체계를 봅니다."
+        ],
+        "rationale": "ESG는 기업의 지속 가능한 성장을 위한 중요한 관리 방식으로, 환경, 사회, 그리고 경영 구조에 대한 책임을 강조합니다. 이를 통해 기업은 장기적인 안정성과 신뢰성을 높일 수 있습니다.",
+        "steps": [],
+        "followUp": "ESG가 왜 중요한지 더 자세히 알고 싶다면, ESG의 각 영역이 어떻게 기업의 성공에 기여하는지를 물어보세요.",
+        "marketHandoff": null
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/explicit_follow_up/20260825T150056291743_e7734351",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/explicit_follow_up/20260825T150056291743_e7734351/composite/composite_run_record.json",
+        "compositeRecordSha256": "bb316f7412d4429eb742334909a4558fc8806d7ffb8ed4c35e54cd221b26fdbd",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/explicit_follow_up/20260825T150056291743_e7734351/composite/result.json",
+        "compositeResultSha256": "e2cf968eaa906368018c7c409882b278b7c0e3699e20169ae6ea606937db78ac",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/explicit_follow_up/20260825T150056291743_e7734351/composite/router/run_skill_record.json",
+        "selectedRecord": null,
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/explicit_follow_up/20260825T150056291743_e7734351/composite/kac_execution.json",
+        "kacExecutionSha256": "3be270941dae91ebb1104673a90e8dd695f50e3f792d1d5e687e6d9d0f724a37",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/explicit_follow_up/20260825T150056291743_e7734351/context_extraction.json",
+        "contextExtractionSha256": "061632492a65d6b443bfb46de2cd22ba89c869efef69154ffa905522467b121b",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/explicit_follow_up/20260825T150056291743_e7734351/ai_generation_record.json",
+        "aiGenerationRecordSha256": "61fe037c86f20a6a223ccc139329ab61bda29b0a30edd5e919a670c59302aa33",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/explicit_follow_up/20260825T150056291743_e7734351/orchestrator_response.json",
+        "orchestratorResponseSha256": "8701b487509cfc7a8b1b6563973687094ca624612b27ba43bf7ffb4ba1906326"
+      }
+    },
+    {
+      "case": "scope_definition",
+      "route": "CONCEPT_EXPLANATION",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "SCOPE_1"
+      ],
+      "answerMode": "LOCAL_AI_GROUNDED",
+      "generationUsed": true,
+      "outputRiskGate": {
+        "decision": "ACCEPT_MODEL_GUIDANCE",
+        "route": "CONCEPT_EXPLANATION",
+        "verifiedStatus": "PROCEED",
+        "reasonCodes": [],
+        "accepted": true,
+        "residualRisk": "LOW"
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": false,
+      "answer": {
+        "statusLabel": "질문하신 내용을 찾았어요",
+        "title": "Scope 1은 조직이 소유하거나 통제하는 배출원에서 발생하는 직접 온실가스 배출입니다.",
+        "paragraphs": [
+          "예시는 조직 소유 보일러의 연료 연소, 자체 차량 연료 사용 등이며 실제 분류에는 소유·통제 관계 확인이 필요합니다."
+        ],
+        "rationale": "질문과 직접 관련된 개념과 근거만 골라 설명하면 다른 ESG 주제나 탄소시장 이야기로 답변이 흐르는 것을 막을 수 있습니다.",
+        "steps": [],
+        "followUp": "Scope 1의 실제 적용 사례나 다른 개념과의 관계가 궁금하면 이어서 질문해 주세요.",
+        "marketHandoff": null
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_definition/20260825T150128171708_d363c2b9",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_definition/20260825T150128171708_d363c2b9/composite/composite_run_record.json",
+        "compositeRecordSha256": "b1c8dc98fb54dd2f971281c4e686962ccca515c981f7e4c31216fb3010f6b0d0",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_definition/20260825T150128171708_d363c2b9/composite/result.json",
+        "compositeResultSha256": "55bc20bda8fcfe81712a7a63cbc8942472ec0171ed3ba84b5ffba3645177b3c1",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_definition/20260825T150128171708_d363c2b9/composite/router/run_skill_record.json",
+        "selectedRecord": null,
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_definition/20260825T150128171708_d363c2b9/composite/kac_execution.json",
+        "kacExecutionSha256": "a44fb18198c572616bc40a1121c34a6e8f8c3e608a30290ac61d609fe44e62fc",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_definition/20260825T150128171708_d363c2b9/context_extraction.json",
+        "contextExtractionSha256": "f1aa7b8f6ef66ee2e17108b45b610a2504b18e086362efd5311558ffe9e7a6f3",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_definition/20260825T150128171708_d363c2b9/ai_generation_record.json",
+        "aiGenerationRecordSha256": "49b52d4fd718d90c02274e1ee91c59959f74336e113855f1393cb301cc9c7d93",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_definition/20260825T150128171708_d363c2b9/orchestrator_response.json",
+        "orchestratorResponseSha256": "23e20176de950cd57af62c7c96a3c589b2121e5640742edc4c5d825a3cca68eb"
+      }
+    },
+    {
+      "case": "scope_1_natural",
+      "route": "SCOPE_CLASSIFICATION",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "ORGANIZATIONAL_BOUNDARY"
+      ],
+      "answerMode": "LOCAL_AI_GROUNDED",
+      "generationUsed": true,
+      "outputRiskGate": {
+        "decision": "ACCEPT_MODEL_GUIDANCE",
+        "route": "SCOPE_CLASSIFICATION",
+        "verifiedStatus": "PROCEED",
+        "reasonCodes": [],
+        "accepted": true,
+        "residualRisk": "LOW"
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": false,
+      "answer": {
+        "statusLabel": "말씀해 주신 상황을 기준으로 분류했어요",
+        "title": "말씀해 주신 조건대로라면 이 활동은 Scope 1로 분류됩니다.",
+        "paragraphs": [
+          "Scope는 배출량의 크기가 아니라 배출원을 누가 소유·운영하는지, 전기나 열을 외부에서 구매했는지, 가치사슬 어디에서 발생했는지에 따라 나뉩니다.",
+          "현재 답변은 입력해 주신 상황에 적용한 분류입니다. 실제 보고에 사용하기 전에는 조직경계와 운영통제 여부, 활동자료를 원문과 다시 대조해 주세요."
+        ],
+        "rationale": "같은 활동명이라도 소유·통제 관계가 다르면 Scope가 달라질 수 있기 때문에 상황 확인이 먼저 필요합니다.",
+        "steps": [
+          {
+            "title": "배출원 확인",
+            "description": "연료, 전기, 이동, 구매품처럼 실제 활동을 특정합니다."
+          },
+          {
+            "title": "소유·통제 확인",
+            "description": "우리 조직이 직접 소유하거나 운영하는지 확인합니다."
+          },
+          {
+            "title": "활동자료 준비",
+            "description": "사용량, 기간, 단위와 증빙자료를 모읍니다."
+          }
+        ],
+        "followUp": "분류하려는 활동과 누가 설비를 운영하는지 알려주시면 더 정확히 안내할 수 있습니다.",
+        "marketHandoff": null
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_natural/20260825T150150295662_23bd571a",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_natural/20260825T150150295662_23bd571a/composite/composite_run_record.json",
+        "compositeRecordSha256": "48befe7e9e14e4ba0addd86eabfcaef3e6f59edb4ff646ab7bfc05eee3472e1e",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_natural/20260825T150150295662_23bd571a/composite/result.json",
+        "compositeResultSha256": "15383b887c26a98b1c062fc2a969166afb6d9e642de72b022ced8558977810d1",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_natural/20260825T150150295662_23bd571a/composite/router/run_skill_record.json",
+        "selectedRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_natural/20260825T150150295662_23bd571a/composite/selected/run_skill_record.json",
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_natural/20260825T150150295662_23bd571a/composite/kac_execution.json",
+        "kacExecutionSha256": "52a2d90a66c69dc13a056af059960996eeb90f25d97a17437a1e7e8548991c03",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_natural/20260825T150150295662_23bd571a/context_extraction.json",
+        "contextExtractionSha256": "f8a54d54707a88a69849df0918de6632108537203e30e7d58554ab2752ee3186",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_natural/20260825T150150295662_23bd571a/ai_generation_record.json",
+        "aiGenerationRecordSha256": "b135a28f9945115340749dea9afe123c01e202649b466333af3bf7047bfe0f77",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_natural/20260825T150150295662_23bd571a/orchestrator_response.json",
+        "orchestratorResponseSha256": "f440bd6976057b7c40fdbb50d60a495073d13fad2b4fee5850f3776883148afe"
+      }
+    },
+    {
+      "case": "scope_1_owned_operated_variant",
+      "route": "SCOPE_CLASSIFICATION",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "ORGANIZATIONAL_BOUNDARY"
+      ],
+      "answerMode": "LOCAL_AI_GROUNDED",
+      "generationUsed": true,
+      "outputRiskGate": {
+        "decision": "ACCEPT_MODEL_GUIDANCE",
+        "route": "SCOPE_CLASSIFICATION",
+        "verifiedStatus": "PROCEED",
+        "reasonCodes": [],
+        "accepted": true,
+        "residualRisk": "LOW"
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": false,
+      "answer": {
+        "statusLabel": "말씀해 주신 상황을 기준으로 분류했어요",
+        "title": "말씀해 주신 조건대로라면 이 활동은 Scope 1로 분류됩니다.",
+        "paragraphs": [
+          "Scope는 배출량의 크기가 아니라 배출원을 누가 소유·운영하는지, 전기나 열을 외부에서 구매했는지, 가치사슬 어디에서 발생했는지에 따라 나뉩니다.",
+          "현재 답변은 입력해 주신 상황에 적용한 분류입니다. 실제 보고에 사용하기 전에는 조직경계와 운영통제 여부, 활동자료를 원문과 다시 대조해 주세요."
+        ],
+        "rationale": "같은 활동명이라도 소유·통제 관계가 다르면 Scope가 달라질 수 있기 때문에 상황 확인이 먼저 필요합니다.",
+        "steps": [
+          {
+            "title": "배출원 확인",
+            "description": "연료, 전기, 이동, 구매품처럼 실제 활동을 특정합니다."
+          },
+          {
+            "title": "소유·통제 확인",
+            "description": "우리 조직이 직접 소유하거나 운영하는지 확인합니다."
+          },
+          {
+            "title": "활동자료 준비",
+            "description": "사용량, 기간, 단위와 증빙자료를 모읍니다."
+          }
+        ],
+        "followUp": "분류하려는 활동과 누가 설비를 운영하는지 알려주시면 더 정확히 안내할 수 있습니다.",
+        "marketHandoff": null
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_owned_operated_variant/20260825T150217276691_cbe42e68",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_owned_operated_variant/20260825T150217276691_cbe42e68/composite/composite_run_record.json",
+        "compositeRecordSha256": "3773aab211e41882dbbb260c2060de6fedd93323c644e81af659fb4c043aa440",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_owned_operated_variant/20260825T150217276691_cbe42e68/composite/result.json",
+        "compositeResultSha256": "6ecadd336ec03daf903907a1cf4a31fcc635ed11896ab5e6508d7f6a895d9c58",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_owned_operated_variant/20260825T150217276691_cbe42e68/composite/router/run_skill_record.json",
+        "selectedRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_owned_operated_variant/20260825T150217276691_cbe42e68/composite/selected/run_skill_record.json",
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_owned_operated_variant/20260825T150217276691_cbe42e68/composite/kac_execution.json",
+        "kacExecutionSha256": "b1693078713ae9765d3326bf7a79873d2c6c891c6f43a64d54bd2db63e969e8a",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_owned_operated_variant/20260825T150217276691_cbe42e68/context_extraction.json",
+        "contextExtractionSha256": "90741e4aff08a993cfc4c7114e66013c2f5c187ead40a8ad51f02c6442d540f9",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_owned_operated_variant/20260825T150217276691_cbe42e68/ai_generation_record.json",
+        "aiGenerationRecordSha256": "911bf11f5a35556e2a776b6ea0860df97c94c81d50037f5d4cfc2d39d51767bb",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_1_owned_operated_variant/20260825T150217276691_cbe42e68/orchestrator_response.json",
+        "orchestratorResponseSha256": "70b7d065c07e360753b1b61431268e9e1d302bc80581d4c7d5dccc8c2f3f39ba"
+      }
+    },
+    {
+      "case": "scope_review",
+      "route": "SCOPE_CLASSIFICATION",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "ORGANIZATIONAL_BOUNDARY"
+      ],
+      "answerMode": "STRUCTURED_GROUNDED",
+      "generationUsed": false,
+      "outputRiskGate": {
+        "decision": "USE_VERIFIED_FALLBACK",
+        "route": "SCOPE_CLASSIFICATION",
+        "verifiedStatus": "REVIEW",
+        "reasonCodes": [
+          "NON_PROCEED_VERDICT_REQUIRES_DETERMINISTIC_GUIDANCE"
+        ],
+        "modelGenerationAllowed": false
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": false,
+      "answer": {
+        "statusLabel": "조금만 더 알려주세요",
+        "title": "이 배출원이 어느 Scope인지 판단하려면 활동과 소유·운영 관계가 더 필요해요.",
+        "paragraphs": [
+          "회사 소유 보일러인지, 외부에서 구매한 전기인지, 협력사가 수행한 운송인지처럼 실제 상황을 알려주시면 분류할 수 있습니다.",
+          "사용량이 있다면 기간과 단위, 고지서나 운행일지 같은 자료도 함께 적어 주세요."
+        ],
+        "rationale": "같은 활동명이라도 소유·통제 관계가 다르면 Scope가 달라질 수 있기 때문에 상황 확인이 먼저 필요합니다.",
+        "steps": [
+          {
+            "title": "배출원 확인",
+            "description": "연료, 전기, 이동, 구매품처럼 실제 활동을 특정합니다."
+          },
+          {
+            "title": "소유·통제 확인",
+            "description": "우리 조직이 직접 소유하거나 운영하는지 확인합니다."
+          },
+          {
+            "title": "활동자료 준비",
+            "description": "사용량, 기간, 단위와 증빙자료를 모읍니다."
+          }
+        ],
+        "followUp": "어떤 활동에서 발생했고, 그 설비나 차량은 누가 소유하고 운영하나요?",
+        "marketHandoff": null
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_review/20260825T150244311763_f4e9415a",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_review/20260825T150244311763_f4e9415a/composite/composite_run_record.json",
+        "compositeRecordSha256": "729108817ec0de1eca7c9ed7981244d4ebe6901516b250de8c5af968ff56bd19",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_review/20260825T150244311763_f4e9415a/composite/result.json",
+        "compositeResultSha256": "9f8671f5d3c12702ca97d1d810b1f17511423e98ab891fd5205ab960e43045c5",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_review/20260825T150244311763_f4e9415a/composite/router/run_skill_record.json",
+        "selectedRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_review/20260825T150244311763_f4e9415a/composite/selected/run_skill_record.json",
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_review/20260825T150244311763_f4e9415a/composite/kac_execution.json",
+        "kacExecutionSha256": "d8b0dc3441b97f2e911a35ced13f9deb7615777da7191eac40b23c360adabf71",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_review/20260825T150244311763_f4e9415a/context_extraction.json",
+        "contextExtractionSha256": "f1aa7b8f6ef66ee2e17108b45b610a2504b18e086362efd5311558ffe9e7a6f3",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_review/20260825T150244311763_f4e9415a/ai_generation_record.json",
+        "aiGenerationRecordSha256": "c14282adbda1e8e2dc9c22f5e96354e5415e199e124711d3750facffbfd3b066",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/scope_review/20260825T150244311763_f4e9415a/orchestrator_response.json",
+        "orchestratorResponseSha256": "def944c86e0a0ada504e5802ff67aefe050fee5b471dc39400af8e872862deb9"
+      }
+    },
+    {
+      "case": "market_compare",
+      "route": "CARBON_MARKET_COMPARISON",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "CCM",
+        "VCM",
+        "EMISSION_ALLOWANCE",
+        "CARBON_CREDIT"
+      ],
+      "answerMode": "LOCAL_AI_GROUNDED",
+      "generationUsed": true,
+      "outputRiskGate": {
+        "decision": "ACCEPT_MODEL_GUIDANCE",
+        "route": "CARBON_MARKET_COMPARISON",
+        "verifiedStatus": "PROCEED",
+        "reasonCodes": [],
+        "accepted": true,
+        "residualRisk": "LOW"
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": false,
+      "answer": {
+        "statusLabel": "시장과 단위의 차이를 설명할 수 있어요",
+        "title": "배출권과 탄소크레딧은 이름이 비슷하지만 쓰임과 확인 기준이 다릅니다.",
+        "paragraphs": [
+          "규제시장(CCM)의 배출권은 법적으로 정해진 감축 의무를 이행하기 위한 단위이고, 자발적시장(VCM)의 크레딧은 자발적인 감축·상쇄 활동에서 만들어지는 단위입니다.",
+          "구매 전에는 어느 제도에서 발행됐는지, 등록부 상태와 중복사용 가능성, 우리 조직이 어떤 주장에 사용하려는지를 함께 확인해야 합니다."
+        ],
+        "rationale": "시장과 단위를 구분하지 않으면 구매한 크레딧을 원래 목적과 다른 공시나 주장에 사용할 위험이 있습니다.",
+        "steps": [
+          {
+            "title": "사용 목적 정하기",
+            "description": "규제 의무, 자발적 상쇄, 기여 주장 중 무엇인지 구분합니다."
+          },
+          {
+            "title": "발행·등록 정보 확인",
+            "description": "제도, 인증, 등록부 상태와 고유 식별 정보를 확인합니다."
+          },
+          {
+            "title": "중복사용 방지 확인",
+            "description": "이미 사용되거나 이전된 단위인지 확인합니다."
+          }
+        ],
+        "followUp": "구매 목적이 공시인지 내부 학습인지 알려주시면 확인 항목을 목적에 맞게 줄여 드릴게요.",
+        "marketHandoff": null
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_compare/20260825T150244657309_7435fbc2",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_compare/20260825T150244657309_7435fbc2/composite/composite_run_record.json",
+        "compositeRecordSha256": "22672008f8cfd07c26ead4a3a4b6b9b8c91d48057a481f352c0e5c6258ed9c2d",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_compare/20260825T150244657309_7435fbc2/composite/result.json",
+        "compositeResultSha256": "955f1bd0958ef7f36946f83112fa619f270c24f3ae90561d59bc87f24cf875cd",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_compare/20260825T150244657309_7435fbc2/composite/router/run_skill_record.json",
+        "selectedRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_compare/20260825T150244657309_7435fbc2/composite/selected/run_skill_record.json",
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_compare/20260825T150244657309_7435fbc2/composite/kac_execution.json",
+        "kacExecutionSha256": "0271b2be03791cfa35ccc58a5099204aa50b4b332faa8a8d1cac1cd789900112",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_compare/20260825T150244657309_7435fbc2/context_extraction.json",
+        "contextExtractionSha256": "3322a4510a63d60711ffb35c0b3c7aa43ed5575ac1e8a1e92b6d8faeba7a0e27",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_compare/20260825T150244657309_7435fbc2/ai_generation_record.json",
+        "aiGenerationRecordSha256": "6e2361792a79c0c4b4472439bd5e8da53c5c3c3a05e455b36e7e100c28ffff3e",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_compare/20260825T150244657309_7435fbc2/orchestrator_response.json",
+        "orchestratorResponseSha256": "ea09e0a63e033641dd945e567195998e30142ccbad82bcc94a592a7744203a44"
+      }
+    },
+    {
+      "case": "market_discovery",
+      "route": "CARBON_MARKET_COMPARISON",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "CCM",
+        "VCM",
+        "EMISSION_ALLOWANCE",
+        "CARBON_CREDIT"
+      ],
+      "answerMode": "LOCAL_AI_GROUNDED",
+      "generationUsed": true,
+      "outputRiskGate": {
+        "decision": "ACCEPT_MODEL_GUIDANCE",
+        "route": "CARBON_MARKET_COMPARISON",
+        "verifiedStatus": "PROCEED",
+        "reasonCodes": [],
+        "accepted": true,
+        "residualRisk": "LOW"
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": true,
+      "answer": {
+        "statusLabel": "실제 구매 가능한 마켓을 안내해 드릴게요",
+        "title": "탄소크레딧 구매 방법",
+        "paragraphs": [
+          "자발적 탄소시장(VCM)에서 검증된 탄소크레딧을 살 수 있습니다. 이 시장은 조직이나 개인이 자발적으로 기후 목표를 달성하기 위해 탄소 크레딧을 활용하는 곳입니다.",
+          "VCM에서는 프로젝트의 지역, 사업 유형, 톤당 가격과 판매 가능량 등을 확인할 수 있습니다. 구매를 원하면 해당 양만큼의 구매 신청을 할 수 있습니다."
+        ],
+        "rationale": "탄소크레딧은 각각의 사업과 인증 상태, 사용 가능한 주장 범위가 다르므로, 구매 전에 이러한 정보들을 반드시 확인해야 합니다.",
+        "steps": [
+          {
+            "title": "프로젝트 살펴보기",
+            "description": "지역, 사업유형과 프로젝트 설명을 비교합니다."
+          },
+          {
+            "title": "가격·수량 확인",
+            "description": "톤당 가격과 현재 판매 가능량을 확인합니다."
+          },
+          {
+            "title": "인증·이전 조건 확인",
+            "description": "구매 후 보유와 이전, 사용 조건을 확인합니다."
+          }
+        ],
+        "followUp": "구매 주체와 목적, 필요한 탄소 크레딧 수량을 알려주시면 구매를 위한 준비 사항을 더 자세히 안내해 드릴게요.",
+        "marketHandoff": {
+          "title": "준비가 되었다면 산림탄소마켓에서 이어갈 수 있어요",
+          "description": "프로젝트별 지역·사업 유형·톤당 가격·판매 가능량을 살펴보고 원하는 수량의 구매 신청으로 이어지는 탄소크레딧 마켓입니다.",
+          "context": "확인사항을 이해했다면 실제 산림탄소 프로젝트를 살펴보고 구매 절차를 이어갈 수 있습니다.",
+          "label": "산림탄소마켓에서 크레딧 살펴보기",
+          "url": "https://forestcarbonmarket.kr/",
+          "note": "수페스타는 구매나 결제를 대신하지 않고 거래 가능성을 보증하지 않습니다. 구매 전 인증 정보, 사용 목적, 소유권 이전 방식과 계약·세무 사항을 직접 확인하세요."
+        }
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_discovery/20260825T150325680676_3714b110",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_discovery/20260825T150325680676_3714b110/composite/composite_run_record.json",
+        "compositeRecordSha256": "bdd73b725f8e6961e30f8a4a00d58286d1668bc849d9ffb05ff6957509e71009",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_discovery/20260825T150325680676_3714b110/composite/result.json",
+        "compositeResultSha256": "1f86381a2126a115bd05da10b3e74496eb05db8f036d3eb1a91b4d18588bcf27",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_discovery/20260825T150325680676_3714b110/composite/router/run_skill_record.json",
+        "selectedRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_discovery/20260825T150325680676_3714b110/composite/selected/run_skill_record.json",
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_discovery/20260825T150325680676_3714b110/composite/kac_execution.json",
+        "kacExecutionSha256": "83f95f0e96cf59031a0f5e025cec5ee36c763aae52f540c1b9e0da0299a5efd1",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_discovery/20260825T150325680676_3714b110/context_extraction.json",
+        "contextExtractionSha256": "36b287eca25af3ca90592246c39105f805a3594dec50cea2967e4e4e6e6f74f0",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_discovery/20260825T150325680676_3714b110/ai_generation_record.json",
+        "aiGenerationRecordSha256": "849907aad080535782dd2ca8a847e1f1bfa21bb12fc0ed3d3479a0fbb5ea6634",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_discovery/20260825T150325680676_3714b110/orchestrator_response.json",
+        "orchestratorResponseSha256": "cb62e5836dde30f23c7255a91dc01dcb1623faca2fc5e2848ac6906cd22c1220"
+      }
+    },
+    {
+      "case": "market_claim_review",
+      "route": "CARBON_MARKET_COMPARISON",
+      "runComposite": "supestar-forest-esg-orchestrator-run",
+      "directEntryPoint": true,
+      "selectedConcepts": [
+        "CCM",
+        "VCM",
+        "EMISSION_ALLOWANCE",
+        "CARBON_CREDIT"
+      ],
+      "answerMode": "STRUCTURED_GROUNDED",
+      "generationUsed": false,
+      "outputRiskGate": {
+        "decision": "USE_VERIFIED_FALLBACK",
+        "route": "CARBON_MARKET_COMPARISON",
+        "verifiedStatus": "REVIEW",
+        "reasonCodes": [
+          "NON_PROCEED_VERDICT_REQUIRES_DETERMINISTIC_GUIDANCE"
+        ],
+        "modelGenerationAllowed": false
+      },
+      "model": "qwen2.5:14b-instruct-q4_K_M",
+      "marketHandoffPresent": false,
+      "answer": {
+        "statusLabel": "공시에 쓰기 전 확인이 필요해요",
+        "title": "크레딧이 소각됐다는 사실만으로 탄소중립 공시에 바로 사용할 수 있는 것은 아니에요.",
+        "paragraphs": [
+          "적용되는 제도와 공시 기준, 실제로 사용할 문구, 회사 내부 승인까지 함께 확인해야 합니다.",
+          "수페스타는 필요한 확인사항을 정리할 수 있지만 공시 문구의 적정성을 최종 승인하지는 않습니다."
+        ],
+        "rationale": "시장과 단위를 구분하지 않으면 구매한 크레딧을 원래 목적과 다른 공시나 주장에 사용할 위험이 있습니다.",
+        "steps": [
+          {
+            "title": "사용 목적 정하기",
+            "description": "규제 의무, 자발적 상쇄, 기여 주장 중 무엇인지 구분합니다."
+          },
+          {
+            "title": "발행·등록 정보 확인",
+            "description": "제도, 인증, 등록부 상태와 고유 식별 정보를 확인합니다."
+          },
+          {
+            "title": "중복사용 방지 확인",
+            "description": "이미 사용되거나 이전된 단위인지 확인합니다."
+          }
+        ],
+        "followUp": "어느 공시나 보고서에 어떤 문구로 쓰려는지 알려주시면 확인 항목을 정리해 드릴게요.",
+        "marketHandoff": null
+      },
+      "runRecord": {
+        "runRoot": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_claim_review/20260825T150406510517_8c25d809",
+        "compositeRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_claim_review/20260825T150406510517_8c25d809/composite/composite_run_record.json",
+        "compositeRecordSha256": "fb2eab7d5da0b8899b4146887767ce9908fa26d2494d5fe5c7f5ec63d182368b",
+        "compositeResult": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_claim_review/20260825T150406510517_8c25d809/composite/result.json",
+        "compositeResultSha256": "ff7919dd95cd8eb89467e307ec27000e48174d921d543fb2ec8a392f4b715876",
+        "routerRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_claim_review/20260825T150406510517_8c25d809/composite/router/run_skill_record.json",
+        "selectedRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_claim_review/20260825T150406510517_8c25d809/composite/selected/run_skill_record.json",
+        "kacExecution": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_claim_review/20260825T150406510517_8c25d809/composite/kac_execution.json",
+        "kacExecutionSha256": "6c46a5157b244b4d91da12c82a1efcab9e9fb1f00353d1ad0d2204fb6d3533c5",
+        "contextExtraction": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_claim_review/20260825T150406510517_8c25d809/context_extraction.json",
+        "contextExtractionSha256": "b71516f3670e06c3d91fdccb7f1eca7fa8fe4c12469c7dbc5cdaddec30147f91",
+        "aiGenerationRecord": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_claim_review/20260825T150406510517_8c25d809/ai_generation_record.json",
+        "aiGenerationRecordSha256": "8dba3d806498350e7a377473cd9863039e30fd4cc4486897ba852b7e83971631",
+        "orchestratorResponse": "06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/market_claim_review/20260825T150406510517_8c25d809/orchestrator_response.json",
+        "orchestratorResponseSha256": "15cee585652afa3145c15ed484ea6038a2840df3e47550215e82fc47c52f3fad"
+      }
+    }
+  ]
+}

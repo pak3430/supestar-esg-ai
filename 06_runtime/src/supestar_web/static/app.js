@@ -277,7 +277,9 @@ function addError(message) {
 }
 
 async function runQuestion(question) {
-  const history = conversation.slice(-6);
+  // The server decides whether a question is an explicit follow-up.  Send only
+  // recent user-authored text; never feed assistant prose back as context.
+  const history = conversation.filter((item) => item.role === 'user').slice(-3);
   addUserMessage(question);
   conversation.push({ role: 'user', content: question });
   const loading = addLoading();

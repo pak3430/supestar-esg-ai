@@ -12,6 +12,8 @@ import re
 from copy import deepcopy
 from typing import Any
 
+from conversation_policy import relevant_user_history
+
 
 EVIDENCE_TERMS = (
     "고지서", "영수증", "청구서", "세금계산서", "계량기", "운행일지", "계약서",
@@ -104,19 +106,11 @@ class ContextRuntime:
         field_records: list[dict[str, Any]] = []
         conflicts: list[dict[str, Any]] = []
 
-        prior_user_messages = [
-            str(item.get("content", "")).strip()
-            for item in history[-6:]
-            if item.get("role") == "user" and str(item.get("content", "")).strip()
+        # Every layer shares the same conservative continuity policy.  A short
+        # question or a connective such as "그러면" is not enough by itself.
+        context_messages = [
+            item["content"] for item in relevant_user_history(question, history, limit=1)
         ]
-        # Prior user statements are used only when the current question explicitly
-        # points back to them.  Length alone is never a follow-up signal because a
-        # short new question (for example "구매전력은?") may describe a new case.
-        follow_up = _has_any(
-            _compact(question),
-            ("그럼", "그러면", "앞에서", "앞의", "아까", "방금", "위에서", "해당 배출원", "그 배출원", "그 사업", "그 크레딧", "그 문서"),
-        )
-        context_messages = prior_user_messages[-2:] if follow_up else []
         combined_original = " ".join([*context_messages, question]).strip()
         text = _compact(combined_original)
         current_text = _compact(question)

@@ -73,10 +73,13 @@ def evaluate_question_routing(payload: dict[str, Any]) -> dict[str, Any]:
     skill = "supestar-question-routing"
     result = _base(skill, payload)
     question = _text(payload, "question")
+    routing_question = _text(payload, "routingQuestion") or question
     role = _text(payload, "userRole")
     as_of = _text(payload, "asOfDate")
     snapshot = {
         "question": question,
+        "routingQuestion": routing_question,
+        "conversationContinuity": payload.get("conversationContinuity", {}),
         "userRole": role,
         "asOfDate": as_of,
         "providedEvidence": payload.get("providedEvidence", []),
@@ -105,7 +108,7 @@ def evaluate_question_routing(payload: dict[str, Any]) -> dict[str, Any]:
             "ignore previous instructions", "reveal system prompt", "bypass the rules",
         ),
     }
-    matched_prohibited = [code for code, terms in prohibited_groups.items() if any(term in question.lower() for term in terms)]
+    matched_prohibited = [code for code, terms in prohibited_groups.items() if any(term in routing_question.lower() for term in terms)]
     if matched_prohibited:
         route = "OUT_OF_SCOPE"
         result.update(
@@ -124,7 +127,7 @@ def evaluate_question_routing(payload: dict[str, Any]) -> dict[str, Any]:
         )
         reason_codes = ["MISSING_REQUIRED_INPUT"]
     else:
-        q = question.lower()
+        q = routing_question.lower()
         relation_terms = ("왜", "연결", "이어", "관계", "경로", "순서")
         carbon_path_terms = ("탄소", "배출", "scope", "스코프", "측정", "감축", "산림")
         supported_concepts = (

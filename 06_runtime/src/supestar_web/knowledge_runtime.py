@@ -15,6 +15,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from conversation_policy import effective_question
+
 
 APP_ROOT = Path(__file__).resolve().parent
 PROJECT_ROOT = APP_ROOT.parents[2]
@@ -133,12 +135,8 @@ class KnowledgeRuntime:
         }
 
     def _effective_question(self, question: str, history: list[dict[str, Any]]) -> str:
-        normalized = _normalize(question)
-        follow_up = len(normalized) <= 12 or any(token in question for token in ("그건", "그게", "그러면", "왜요", "더 알려"))
-        if not follow_up:
-            return question
-        previous = [str(item.get("content", "")).strip() for item in history if item.get("role") == "user"]
-        return f"{previous[-1]} / {question}" if previous else question
+        effective, _ = effective_question(question, history)
+        return effective
 
     def _score(self, question: str, record: dict[str, Any]) -> tuple[int, list[str]]:
         compact = _normalize(question)
@@ -163,6 +161,7 @@ class KnowledgeRuntime:
     def select(self, question: str, history: list[dict[str, Any]] | None = None, limit: int = 3) -> dict[str, Any]:
         safe_history = history if isinstance(history, list) else []
         effective = self._effective_question(question, safe_history)
+        history_messages_used = 1 if effective != question else 0
         ranked: list[tuple[int, str, list[str]]] = []
         for identity, record in self._catalog.items():
             score, matches = self._score(effective, record)
@@ -197,6 +196,8 @@ class KnowledgeRuntime:
         return {
             "question": question,
             "effectiveQuestion": effective,
+            "historyPolicy": "EXPLICIT_FOLLOW_UP_ONLY",
+            "historyMessagesUsed": history_messages_used,
             "intent": intent,
             "selected": selected,
         }
@@ -296,6 +297,8 @@ class KnowledgeRuntime:
             "executionState": "COMPLETED" if chains else "NO_MATCH",
             "intent": selection["intent"],
             "effectiveQuestion": selection["effectiveQuestion"],
+            "historyPolicy": selection["historyPolicy"],
+            "historyMessagesUsed": selection["historyMessagesUsed"],
             "selectedConcepts": [chain["identity"] for chain in chains],
             "chains": chains,
             "sourceEvidence": combined_evidence,

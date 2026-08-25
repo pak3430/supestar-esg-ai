@@ -21,6 +21,7 @@
 
 ```text
 사용자 질문
+→ 현재 질문을 기본 독립 처리하고, 명시적 지시어가 있을 때만 직전 사용자 질문 1개 연결
 → 질문 Context 추출 및 상충 검사
 → Runtime Composite 단일 진입점
   → 9개 질문 경로 중 하나 선택
@@ -46,6 +47,7 @@
 - 근거·판정·권한·외부 링크 Output Risk Gate
 - Ollama 로컬 AI 연동
 - 브라우저 기반 대화 UI
+- 명시적 후속 질문 전용 대화 이력 정책(assistant 답변 재입력 금지)
 
 질문이 단순한 ESG 설명이면 ESG만 설명한다. 산림탄소마켓은 탄소크레딧 구매처나 구매 방법을 명시적으로 물은 경우에만 외부 행동 선택지로 연결한다.
 
@@ -78,23 +80,32 @@ SUPESTAR_AI_PROVIDER=disabled ./06_runtime/deploy/start_local.sh
 
 ## 검증
 
-최신 제출본 기준으로 다음 검증을 통과했다.
+최신 Runtime 기준으로 다음 검증을 통과했다.
 
-- 단위·통합 테스트 23개 통과
-- 결정론적 질문 시나리오 60개 통과
-- 실제 로컬 AI 시나리오 8개 통과
+- 자동 테스트 35개 통과: Web 27개, Runtime Composite 3개, 원자 Skill 5개
+- 결정론적 질문 시나리오 63개 통과
+- 실제 로컬 AI 시나리오 10개 통과
 - 9개 라우트와 `PROCEED`·`REVIEW`·`STOP` 모두 확인
 - 모든 시나리오에서 입력 바이트 보존, KAC 실행, Context 추출, Output Risk Gate 확인
 - 산림탄소마켓 연결은 명시적 구매 의도 시나리오 1건에서만 발생
+- `ESG → SDGs는요?`는 새 주제로 분리하고, `그건 왜 중요한가요?`는 직전 사용자 질문만 이어받는 대화 회귀 검증 통과
 
 ```bash
 python3 -m unittest discover \
   -s 06_runtime/src/supestar_web/tests \
   -p 'test_*.py' -v
+
+python3 -m unittest discover \
+  -s 05_identity_pipeline/08_composite_runtime/tests \
+  -p 'test_*.py' -v
+
+python3 -m unittest discover \
+  -s 05_identity_pipeline/06_atomic_skills/_shared/tests \
+  -p 'test_*.py' -v
 ```
 
-- [결정론적 60문항 검증 manifest](06_runtime/tests/submission_refresh_deterministic_v2_2026-08-25/manifest.json)
-- [로컬 AI 8문항 검증 manifest](06_runtime/tests/submission_refresh_local_ai_v2_2026-08-25/manifest.json)
+- [결정론적 63문항 검증 manifest](06_runtime/tests/submission_refresh_deterministic_v3_history_isolation_2026-08-25/manifest.json)
+- [로컬 AI 10문항 검증 manifest](06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/manifest.json)
 - [최신 제출 패키지 최종검증](07_evidence/qa/2026-08-25_수페스타_최신제출패키지_최종검증.md)
 
 ## 저장소 구조

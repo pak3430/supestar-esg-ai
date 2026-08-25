@@ -15,6 +15,7 @@ from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from conversation_policy import relevant_user_history
 from output_risk_gate import OutputRiskGate
 
 
@@ -153,6 +154,12 @@ class AiRuntime:
         route: str,
     ) -> tuple[dict[str, Any], dict[str, Any]]:
         runtime_status = self.status()
+        compact_history = [
+            {"role": "user", "content": item["content"][:800]}
+            for item in relevant_user_history(question, history, limit=1)
+        ]
+        runtime_status["historyPolicy"] = "EXPLICIT_FOLLOW_UP_ONLY"
+        runtime_status["historyMessagesUsed"] = len(compact_history)
         safe_fallback = self.risk_gate.safe_fallback(fallback_guidance, deterministic_result, route)
         generation_policy = self.risk_gate.generation_policy(route, deterministic_result)
         runtime_status["outputRiskGate"] = generation_policy
@@ -167,14 +174,8 @@ class AiRuntime:
             runtime_status["generationUsed"] = False
             return safe_fallback, runtime_status
 
-        # Assistant prose is never fed back as factual context.  Only recent user
-        # statements are carried for conversational continuity; deterministic
-        # extraction decides whether any of them may populate an operational field.
-        compact_history = [
-            {"role": item.get("role"), "content": str(item.get("content", ""))[:800]}
-            for item in history[-6:]
-            if item.get("role") == "user" and item.get("content")
-        ]
+        # Assistant prose is never fed back.  Prior user text is supplied only
+        # when the current question explicitly refers to it.
         grounding = {
             "question": question,
             "marketLinkAllowed": market_allowed,

@@ -1,13 +1,14 @@
 # 수페스타 질문 처리·위험 게이트 매트릭스
 
 - 기준일: 2026-08-25 KST
-- 적용 대상: 수페스타 로컬 웹 Runtime v4
+- 적용 대상: 수페스타 로컬 웹 Runtime, 대화 이력 격리 검증 profile v5
 - 목적: 자연어 질문이 원자 Skill 입력으로 잘못 변환되거나, AI 문장이 검증 판정보다 앞서 결론을 단정하는 재발을 막는다.
 
 ## 1. 답변이 만들어지는 기준
 
 ```text
 현재 질문
+→ 기본 독립 처리 / 명시적 참조가 있으면 직전 사용자 질문 1개만 연결
 → 현재 질문의 주된 의도 1개 선택
 → 사용자 진술에서만 구조화 필드 추출
 → 상충·부정·누락 검사
@@ -44,6 +45,9 @@
 | 등록 완료지만 소각 여부 미확인 | 등록 완료만 보고 사용 가능 오판 | 확인 상태와 `UNVERIFIED`가 함께 있으면 충돌로 기록하고 `REVIEW` |
 | 보고서는 보유, 동의서는 미보유 | 한 부정문 때문에 모든 문서를 미보유 처리 | 각 문서가 들어 있는 문장 단위로 보유·미보유 판별 |
 | 짧은 새 질문 | 이전 배출원 관계를 자동 상속 | 길이는 후속 질문 조건에서 제외; “그 배출원” 같은 명시 참조만 상속 |
+| ESG 다음 “SDGs는요?” | 짧다는 이유로 ESG와 합쳐 ESG를 다시 답함 | 현재 질문을 독립 처리하고 `SUSTAINABLE_DEVELOPMENT_GOALS`만 선택 |
+| “그러면 SDGs는요?” | 접속사만 보고 직전 ESG를 강제 상속 | “그러면”은 단독 참조로 보지 않고 SDGs 새 주제로 처리 |
+| “그건 왜 중요한가요?” | 참조 대상을 잃어 일반 답변 또는 엉뚱한 주제 답변 | 명시적 지시어를 확인해 직전 사용자 질문 1개만 라우터·KAC·Context·AI에 공통 전달 |
 | 이전 AI 답변이 잘못된 사실을 말함 | 다음 판정의 사실 입력으로 재사용 | Context와 AI 생성 모두 이전 assistant 발화를 사실 근거에서 제외 |
 | 사업등록 단계와 모니터링 단계를 동시에 주장 | 높은 단계를 임의 선택 | 복수 현재단계를 충돌로 기록하고 `currentStage=UNKNOWN`, 결과 `REVIEW` |
 | Scope Skill은 `REVIEW`, 모델은 Scope 1 설명 | 사용자는 모델 문장을 최종 결과로 오인 | 모든 `REVIEW/STOP`에서 모델 생성 차단, 검증된 보완 질문만 표시 |
@@ -71,16 +75,17 @@
 
 ## 6. 검증 증거
 
-- 단위·통합 검증: 23건 통과
-- 결정론적 질문 검증: 60건 통과 — 최초 오류 문장, `Nm³` 단위 기호, “저희 회사가 소유·운영” 표현을 그대로 사용한 회귀 사례 포함
-- 로컬 AI 근거 답변 검증: 8건 통과
+- 자동 테스트: 35건 통과 — Web 27건, Runtime Composite 3건, 원자 Skill 5건
+- 결정론적 질문 검증: 63건 통과 — 최초 오류 문장, `Nm³` 단위 기호, “저희 회사가 소유·운영”, 새 주제 분리와 명시적 후속 질문 회귀 사례 포함
+- 로컬 AI 근거 답변 검증: 10건 통과
 - 라우트: 9개 전부 커버
 - 판정: `PROCEED`, `REVIEW`, `STOP` 전부 커버
 - 모든 사례에서 Context 추출 기록과 Output Risk Gate 기록 존재
 - 모든 사례에서 Runtime Composite 단일 진입·라우터 1회·입력 바이트 보존 확인
 - 마켓 링크: 명시적 구매처 질문 1건에서만 노출
 - 사용자 답변 앞단의 Runtime 전문용어 비노출 검사 통과
-- 결정론적 manifest: `06_runtime/tests/supestar_web_v4_natural_final_r3_2026-08-25/manifest.json`
+- 결정론적 manifest: `06_runtime/tests/submission_refresh_deterministic_v3_history_isolation_2026-08-25/manifest.json`
+- 로컬 AI manifest: `06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/manifest.json`
 
 ## 7. 남아 있는 경계
 

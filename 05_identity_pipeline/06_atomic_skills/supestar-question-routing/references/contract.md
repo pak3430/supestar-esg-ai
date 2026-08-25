@@ -5,11 +5,18 @@
 ```json
 {
   "question": "이 활동은 어느 Scope인가요?",
+  "routingQuestion": "이 활동은 어느 Scope인가요?",
+  "conversationContinuity": {
+    "policy": "EXPLICIT_FOLLOW_UP_ONLY",
+    "historyMessagesUsed": 0
+  },
   "userRole": "ESG_MANAGER",
   "asOfDate": "2026-08-21",
   "providedEvidence": []
 }
 ```
+
+`question`은 사용자의 현재 원문을 보존한다. `routingQuestion`은 현재 질문이 앞선 사용자 발화를 명시적으로 가리킬 때만 직전 사용자 질문 1개를 결합하며, 짧은 문장이나 단순 접속어만으로는 결합하지 않는다. 라우터는 경로 선택에 `routingQuestion`을 사용하고 원문은 바꾸지 않는다.
 
 Allowed roles: `LEARNER`, `ESG_MANAGER`, `FOREST_OWNER_OPERATOR`, `REVIEWER`.
 
