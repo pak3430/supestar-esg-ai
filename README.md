@@ -115,7 +115,7 @@ SUPESTAR_CLOUD_AI_API_KEY=server-side-secret
 - 결정론적 질문 시나리오 64개 통과
 - 실제 로컬 AI 시나리오 10개 통과
 - 동일한 `ESG가 무엇인가요?` 로컬 Qwen 5회 독립 실행에서 실제 생성 5/5, 서로 다른 답변 5/5, 안전 대체 답변과 다른 출력 5/5, ESG 핵심 앵커 보존 5/5 확인
-- 공개 Qwen Cloud 시나리오 5개 통과: ESG·KOFPI·Scope 1은 실제 생성 사용, REVIEW·STOP은 생성 차단
+- 배포 후 공개 Qwen Cloud 9회 검증 통과: 동일 ESG 질문 5회가 모두 다른 실제 생성, KOFPI·Scope 1 생성, REVIEW·STOP 생성 차단
 - 9개 라우트와 `PROCEED`·`REVIEW`·`STOP` 모두 확인
 - 모든 시나리오에서 입력 바이트 보존, KAC 실행, Context 추출, Output Risk Gate 확인
 - 산림탄소마켓 연결은 명시적 구매 의도 시나리오 1건에서만 발생
