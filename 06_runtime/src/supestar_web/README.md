@@ -15,9 +15,10 @@
 7. 분류·비교·절차·준비도 질문이면 Composite가 등록된 도메인 Run Skill을 최대 하나만 추가 실행한다.
 8. 입력 바이트, 라우터 전달 바이트, 선택 경로, 자식 실행 수를 `composite_run_record.json`에 남긴다.
 9. `OutputRiskGate`가 검증 판정과 자연어 답변을 대조한다. `REVIEW/STOP`과 거래 준비도는 모델 생성을 차단하고, Scope·절차·E/S/G·외부 링크·공식 확정이 근거를 벗어나면 생성문을 폐기한다.
-10. 로컬 Ollama 또는 설정된 서버 AI가 통과한 검증 결과만 자연스러운 한국어로 표현한다. 모델은 Concept 선택, 근거, `PROCEED/REVIEW/STOP` 판정을 바꿀 수 없다.
-11. 모델이 없거나 생성 검증이 실패하면 AI인 척하지 않고 `STRUCTURED_GROUNDED` 답변을 반환한다.
-12. 산림탄소마켓 링크는 탄소크레딧 구매처·구매 방법을 사용자가 명시적으로 질문한 경우에만 표시한다.
+10. 로컬 Ollama 또는 설정된 서버 AI에는 완성된 고정 답변이 아니라 선택된 KAC·검증 판정·근거와 응답 문체만 전달한다. 모델은 Concept 선택, 근거, `PROCEED/REVIEW/STOP` 판정을 바꿀 수 없다.
+11. 모델 출력의 SHA-256을 안전 대체 답변과 비교한다. 완전히 같으면 다른 문체로 한 번 재생성하고, 다시 같으면 모델 출력을 채택하지 않는다.
+12. 모델이 없거나 생성 검증이 실패하면 AI인 척하지 않고 `STRUCTURED_GROUNDED` 답변을 반환한다. 실제 생성 여부·시도 횟수·온도·토큰 수·출력 해시는 실행기록과 화면의 `AI 생성 증거`에 표시한다.
+13. 산림탄소마켓 링크는 탄소크레딧 구매처·구매 방법을 사용자가 명시적으로 질문한 경우에만 표시한다.
 
 ```text
 질문
@@ -46,6 +47,7 @@ export SUPESTAR_AI_PROVIDER=auto
 export SUPESTAR_OLLAMA_URL=http://127.0.0.1:11434
 export SUPESTAR_OLLAMA_MODEL=qwen2.5:14b-instruct-q4_K_M
 export SUPESTAR_AI_TIMEOUT_SECONDS=90
+export SUPESTAR_AI_TEMPERATURE=0.55
 ```
 
 모델 없는 환경에서는 `SUPESTAR_AI_PROVIDER=disabled`로 명시적으로 끌 수 있다. 이때 답변은 `STRUCTURED_GROUNDED`로 표시되며 Concept·KAC·Run Skill 실행과 근거 기록은 그대로 수행된다.
@@ -56,6 +58,7 @@ export SUPESTAR_CLOUD_AI_BASE_URL=https://provider.example/v1
 export SUPESTAR_CLOUD_AI_MODEL=provider-model-id
 export SUPESTAR_CLOUD_AI_API_KEY=server-side-secret
 export SUPESTAR_AI_TIMEOUT_SECONDS=45
+export SUPESTAR_AI_TEMPERATURE=0.55
 ```
 
 서버 AI 비밀키는 배포 서비스의 Secret에만 저장하며 브라우저·Run Record·GitHub에 기록하지 않는다. 설정 누락, API 오류, JSON 스키마 오류 또는 Output Risk Gate 거부가 발생하면 `STRUCTURED_GROUNDED`로 자동 전환한다.
@@ -88,7 +91,7 @@ python3 06_runtime/src/supestar_web/tests/validate_local_ai.py \
   --output-root 06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25
 ```
 
-결정론적 검증은 최초 오류 문장, “저희 회사가 소유·운영” 자연어 변형과 KOFPI 구체 개념 우선 선택 회귀를 포함한 64개 질문 시나리오로 9개 라우트와 `PROCEED/REVIEW/STOP`을 모두 확인한다. 범위에는 Scope 1·2·3 세부 활동, 부정문, 상태 충돌, 이전 대화 오염, 짧은 새 주제와 명시적 후속 질문의 분리, 산림 E/S/G 일부 누락, 절차 단계 충돌, 거래 G1~G11, 실시간 가격·투자추천·외부 실행, 프롬프트 우회와 가짜 증거 요청이 포함된다. 실제 로컬 AI 검증은 같은 대화 연속성 사례를 포함한 10개 질문을 통과했고, 공개 Qwen Cloud 검증 5건에서는 ESG·KOFPI·Scope 1의 실제 생성과 REVIEW·STOP의 생성 차단을 확인했다. 세부 목록은 [질문 처리·위험 게이트 매트릭스](QUESTION_HANDLING_AND_RISK_MATRIX_2026-08-25.md)에 있다.
+결정론적 검증은 최초 오류 문장, “저희 회사가 소유·운영” 자연어 변형과 KOFPI 구체 개념 우선 선택 회귀를 포함한 64개 질문 시나리오로 9개 라우트와 `PROCEED/REVIEW/STOP`을 모두 확인한다. 범위에는 Scope 1·2·3 세부 활동, 부정문, 상태 충돌, 이전 대화 오염, 짧은 새 주제와 명시적 후속 질문의 분리, 산림 E/S/G 일부 누락, 절차 단계 충돌, 거래 G1~G11, 실시간 가격·투자추천·외부 실행, 프롬프트 우회와 가짜 증거 요청이 포함된다. 실제 로컬 AI 10개 시나리오도 통과했다. 같은 `ESG가 무엇인가요?`를 로컬 Qwen에 5회 독립 실행했을 때 5개 출력이 모두 서로 달랐고, 5건 모두 안전 대체 답변과 다른 실제 생성이며 환경·사회·지배구조 앵커를 보존했다. 공개 Qwen Cloud의 배포 후 결과는 별도 QA 기록으로 남긴다. 세부 질문 목록은 [질문 처리·위험 게이트 매트릭스](QUESTION_HANDLING_AND_RISK_MATRIX_2026-08-25.md)에 있다.
 
 ## 안전 경계
 

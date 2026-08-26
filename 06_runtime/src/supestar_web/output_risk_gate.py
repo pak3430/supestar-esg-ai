@@ -214,6 +214,7 @@ class OutputRiskGate:
         route: str,
         deterministic_result: dict[str, Any],
         market_allowed: bool,
+        selected_concepts: list[str] | None = None,
     ) -> dict[str, Any]:
         title = str(guidance.get("title", ""))
         paragraphs = [str(item) for item in guidance.get("paragraphs", [])]
@@ -247,6 +248,19 @@ class OutputRiskGate:
 
         if re.search(r"(?:오늘|현재|실시간|최신)\s*(?:가격|시세)|(?:원|달러)\s*(?:입니다|이다)", joined):
             reasons.append("UNVERIFIED_LIVE_OR_PRICE_CLAIM")
+
+        if route == "CONCEPT_EXPLANATION":
+            anchor_groups = {
+                "ESG": (("환경",), ("사회",), ("지배구조",)),
+                "SUSTAINABLE_DEVELOPMENT_GOALS": (("지속가능",), ("목표",)),
+                "KOFPI": (("한국임업진흥원",),),
+                "KNOWLEDGE_ACTION_CHAIN": (("지식",), ("행동",)),
+            }
+            for concept in selected_concepts or []:
+                groups = anchor_groups.get(str(concept), ())
+                if groups and any(not any(term.lower() in joined for term in group) for group in groups):
+                    reasons.append("SELECTED_CONCEPT_ANCHOR_NOT_PRESERVED")
+                    break
 
         if route == "SCOPE_CLASSIFICATION":
             candidate = deterministic_result.get("data", {}).get("candidateScope")

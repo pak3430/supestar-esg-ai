@@ -161,6 +161,22 @@ function renderOutputRiskGate(gate = {}) {
   </div>`;
 }
 
+function renderAiGeneration(ai = {}) {
+  const generated = ai.generationUsed === true;
+  const changed = ai.modelOutputChangedFromFallback === true;
+  const promptTokens = ai.promptTokensTotal ?? ai.promptTokens;
+  const responseTokens = ai.responseTokensTotal ?? ai.responseTokens;
+  const modelHash = ai.modelOutputSha256 ? `${String(ai.modelOutputSha256).slice(0, 16)}…` : '없음';
+  const fallbackHash = ai.fallbackOutputSha256 ? `${String(ai.fallbackOutputSha256).slice(0, 16)}…` : '없음';
+  return `<div class="safety-note">
+    <strong>${generated ? '실제 모델 생성 사용' : '검증된 구조화 답변 사용'}</strong>
+    <p>Provider: ${escapeHtml(ai.provider || 'none')} · Model: ${escapeHtml(ai.model || 'none')} · 시도: ${escapeHtml(ai.generationAttempts ?? 0)}회 · Temperature: ${escapeHtml(ai.temperature ?? 'N/A')}</p>
+    <p>입력 토큰: ${escapeHtml(promptTokens ?? 'N/A')} · 출력 토큰: ${escapeHtml(responseTokens ?? 'N/A')} · 기준 답안과 다른 생성문: ${changed ? '예' : '아니오'}</p>
+    <p>모델 출력 해시: ${escapeHtml(modelHash)} · 안전 폴백 해시: ${escapeHtml(fallbackHash)}</p>
+    ${ai.styleVariant ? `<p>표현 방식: ${escapeHtml(ai.styleVariant)}</p>` : ''}
+  </div>`;
+}
+
 function renderGuidanceSteps(steps = []) {
   if (!steps.length) return '';
   return `<section class="guidance-section">
@@ -245,6 +261,8 @@ function renderTechnicalDetails(result, preserved) {
         <p class="record-line"><strong>입력 SHA-256</strong> ${escapeHtml(result.inputEvidence?.sha256 || '')}</p>
         <p class="record-line"><strong>기록 위치</strong> ${escapeHtml(result.runRecord?.orchestratorResponse || '')}</p>
         <div class="safety-note">${escapeHtml(result.safetyBoundary)}</div>
+        <h4>AI 생성 증거</h4>
+        ${renderAiGeneration(result.aiRuntime)}
         ${renderOutputRiskGate(result.outputRiskGate)}
       </section>
     </div>

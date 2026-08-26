@@ -34,7 +34,7 @@
 → 안전한 최종 답변
 ```
 
-AI는 검증된 결과를 자연스러운 한국어로 표현할 뿐 Concept 선택, 근거, 판정을 바꿀 수 없다. 로컬 Ollama 또는 서버 측 OpenAI-compatible API를 선택할 수 있으며, 모델이 없거나 생성 검증에 실패하면 `STRUCTURED_GROUNDED` 모드로 근거 기반 구조화 답변을 반환한다.
+AI는 검증된 결과를 자연스러운 한국어로 표현할 뿐 Concept 선택, 근거, 판정을 바꿀 수 없다. 모델 프롬프트에는 완성된 고정 답변이 아니라 선택된 KAC·검증 판정·근거만 전달한다. 모델 출력이 안전 대체 답변과 완전히 같으면 재생성하고, 그래도 같으면 AI 생성으로 표시하지 않는다. 로컬 Ollama 또는 서버 측 OpenAI-compatible API를 선택할 수 있으며, 모델이 없거나 생성 검증에 실패하면 `STRUCTURED_GROUNDED` 모드로 근거 기반 구조화 답변을 반환한다.
 
 ## 구현 범위
 
@@ -85,6 +85,7 @@ export SUPESTAR_AI_PROVIDER=auto
 export SUPESTAR_OLLAMA_URL=http://127.0.0.1:11434
 export SUPESTAR_OLLAMA_MODEL=qwen2.5:14b-instruct-q4_K_M
 export SUPESTAR_AI_TIMEOUT_SECONDS=90
+export SUPESTAR_AI_TEMPERATURE=0.55
 ```
 
 AI 없이 결정론적 구조화 답변만 확인하려면 다음과 같이 실행한다.
@@ -110,9 +111,10 @@ SUPESTAR_CLOUD_AI_API_KEY=server-side-secret
 
 최신 Runtime 기준으로 다음 검증을 통과했다.
 
-- 자동 테스트 36개 통과: Web 28개, Runtime Composite 3개, 원자 Skill 5개
+- 자동 테스트 40개 통과: Web 32개, Runtime Composite 3개, 원자 Skill 5개
 - 결정론적 질문 시나리오 64개 통과
 - 실제 로컬 AI 시나리오 10개 통과
+- 동일한 `ESG가 무엇인가요?` 로컬 Qwen 5회 독립 실행에서 실제 생성 5/5, 서로 다른 답변 5/5, 안전 대체 답변과 다른 출력 5/5, ESG 핵심 앵커 보존 5/5 확인
 - 공개 Qwen Cloud 시나리오 5개 통과: ESG·KOFPI·Scope 1은 실제 생성 사용, REVIEW·STOP은 생성 차단
 - 9개 라우트와 `PROCEED`·`REVIEW`·`STOP` 모두 확인
 - 모든 시나리오에서 입력 바이트 보존, KAC 실행, Context 추출, Output Risk Gate 확인
@@ -140,6 +142,7 @@ python3 -m unittest discover \
 - [로컬 AI 10문항 검증 manifest](06_runtime/tests/submission_refresh_local_ai_v3_history_isolation_2026-08-25/manifest.json)
 - [최신 제출 패키지 최종검증](07_evidence/qa/2026-08-25_수페스타_최신제출패키지_최종검증.md)
 - [Qwen Cloud 공개 배포 검증](07_evidence/qa/2026-08-25_QwenCloud_공개배포_검증.md)
+- [실제 AI 생성 다양성 및 제출본 보존 검증](07_evidence/qa/2026-08-26_실제AI생성_다양성_및_제출본보존_검증.md)
 
 ## 저장소 구조
 
@@ -157,6 +160,8 @@ ccs_authoring/supestar_mvp_v3/        봉인된 Identity→Skill 지식행동사
 CCS 기반 구조화 과정은 [Common Context Structure](https://github.com/gesia-platform/Common-Context-Structure)를 사용했다. 이 저장소에는 별도의 CCS Git checkout은 중복 포함하지 않는다.
 
 ## 최종 제출물
+
+아래 파일은 이미 제출한 기준본이며, 2026-08-26 이후의 Runtime 개선과 분리해 보존한다.
 
 - [제출 파일 안내](09_submission/final/00_제출파일_안내.md)
 - [예선 기획서 PDF](09_submission/final/초ROK_수페스타_예선기획서.pdf)

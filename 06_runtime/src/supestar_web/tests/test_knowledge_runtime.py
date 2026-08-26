@@ -161,6 +161,130 @@ class KnowledgeRuntimeTests(unittest.TestCase):
         self.assertEqual(metrics["promptTokens"], 12)
         self.assertEqual(request_mock.call_args.args[0], "/chat/completions")
         self.assertEqual(request_mock.call_args.kwargs["base_url"], "https://example.invalid/v1")
+        self.assertEqual(request_mock.call_args.args[1]["temperature"], 0.55)
+        self.assertEqual(request_mock.call_args.args[1]["top_p"], 0.9)
+
+    @staticmethod
+    def _grounded_generation_fixture() -> tuple[dict[str, object], dict[str, object], dict[str, object]]:
+        kac = {
+            "intent": "CONCEPT_EXPLANATION",
+            "selectedConcepts": ["ESG"],
+            "chains": [{
+                "identity": "ESG",
+                "title": "ESG",
+                "definition": "환경, 사회, 지배구조를 함께 보는 경영 관점",
+                "keyPoints": ["환경", "사회", "지배구조"],
+                "nodes": [],
+                "sourceEvidence": [],
+            }],
+        }
+        deterministic = {
+            "status": "PROCEED",
+            "summary": "ESG 개념 설명",
+            "data": {},
+            "missingEvidence": [],
+            "nextActions": [],
+        }
+        fallback = {
+            "statusLabel": "근거에 따라 답변했어요",
+            "title": "완성된 고정 답변 제목",
+            "paragraphs": ["환경·사회·지배구조를 함께 보는 관점입니다."],
+            "rationale": "검증된 개념 사슬을 사용했습니다.",
+            "steps": [],
+            "followUp": "어느 영역을 더 살펴볼까요?",
+            "marketHandoff": None,
+        }
+        return kac, deterministic, fallback
+
+    @staticmethod
+    def _cloud_runtime() -> AiRuntime:
+        cloud_env = {
+            "SUPESTAR_AI_PROVIDER": "cloud",
+            "SUPESTAR_CLOUD_AI_BASE_URL": "https://example.invalid/v1",
+            "SUPESTAR_CLOUD_AI_API_KEY": "test-secret-never-recorded",
+            "SUPESTAR_CLOUD_AI_MODEL": "test-grounded-model",
+        }
+        with patch.dict(os.environ, cloud_env, clear=False):
+            return AiRuntime()
+
+    def test_model_receives_verified_kac_without_completed_fallback_answer(self) -> None:
+        runtime = self._cloud_runtime()
+        kac, deterministic, fallback = self._grounded_generation_fixture()
+        model_guidance = {
+            "title": "ESG는 성과를 세 방향에서 보는 기준입니다",
+            "paragraphs": [
+                "환경에 미치는 영향뿐 아니라 사회에 대한 책임과 지배구조의 건전성을 함께 살펴봅니다.",
+                "그래서 재무 성과만으로는 놓칠 수 있는 지속가능성 위험과 기회를 구조적으로 확인할 수 있습니다.",
+            ],
+            "rationale": "검증된 ESG 개념 사슬의 정의와 핵심 요소를 재구성했습니다.",
+            "followUp": "환경·사회·지배구조 중 어느 영역을 더 알아볼까요?",
+        }
+        metrics = {"promptTokens": 21, "responseTokens": 34, "doneReason": "stop"}
+        with patch.object(
+            runtime,
+            "_generate_with_provider",
+            return_value=(json.dumps(model_guidance, ensure_ascii=False), metrics),
+        ) as generation_mock:
+            guidance, status = runtime.generate(
+                "ESG가 무엇인가요?", [], kac, deterministic, fallback, False, "CONCEPT_EXPLANATION"
+            )
+
+        messages = generation_mock.call_args.args[1]
+        serialized_prompt = json.dumps(messages, ensure_ascii=False)
+        self.assertNotIn("fallbackAnswer", serialized_prompt)
+        self.assertNotIn("완성된 고정 답변 제목", serialized_prompt)
+        self.assertIn("환경, 사회, 지배구조", serialized_prompt)
+        self.assertIn("responseStyle", serialized_prompt)
+        self.assertEqual(guidance["title"], model_guidance["title"])
+        self.assertTrue(status["generationUsed"])
+        self.assertTrue(status["modelOutputChangedFromFallback"])
+        self.assertNotEqual(status["modelOutputSha256"], status["fallbackOutputSha256"])
+        self.assertEqual(status["generationAttempts"], 1)
+        self.assertEqual(status["temperature"], 0.55)
+        self.assertEqual(status["promptTokensTotal"], 21)
+        self.assertEqual(status["responseTokensTotal"], 34)
+
+    def test_exact_fallback_echo_is_retried_before_accepting_model_output(self) -> None:
+        runtime = self._cloud_runtime()
+        kac, deterministic, fallback = self._grounded_generation_fixture()
+        echo = {
+            "title": fallback["title"],
+            "paragraphs": fallback["paragraphs"],
+            "rationale": fallback["rationale"],
+            "followUp": fallback["followUp"],
+        }
+        changed = {
+            "title": "ESG는 환경·사회·지배구조를 함께 보는 틀입니다",
+            "paragraphs": ["조직의 환경 영향, 사회적 책임, 지배구조의 운영 방식을 한데 놓고 판단합니다."],
+            "rationale": "검증된 ESG 개념 사슬에 근거했습니다.",
+            "followUp": "세 영역 중 무엇을 더 살펴볼까요?",
+        }
+        metrics = {"promptTokens": 10, "responseTokens": 12, "doneReason": "stop"}
+        with patch.object(
+            runtime,
+            "_generate_with_provider",
+            side_effect=[
+                (json.dumps(echo, ensure_ascii=False), metrics),
+                (json.dumps(changed, ensure_ascii=False), metrics),
+            ],
+        ) as generation_mock:
+            guidance, status = runtime.generate(
+                "ESG가 무엇인가요?", [], kac, deterministic, fallback, False, "CONCEPT_EXPLANATION"
+            )
+
+        self.assertEqual(generation_mock.call_count, 2)
+        self.assertEqual(guidance["title"], changed["title"])
+        self.assertTrue(status["generationUsed"])
+        self.assertTrue(status["modelOutputChangedFromFallback"])
+        self.assertEqual(status["generationAttempts"], 2)
+        self.assertEqual(status["promptTokensTotal"], 20)
+        self.assertEqual(status["responseTokensTotal"], 24)
+
+    def test_web_ui_exposes_generation_proof_fields(self) -> None:
+        app_script = (APP_ROOT / "static" / "app.js").read_text(encoding="utf-8")
+        self.assertIn("AI 생성 증거", app_script)
+        self.assertIn("modelOutputChangedFromFallback", app_script)
+        self.assertIn("fallbackOutputSha256", app_script)
 
 
 if __name__ == "__main__":

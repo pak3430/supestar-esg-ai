@@ -284,6 +284,36 @@ class OutputRiskGateTest(unittest.TestCase):
         self.assertFalse(decision["accepted"])
         self.assertIn("UNVERIFIED_EXTERNAL_LINK", decision["reasonCodes"])
 
+    def test_selected_esg_concept_must_preserve_all_three_anchors(self) -> None:
+        result = {"status": "PROCEED", "data": {}}
+        rejected = self.gate.assess_model_guidance(
+            {
+                "title": "ESG는 환경을 고려하는 기준입니다.",
+                "paragraphs": ["기후와 에너지 영향을 살펴봅니다."],
+                "rationale": "검증된 개념 사슬을 사용했습니다.",
+                "followUp": "더 알아볼까요?",
+            },
+            "CONCEPT_EXPLANATION",
+            result,
+            False,
+            selected_concepts=["ESG"],
+        )
+        accepted = self.gate.assess_model_guidance(
+            {
+                "title": "ESG는 환경·사회·지배구조를 함께 보는 기준입니다.",
+                "paragraphs": ["조직의 지속가능성 위험과 기회를 세 관점에서 살펴봅니다."],
+                "rationale": "검증된 개념 사슬을 사용했습니다.",
+                "followUp": "어느 영역을 더 알아볼까요?",
+            },
+            "CONCEPT_EXPLANATION",
+            result,
+            False,
+            selected_concepts=["ESG"],
+        )
+        self.assertFalse(rejected["accepted"])
+        self.assertIn("SELECTED_CONCEPT_ANCHOR_NOT_PRESERVED", rejected["reasonCodes"])
+        self.assertTrue(accepted["accepted"])
+
 
 if __name__ == "__main__":
     unittest.main()
