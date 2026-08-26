@@ -102,6 +102,20 @@ class KnowledgeRuntimeTests(unittest.TestCase):
         self.assertEqual(result["selectedConcepts"], ["SUSTAINABLE_DEVELOPMENT_GOALS"])
         self.assertEqual(result["historyMessagesUsed"], 0)
 
+    def test_self_contained_scope_question_does_not_inherit_unrelated_topic(self) -> None:
+        question = (
+            "우리 회사가 소유하고 직접 운영·통제하는 사업장 보일러에서 도시가스를 연소합니다. "
+            "2026년 8월 사용량은 1,250Nm³이고 요금고지서도 보유하고 있습니다. "
+            "이 배출원은 Scope 몇인가요?"
+        )
+        result = self.runtime.execute(
+            question,
+            history=[{"role": "user", "content": "SDGs는 ESG와 어떤 관계인가요?"}],
+        )
+        self.assertEqual(result["effectiveQuestion"], question)
+        self.assertEqual(result["historyMessagesUsed"], 0)
+        self.assertEqual(result["selectedConcepts"], ["SCOPE_1"])
+
     def test_ai_history_uses_only_explicit_follow_up_context(self) -> None:
         runtime = AiRuntime()
         history = [{"role": "user", "content": "ESG가 무엇인가요?"}]
